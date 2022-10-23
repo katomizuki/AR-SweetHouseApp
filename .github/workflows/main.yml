@@ -20,4 +20,4 @@ jobs:
        key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
        restore-keys: ${{ runner.os }}-spm-
     - name: Build
-      run: xcodebuild -sdk iphonesimulator -configuration Debug build
+      run: xcodebuild -project RealitySuperApp.xcodeproj -scheme RealitySuperApp -configuration Release
