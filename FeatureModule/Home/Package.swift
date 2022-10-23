@@ -10,12 +10,19 @@ let package = Package(
         .library(
             name: "Home",
             targets: ["Home"]),
+        
     ],
     dependencies: [
+        .package(url:"https://github.com/pointfreeco/swift-composable-architecture.git" ,
+                 .upToNextMajor(from: "0.9.0"))
     ],
     targets: [
         .target(
-            name: "Home"),
+            name: "Home",
+            dependencies: [
+                .product(name: "ComposableArchitecture",
+                         package:"swift-composable-architecture"),
+            ]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home"]),
