@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D3760F8C2905002F00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F8B2905002F00356F63 /* Home */; };
+		D3760F9A29051AD800356F63 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9929051AD800356F63 /* ComposableArchitecture */; };
+		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
-		D37BED9E29017E4500FF3A73 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9D29017E4500FF3A73 /* ContentView.swift */; };
 		D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37BEDA129017E4800FF3A73 /* Assets.xcassets */; };
 		D37BEDAF29017E4800FF3A73 /* RealitySuperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */; };
 		D37BEDB929017E4800FF3A73 /* RealitySuperAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BEDB829017E4800FF3A73 /* RealitySuperAppUITests.swift */; };
@@ -40,7 +40,6 @@
 		D3760F9429050DF300356F63 /* DomainModel */ = {isa = PBXFileReference; lastKnownFileType = text; name = DomainModel; path = RealitySuperApp/DomainModel; sourceTree = SOURCE_ROOT; };
 		D37BED9829017E4500FF3A73 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D37BED9D29017E4500FF3A73 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D37BEDAA29017E4800FF3A73 /* RealitySuperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealitySuperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppTests.swift; sourceTree = "<group>"; };
@@ -54,7 +53,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3760F8C2905002F00356F63 /* Home in Frameworks */,
+				D3760F9A29051AD800356F63 /* ComposableArchitecture in Frameworks */,
+				D3760F9C29051B6B00356F63 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,7 +139,6 @@
 				D3760F8D2905044800356F63 /* UIModule */,
 				D3760F9329050DAD00356F63 /* DomainModule */,
 				D3760F8F290504DC00356F63 /* Infra */,
-				D37BED9A29017E4500FF3A73 /* RealitySuperApp */,
 				D37BEDAD29017E4800FF3A73 /* RealitySuperAppTests */,
 				D37BEDB729017E4800FF3A73 /* RealitySuperAppUITests */,
 				D37BED9929017E4500FF3A73 /* Products */,
@@ -155,14 +154,6 @@
 				D37BEDB429017E4800FF3A73 /* RealitySuperAppUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		D37BED9A29017E4500FF3A73 /* RealitySuperApp */ = {
-			isa = PBXGroup;
-			children = (
-				D37BED9D29017E4500FF3A73 /* ContentView.swift */,
-			);
-			path = RealitySuperApp;
 			sourceTree = "<group>";
 		};
 		D37BEDAD29017E4800FF3A73 /* RealitySuperAppTests */ = {
@@ -199,7 +190,8 @@
 			);
 			name = RealitySuperApp;
 			packageProductDependencies = (
-				D3760F8B2905002F00356F63 /* Home */,
+				D3760F9929051AD800356F63 /* ComposableArchitecture */,
+				D3760F9B29051B6B00356F63 /* Home */,
 			);
 			productName = RealitySuperApp;
 			productReference = D37BED9829017E4500FF3A73 /* RealitySuperApp.app */;
@@ -273,6 +265,9 @@
 				Base,
 			);
 			mainGroup = D37BED8F29017E4500FF3A73;
+			packageReferences = (
+				D3760F9829051AD800356F63 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = D37BED9929017E4500FF3A73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -314,7 +309,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D37BED9E29017E4500FF3A73 /* ContentView.swift in Sources */,
 				D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,8 +639,24 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D3760F9829051AD800356F63 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		D3760F8B2905002F00356F63 /* Home */ = {
+		D3760F9929051AD800356F63 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3760F9829051AD800356F63 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+		D3760F9B29051B6B00356F63 /* Home */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Home;
 		};

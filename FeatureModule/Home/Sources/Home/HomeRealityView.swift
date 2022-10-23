@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealityKit
+import ComposableArchitecture
 
 public struct ContentView : View {
     public var body: some View {
