@@ -1,20 +1,21 @@
 //
-//  ContentView.swift
-//  RealitySuperApp
+//  File.swift
+//  
 //
-//  Created by ミズキ on 2022/10/20.
+//  Created by ミズキ on 2022/10/23.
 //
 
 import SwiftUI
 import RealityKit
 
-struct ContentView : View {
-    var body: some View {
+public struct ContentView : View {
+    public var body: some View {
         ARViewContainer().edgesIgnoringSafeArea(.all)
     }
+    public init() { }
 }
 
-struct ARViewContainer: UIViewRepresentable {
+ struct ARViewContainer: UIViewRepresentable {
     
     func makeUIView(context: Context) -> ARView {
         let arView = ARView(frame: .zero)
@@ -24,4 +25,3 @@ struct ARViewContainer: UIViewRepresentable {
     func updateUIView(_ uiView: ARView, context: Context) {}
     
 }
-
