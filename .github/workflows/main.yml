@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: xcodebuild build -scheme RealitySuperApp -sdk iphonesimulator -configuration Release -clonedSourcePackagesDirPath SourcePackages
     - name: Test
-      run: xcodebuild build test \-project RealitySuperApp.xcodeproj \-scheme RealitySuperApp \-configuration Debug \-destination 'platform=iOS Simulator,name=iPhone 14 Pro'
+      run: xcodebuild test \-sdk iphonesimulator \-configuration Debug \-project RealitySuperApp.xcodeproj \-scheme RealitySuperApp \-skip-testing:RealitySuperAppUITests \-destination 'platform=iOS Simulator,name=iPhone 14 Pro'
