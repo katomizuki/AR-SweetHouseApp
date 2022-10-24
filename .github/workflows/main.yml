@@ -14,4 +14,4 @@ jobs:
     - name: Show Xcode version
       run: xcodebuild -version
     - name: Build
-      run: xcodebuild build -scheme RealitySuperApp -sdk iphonesimulator -configuration Release
+      run: xcodebuild build　-resolvePackageDependencies -scheme RealitySuperApp -sdk iphonesimulator -configuration Release
