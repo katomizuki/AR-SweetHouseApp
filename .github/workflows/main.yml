@@ -21,3 +21,5 @@ jobs:
        restore-keys: ${{ runner.os }}-spm-
     - name: Build
       run: xcodebuild build -scheme RealitySuperApp -sdk iphonesimulator -configuration Release -clonedSourcePackagesDirPath SourcePackages
+    - name: Test
+      run: xcodebuild test -scheme RealitySuperApp -sdk iphonesimulator -configuration Release -project RealitySuperApp.xcodeproj destination "platform=iOS Simulator,name=iPhone 11 Pro Max”
