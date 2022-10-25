@@ -36,8 +36,6 @@
 		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D37BEDAA29017E4800FF3A73 /* RealitySuperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealitySuperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppTests.swift; sourceTree = "<group>"; };
-		D37BEDB829017E4800FF3A73 /* RealitySuperAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppUITests.swift; sourceTree = "<group>"; };
-		D37BEDBA29017E4800FF3A73 /* RealitySuperAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,7 +125,6 @@
 				D3760F9329050DAD00356F63 /* DomainModule */,
 				D3760F8F290504DC00356F63 /* Infra */,
 				D37BEDAD29017E4800FF3A73 /* RealitySuperAppTests */,
-				D37BEDB729017E4800FF3A73 /* RealitySuperAppUITests */,
 				D37BED9929017E4500FF3A73 /* Products */,
 				D3760F8A2905002F00356F63 /* Frameworks */,
 			);
@@ -148,15 +145,6 @@
 				D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */,
 			);
 			path = RealitySuperAppTests;
-			sourceTree = "<group>";
-		};
-		D37BEDB729017E4800FF3A73 /* RealitySuperAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D37BEDB829017E4800FF3A73 /* RealitySuperAppUITests.swift */,
-				D37BEDBA29017E4800FF3A73 /* RealitySuperAppUITestsLaunchTests.swift */,
-			);
-			path = RealitySuperAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
