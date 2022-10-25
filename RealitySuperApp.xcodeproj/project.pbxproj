@@ -14,6 +14,10 @@
 		D3DF88552907F7C300227BED /* DomainModel in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88542907F7C300227BED /* DomainModel */; };
 		D3DF88572907F81700227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88562907F81700227BED /* Repositry */; };
 		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
+		D3DF885B2908044500227BED /* DomainModel in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF885A2908044500227BED /* DomainModel */; };
+		D3DF885D2908044A00227BED /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF885C2908044A00227BED /* Home */; };
+		D3DF885F2908044E00227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF885E2908044E00227BED /* Repositry */; };
+		D3DF88612908045300227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88602908045300227BED /* ViewComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3DF885B2908044500227BED /* DomainModel in Frameworks */,
+				D3DF885D2908044A00227BED /* Home in Frameworks */,
+				D3DF885F2908044E00227BED /* Repositry in Frameworks */,
+				D3DF88612908045300227BED /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +207,12 @@
 				D37BEDAC29017E4800FF3A73 /* PBXTargetDependency */,
 			);
 			name = RealitySuperAppTests;
+			packageProductDependencies = (
+				D3DF885A2908044500227BED /* DomainModel */,
+				D3DF885C2908044A00227BED /* Home */,
+				D3DF885E2908044E00227BED /* Repositry */,
+				D3DF88602908045300227BED /* ViewComponents */,
+			);
 			productName = RealitySuperAppTests;
 			productReference = D37BEDAA29017E4800FF3A73 /* RealitySuperAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -482,7 +496,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LSUSGUW6L4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mizuki.RealitySuperAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -505,7 +519,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = LSUSGUW6L4;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mizuki.RealitySuperAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -565,6 +579,22 @@
 			productName = Repositry;
 		};
 		D3DF88582907F82000227BED /* ViewComponents */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViewComponents;
+		};
+		D3DF885A2908044500227BED /* DomainModel */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DomainModel;
+		};
+		D3DF885C2908044A00227BED /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+		D3DF885E2908044E00227BED /* Repositry */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Repositry;
+		};
+		D3DF88602908045300227BED /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ViewComponents;
 		};
