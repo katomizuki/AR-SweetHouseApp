@@ -50,6 +50,17 @@
                ReferencedContainer = "container:RealitySuperApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "D3DF887029081A5100227BED"
+               BuildableName = "RealitySuperAppTests2.xctest"
+               BlueprintName = "RealitySuperAppTests2"
+               ReferencedContainer = "container:RealitySuperApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
