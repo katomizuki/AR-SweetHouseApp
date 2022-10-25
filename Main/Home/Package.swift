@@ -10,6 +10,15 @@ let package = Package(
         .library(
             name: "Home",
             targets: ["Home"]),
+        .library(
+            name: "Repositry",
+            targets: ["Repositry"]),
+        .library(
+            name: "ViewComponents",
+            targets: ["ViewComponents"]),
+        .library(
+            name: "DomainModel",
+            targets: ["DomainModel"]),
         
     ],
     dependencies: [
@@ -17,6 +26,15 @@ let package = Package(
     targets: [
         .target(
             name: "Home",
+            dependencies: []),
+        .target(
+            name: "Repositry",
+            dependencies: []),
+        .target(
+            name: "ViewComponents",
+            dependencies: []),
+        .target(
+            name: "DomainModel",
             dependencies: []),
         .testTarget(
             name: "HomeTests",

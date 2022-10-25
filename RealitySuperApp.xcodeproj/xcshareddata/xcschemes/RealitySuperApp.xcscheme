@@ -20,6 +20,20 @@
                ReferencedContainer = "container:RealitySuperApp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "HomeTests"
+               BuildableName = "HomeTests"
+               BlueprintName = "HomeTests"
+               ReferencedContainer = "container:Main/Home">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,36 +43,13 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D37BEDA929017E4800FF3A73"
-               BuildableName = "RealitySuperAppTests.xctest"
-               BlueprintName = "RealitySuperAppTests"
-               ReferencedContainer = "container:RealitySuperApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "YES"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D37BEDB329017E4800FF3A73"
-               BuildableName = "RealitySuperAppUITests.xctest"
-               BlueprintName = "RealitySuperAppUITests"
-               ReferencedContainer = "container:RealitySuperApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D3DF887029081A5100227BED"
-               BuildableName = "RealitySuperAppTests2.xctest"
-               BlueprintName = "RealitySuperAppTests2"
-               ReferencedContainer = "container:RealitySuperApp.xcodeproj">
+               BlueprintIdentifier = "HomeTests"
+               BuildableName = "HomeTests"
+               BlueprintName = "HomeTests"
+               ReferencedContainer = "container:Main/Home">
             </BuildableReference>
          </TestableReference>
       </Testables>

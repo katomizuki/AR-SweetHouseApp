@@ -10,32 +10,16 @@
 		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37BEDA129017E4800FF3A73 /* Assets.xcassets */; };
-		D37BEDAF29017E4800FF3A73 /* RealitySuperAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */; };
 		D3DF88552907F7C300227BED /* DomainModel in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88542907F7C300227BED /* DomainModel */; };
 		D3DF88572907F81700227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88562907F81700227BED /* Repositry */; };
 		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		D37BEDAB29017E4800FF3A73 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D37BED9029017E4500FF3A73 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D37BED9729017E4500FF3A73;
-			remoteInfo = RealitySuperApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		D3073B5029081DB9005085CC /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = RealitySuperApp.app; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperApp.app"; sourceTree = "<absolute>"; };
-		D3073B5229081F36005085CC /* RealitySuperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RealitySuperAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D3073B532908933C005085CC /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = RealitySuperApp.app; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperApp.app"; sourceTree = "<absolute>"; };
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
-		D3760F8E2905049000356F63 /* ViewComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViewComponents; path = UIModule/ViewComponents; sourceTree = SOURCE_ROOT; };
-		D3760F9429050DF300356F63 /* DomainModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DomainModel; path = DomainModule/DomainModel; sourceTree = SOURCE_ROOT; };
-		D3760F9E29052A2800356F63 /* Repositry */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Repositry; path = Infra/Repositry; sourceTree = SOURCE_ROOT; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppTests.swift; sourceTree = "<group>"; };
 		D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RealitySuperApp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,22 +35,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D37BEDA729017E4800FF3A73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D3760F872904FDDD00356F63 /* FeatureModule */ = {
+		D3760F872904FDDD00356F63 /* Main */ = {
 			isa = PBXGroup;
 			children = (
 				D3760F862904FDC700356F63 /* Home */,
 			);
-			path = FeatureModule;
+			path = Main;
 			sourceTree = "<group>";
 		};
 		D3760F882904FEBC00356F63 /* App */ = {
@@ -86,50 +63,13 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		D3760F8D2905044800356F63 /* UIModule */ = {
-			isa = PBXGroup;
-			children = (
-				D3760F8E2905049000356F63 /* ViewComponents */,
-			);
-			path = UIModule;
-			sourceTree = "<group>";
-		};
-		D3760F8F290504DC00356F63 /* Infra */ = {
-			isa = PBXGroup;
-			children = (
-				D3760F9E29052A2800356F63 /* Repositry */,
-			);
-			path = Infra;
-			sourceTree = "<group>";
-		};
-		D3760F9329050DAD00356F63 /* DomainModule */ = {
-			isa = PBXGroup;
-			children = (
-				D3760F9429050DF300356F63 /* DomainModel */,
-			);
-			name = DomainModule;
-			sourceTree = "<group>";
-		};
 		D37BED8F29017E4500FF3A73 = {
 			isa = PBXGroup;
 			children = (
 				D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */,
 				D3760F882904FEBC00356F63 /* App */,
-				D3760F872904FDDD00356F63 /* FeatureModule */,
-				D3760F8D2905044800356F63 /* UIModule */,
-				D3760F9329050DAD00356F63 /* DomainModule */,
-				D3760F8F290504DC00356F63 /* Infra */,
-				D37BEDAD29017E4800FF3A73 /* RealitySuperAppTests */,
-				D3073B5229081F36005085CC /* RealitySuperAppTests.xctest */,
+				D3760F872904FDDD00356F63 /* Main */,
 			);
-			sourceTree = "<group>";
-		};
-		D37BEDAD29017E4800FF3A73 /* RealitySuperAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */,
-			);
-			path = RealitySuperAppTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,28 +95,8 @@
 				D3DF88582907F82000227BED /* ViewComponents */,
 			);
 			productName = RealitySuperApp;
-			productReference = D3073B5029081DB9005085CC /* RealitySuperApp.app */;
+			productReference = D3073B532908933C005085CC /* RealitySuperApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		D37BEDA929017E4800FF3A73 /* RealitySuperAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D37BEDC129017E4800FF3A73 /* Build configuration list for PBXNativeTarget "RealitySuperAppTests" */;
-			buildPhases = (
-				D37BEDA629017E4800FF3A73 /* Sources */,
-				D37BEDA729017E4800FF3A73 /* Frameworks */,
-				D37BEDA829017E4800FF3A73 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D37BEDAC29017E4800FF3A73 /* PBXTargetDependency */,
-			);
-			name = RealitySuperAppTests;
-			packageProductDependencies = (
-			);
-			productName = RealitySuperAppTests;
-			productReference = D3073B5229081F36005085CC /* RealitySuperAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -190,10 +110,6 @@
 				TargetAttributes = {
 					D37BED9729017E4500FF3A73 = {
 						CreatedOnToolsVersion = 14.0.1;
-					};
-					D37BEDA929017E4800FF3A73 = {
-						CreatedOnToolsVersion = 14.0.1;
-						TestTargetID = D37BED9729017E4500FF3A73;
 					};
 				};
 			};
@@ -213,7 +129,6 @@
 			projectRoot = "";
 			targets = (
 				D37BED9729017E4500FF3A73 /* RealitySuperApp */,
-				D37BEDA929017E4800FF3A73 /* RealitySuperAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -224,13 +139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D37BEDA829017E4800FF3A73 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,23 +153,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D37BEDA629017E4800FF3A73 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D37BEDAF29017E4800FF3A73 /* RealitySuperAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		D37BEDAC29017E4800FF3A73 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D37BED9729017E4500FF3A73 /* RealitySuperApp */;
-			targetProxy = D37BEDAB29017E4800FF3A73 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		D37BEDBC29017E4800FF3A73 /* Debug */ = {
@@ -450,64 +342,6 @@
 			};
 			name = Release;
 		};
-		D37BEDC229017E4800FF3A73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LSUSGUW6L4;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LD_RUNPATH_SEARCH_PATHS_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE))",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mizuki.RealitySuperAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RealitySuperApp.app/RealitySuperApp";
-			};
-			name = Debug;
-		};
-		D37BEDC329017E4800FF3A73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = LSUSGUW6L4;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(LD_RUNPATH_SEARCH_PATHS_SHALLOW_BUNDLE_$(SHALLOW_BUNDLE))",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mizuki.RealitySuperAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RealitySuperApp.app/RealitySuperApp";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -525,15 +359,6 @@
 			buildConfigurations = (
 				D37BEDBF29017E4800FF3A73 /* Debug */,
 				D37BEDC029017E4800FF3A73 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D37BEDC129017E4800FF3A73 /* Build configuration list for PBXNativeTarget "RealitySuperAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D37BEDC229017E4800FF3A73 /* Debug */,
-				D37BEDC329017E4800FF3A73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
