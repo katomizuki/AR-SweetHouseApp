@@ -27,14 +27,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D3073B5029081DB9005085CC /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = RealitySuperApp.app; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperApp.app"; sourceTree = "<absolute>"; };
+		D3073B5129081DB9005085CC /* RealitySuperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = RealitySuperAppTests.xctest; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperAppTests.xctest"; sourceTree = "<absolute>"; };
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		D3760F8E2905049000356F63 /* ViewComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViewComponents; path = UIModule/ViewComponents; sourceTree = SOURCE_ROOT; };
 		D3760F9429050DF300356F63 /* DomainModel */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DomainModel; path = DomainModule/DomainModel; sourceTree = SOURCE_ROOT; };
 		D3760F9E29052A2800356F63 /* Repositry */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Repositry; path = Infra/Repositry; sourceTree = SOURCE_ROOT; };
-		D37BED9829017E4500FF3A73 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = RealitySuperApp.app; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperApp.app"; sourceTree = "<absolute>"; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D37BEDAA29017E4800FF3A73 /* RealitySuperAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = RealitySuperAppTests.xctest; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperAppTests.xctest"; sourceTree = "<absolute>"; };
 		D37BEDAE29017E4800FF3A73 /* RealitySuperAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealitySuperAppTests.swift; sourceTree = "<group>"; };
 		D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RealitySuperApp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -154,7 +154,7 @@
 				D3DF88582907F82000227BED /* ViewComponents */,
 			);
 			productName = RealitySuperApp;
-			productReference = D37BED9829017E4500FF3A73 /* RealitySuperApp.app */;
+			productReference = D3073B5029081DB9005085CC /* RealitySuperApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D37BEDA929017E4800FF3A73 /* RealitySuperAppTests */ = {
@@ -174,7 +174,7 @@
 			packageProductDependencies = (
 			);
 			productName = RealitySuperAppTests;
-			productReference = D37BEDAA29017E4800FF3A73 /* RealitySuperAppTests.xctest */;
+			productReference = D3073B5129081DB9005085CC /* RealitySuperAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
