@@ -22,4 +22,4 @@ jobs:
 #     - name: Build
 #       run: xcodebuild build -scheme RealitySuperApp -sdk iphonesimulator -configuration Release -clonedSourcePackagesDirPath SourcePackages
     - name: Test
-      run: xcodebuild clean test \-sdk iphonesimulator \-project RealitySuperApp.xcodeproj \-scheme RealitySuperApp \-skip-testing:RealitySuperAppUITests \-destination 'platform=iOS Simulator,name=iPhone 13 Pro'
+      run: xcodebuild clean test \-sdk iphonesimulator \-project RealitySuperApp.xcodeproj \-scheme RealitySuperApp \-skip-testing:RealitySuperAppUITests \-destination 'platform=iOS Simulator,name=iPhone 13 Pro' CODE_SIGNING_ALLOWED=NO
