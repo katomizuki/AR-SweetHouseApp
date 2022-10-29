@@ -1,23 +1,25 @@
-# This file contains the fastlane.tools configuration
-# You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
 
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "Test"
+  lane :test do
+    run_tests(device: "iPhone 14 Pro", 
+              scheme: "RealitySuperApp", 
+              slack_url: "https://hooks.slack.com/services/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")
+  end
+  lane :release do
+    sync_code_signing(type: "appstore") 
+    build_app(scheme: "RealitySuperApp")
+    upload_to_app_store(
+      username: "kato.1120.3211.haya@icloud.com",
+      skip_screenshots: true,
+      skip_metadata: true,
+      force: true,
+    )
+   slack(
+      message: "Successfully uploaded a new App Store build",
+      slack_url: "https://hooks.slack.com/services/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"
+    )
   end
 end
