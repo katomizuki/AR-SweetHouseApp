@@ -1,0 +1,17 @@
+current directory: /Users/mizuki/Dropbox/RealitySuperApp/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+/Users/mizuki/.rbenv/versions/3.1.2/bin/ruby -I /Users/mizuki/.rbenv/versions/3.1.2/lib/ruby/site_ruby/3.1.0 extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /Users/mizuki/Dropbox/RealitySuperApp/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20221029-23574-wvcraj sitelibdir\=./.gem.20221029-23574-wvcraj clean
+
+current directory: /Users/mizuki/Dropbox/RealitySuperApp/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20221029-23574-wvcraj sitelibdir\=./.gem.20221029-23574-wvcraj
+compiling unf.cc
+linking shared-object unf_ext.bundle
+ld: warning: -undefined dynamic_lookup may not work with chained fixups
+
+current directory: /Users/mizuki/Dropbox/RealitySuperApp/vendor/bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20221029-23574-wvcraj sitelibdir\=./.gem.20221029-23574-wvcraj install
+/usr/bin/install -c -m 0755 unf_ext.bundle ./.gem.20221029-23574-wvcraj
