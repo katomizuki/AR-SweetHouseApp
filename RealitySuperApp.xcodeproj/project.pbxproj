@@ -10,16 +10,16 @@
 		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37BEDA129017E4800FF3A73 /* Assets.xcassets */; };
-		D3DF88552907F7C300227BED /* DomainModel in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88542907F7C300227BED /* DomainModel */; };
+		D38C7B74290E685900515B58 /* DomainModule in Frameworks */ = {isa = PBXBuildFile; productRef = D38C7B73290E685900515B58 /* DomainModule */; };
 		D3DF88572907F81700227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88562907F81700227BED /* Repositry */; };
 		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D3073B532908933C005085CC /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = RealitySuperApp.app; path = "/Users/mizuki/Dropbox/RealitySuperApp/build/Debug-iphoneos/RealitySuperApp.app"; sourceTree = "<absolute>"; };
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D38C7B71290E66D500515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RealitySuperApp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -28,9 +28,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3DF88552907F7C300227BED /* DomainModel in Frameworks */,
 				D3760F9C29051B6B00356F63 /* Home in Frameworks */,
 				D3DF88572907F81700227BED /* Repositry in Frameworks */,
+				D38C7B74290E685900515B58 /* DomainModule in Frameworks */,
 				D3DF88592907F82000227BED /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,7 +69,16 @@
 				D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */,
 				D3760F882904FEBC00356F63 /* App */,
 				D3760F872904FDDD00356F63 /* Main */,
+				D38C7B71290E66D500515B58 /* RealitySuperApp.app */,
+				D38C7B72290E685900515B58 /* Frameworks */,
 			);
+			sourceTree = "<group>";
+		};
+		D38C7B72290E685900515B58 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -90,12 +99,12 @@
 			name = RealitySuperApp;
 			packageProductDependencies = (
 				D3760F9B29051B6B00356F63 /* Home */,
-				D3DF88542907F7C300227BED /* DomainModel */,
 				D3DF88562907F81700227BED /* Repositry */,
 				D3DF88582907F82000227BED /* ViewComponents */,
+				D38C7B73290E685900515B58 /* DomainModule */,
 			);
 			productName = RealitySuperApp;
-			productReference = D3073B532908933C005085CC /* RealitySuperApp.app */;
+			productReference = D38C7B71290E66D500515B58 /* RealitySuperApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -370,9 +379,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Home;
 		};
-		D3DF88542907F7C300227BED /* DomainModel */ = {
+		D38C7B73290E685900515B58 /* DomainModule */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DomainModel;
+			productName = DomainModule;
 		};
 		D3DF88562907F81700227BED /* Repositry */ = {
 			isa = XCSwiftPackageProductDependency;
