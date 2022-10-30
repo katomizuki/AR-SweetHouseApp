@@ -6,7 +6,7 @@ platform :ios do
   lane :test do
     run_tests(device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp", 
-              slack_url: "https://hooks.slack.com/services/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")
+              slack_url: "https://hooks.slack.com/services/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")
   end
   lane :release do
     sync_code_signing(type: "appstore") 
@@ -19,7 +19,7 @@ platform :ios do
     )
    slack(
       message: "Successfully uploaded a new App Store build",
-      slack_url: "https://hooks.slack.com/services/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"
+      slack_url: "https://hooks.slack.com/services/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"
     )
   end
 end
