@@ -17,8 +17,8 @@ let package = Package(
             name: "ViewComponents",
             targets: ["ViewComponents"]),
         .library(
-            name: "DomainModel",
-            targets: ["DomainModel"]),
+            name: "DomainModule",
+            targets: ["DomainModule"]),
         
     ],
     dependencies: [
@@ -34,7 +34,7 @@ let package = Package(
             name: "ViewComponents",
             dependencies: []),
         .target(
-            name: "DomainModel",
+            name: "DomainModule",
             dependencies: []),
         .testTarget(
             name: "HomeTests",
