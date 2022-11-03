@@ -6,8 +6,8 @@ platform :ios do
 	before_all do
   if is_ci?
     create_keychain(
-      name: 'name',
-      password: 'password',
+      name: ENV['USER_NAME'],
+      password: ENV["MATCH_PASSWORD"],
       timeout: 1800
     )
   end
