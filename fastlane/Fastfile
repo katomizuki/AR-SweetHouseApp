@@ -21,7 +21,7 @@ end
 
   lane :release do
 
-	username = ENV['USE_RNAME']
+	username = ENV['USER_NAME']
   	personal_github_access_token = ENV["PERSONAL_GITHUB_ACCESS_TOKEN"]
   	authorization_token_str = "#{username}:#{personal_github_access_token}"
   	basic_authorization_token = Base64.strict_encode64(authorization_token_str)
