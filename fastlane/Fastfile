@@ -49,7 +49,7 @@ platform :ios do
   	basic_authorization_token = Base64.strict_encode64(authorization_token_str)
 
 	api_key = app_store_connect_api_key(
-  	key_id: ENV['ASC_API_KEY_ID'],
+  	key_id: ASC_API_KEY_ID,
   	issuer_id: ENV['ASC_API_ISSUER_ID'],
   	key_content: ENV['ASC_KEY_CONTENT']
 	)
