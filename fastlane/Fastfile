@@ -25,7 +25,7 @@ platform :ios do
   	git_basic_authorization: basic_authorization_token,
   	api_key: api_key,
   	type: "appstore",
-  	readonly: false
+  	readonly: true
 	)
 
     	increment_version_number(xcodeproj: "RealitySuperApp.xcodeproj")
@@ -58,7 +58,7 @@ platform :ios do
   	git_basic_authorization: basic_authorization_token,
   	api_key: api_key,
   	type: "adhoc",
-  	readonly: false
+  	readonly: true
 	)
 	
 	increment_build_number
