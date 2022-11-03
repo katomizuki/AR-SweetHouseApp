@@ -33,6 +33,7 @@ jobs:
         USER_NAME: ${{ secrets.USER_NAME }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APP_ID: ${{ secrets.APP_ID }} 
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         GIT_URL: ${{ secrets.GIT_URL }}
        run: bundle exec fastlane beta
         
