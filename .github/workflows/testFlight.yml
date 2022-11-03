@@ -26,13 +26,14 @@ jobs:
     
      - name: Upload a TestFlight
        env:
-        ASC_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
-        ASC_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+        ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+        ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
         ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
         PERSONAL_GITHUB_ACCESS_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
         USER_NAME: ${{ secrets.USER_NAME }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
         APP_ID: ${{ secrets.APP_ID }} 
+        GIT_URL: ${{ secrets.GIT_URL }}
        run: bundle exec fastlane beta
         
        
