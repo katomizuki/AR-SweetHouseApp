@@ -73,12 +73,13 @@ end
 	)
 	
 	increment_build_number
-	disable_automatic_code_signing(path: "RealitySuperApp.xcodeproj")
+
 	build_app(
 	scheme: "RealitySuperApp",
-	silent: true,
-	clean: true)
-	enable_automatic_code_signing(path: "RealitySuperApp.xcodeproj")
+	export_options: {
+      	method: "app-store",
+    	}
+ 	)
 	upload_to_testflight(api_key: api_key)
   end
 end
