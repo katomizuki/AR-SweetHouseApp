@@ -29,7 +29,6 @@ jobs:
         ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
         ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
         ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
-        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         PERSONAL_GITHUB_ACCESS_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
         USER_NAME: ${{ secrets.USER_NAME }}
         APPLE_ID: ${{ secrets.APPLE_ID }}
