@@ -35,6 +35,8 @@ jobs:
         APP_ID: ${{ secrets.APP_ID }} 
         MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
         GIT_URL: ${{ secrets.GIT_URL }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
        run: bundle exec fastlane beta
         
        
