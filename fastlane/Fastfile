@@ -9,7 +9,9 @@ platform :ios do
               slack_url: "https://hooks.slack.com/services/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")
   end
   lane :release do
-    sync_code_signing(type: "appstore") 
+    sync_code_signing(type: "appstore")
+    increment_version_number(xcodeproj: "RealitySuperApp.xcodeproj")
+    increment_build_number
     build_app(scheme: "RealitySuperApp")
     upload_to_app_store(
       username: "kato.1120.3211.haya@icloud.com",
@@ -21,5 +23,38 @@ platform :ios do
       message: "Successfully uploaded a new App Store build",
       slack_url: "https://hooks.slack.com/services/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"
     )
+  end
+  lane :beta do
+
+	username = ENV['USERNAME']
+  	personal_github_access_token = ENV["PERSONAL_GITHUB_ACCESS_TOKEN"]
+  	authorization_token_str = "#{username}:#{personal_github_access_token}"
+  	basic_authorization_token = Base64.strict_encode64(authorization_token_str)
+
+	api_key = app_store_connect_api_key(
+  	key_id: ENV['ASC_API_KEY_ID'],
+  	issuer_id: ENV['ASC_API_ISSUER_ID'],
+  	key_content: ENV['ASC_KEY_CONTENT']
+	)
+
+	match(
+  	git_basic_authorization: basic_authorization_token,
+  	api_key: api_key,
+  	app_identifier: 'com.mizuki.RealitySuperApp',
+  	type: "adhoc",
+  	readonly: false
+	)
+	
+	increment_build_number
+	build_app(
+	scheme: "RealitySuperApp",
+	silent: true,
+	clean: true
+	)
+
+	upload_to_testflight(api_key: api_key)
+	slack(
+   	message: "Successfully uploaded a TestFlight",
+  	slack_url: "https://hooks.slack.com/services/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")
   end
 end
