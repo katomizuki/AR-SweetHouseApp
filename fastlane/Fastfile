@@ -1,7 +1,21 @@
 
 default_platform(:ios)
 
+
+
 platform :ios do
+
+before_all do
+  if is_ci?
+    create_keychain(
+      name: ENV['MATCH_KEYCHAIN_NAME'],
+      password: ENV['MATCH_KEYCHAIN_PASSWORD'],
+      timeout: 1800
+    )
+  end
+end
+
+
   desc "Test"
   lane :test do
     run_tests(device: "iPhone 14 Pro", 
@@ -49,7 +63,7 @@ platform :ios do
   	basic_authorization_token = Base64.strict_encode64(authorization_token_str)
 
 	api_key = app_store_connect_api_key(
-  	key_id: ASC_API_KEY_ID,
+  	key_id: ENV['ASC_API_KEY_ID'],
   	issuer_id: ENV['ASC_API_ISSUER_ID'],
   	key_content: ENV['ASC_KEY_CONTENT']
 	)
