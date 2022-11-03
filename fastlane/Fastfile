@@ -74,10 +74,8 @@ end
 	
 	increment_build_number
 
-	build_app(
-	scheme: "RealitySuperApp",
-	export_xcargs: "-allowProvisioningUpdates"
- 	)
+	build_app(scheme: "RealitySuperApp")
+
 	upload_to_testflight(api_key: api_key)
   end
 end
