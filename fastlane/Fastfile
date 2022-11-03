@@ -76,9 +76,7 @@ end
 
 	build_app(
 	scheme: "RealitySuperApp",
-	export_options: {
-      	method: "app-store",
-    	}
+	export_xcargs: "-allowProvisioningUpdates"
  	)
 	upload_to_testflight(api_key: api_key)
   end
