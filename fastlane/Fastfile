@@ -68,19 +68,31 @@ end
 	match(
   	git_basic_authorization: basic_authorization_token,
   	api_key: api_key,
-  	type: "adhoc",
-  	readonly: true
+  	type: "appstore",
+  	readonly: is_ci
 	)
 	
 	increment_build_number
+	# update_code_signing_settings(
+  #     path: "RealitySuperApp.xcodeproj",
+  #     code_sign_identity: "iPhone Distribution",
+  #     profile_name: "AdHoc_com.mizuki.RealitySuperApp.mobileprovision",
+  #     use_automatic_signing: false,
+  #   )
 
 	build_app(
 		scheme: "RealitySuperApp",
 		export_options: {
-      method: "ad-hoc",
-			"com.mizuki.RealitySuperApp"=>"AdHoc_com.mizuki.RealitySuperApp.mobileprovision"
+      method: "app-store",
     }
 	)
+
+	# update_code_signing_settings(
+  #     path: "RealitySuperApp.xcodeproj",
+  #     code_sign_identity: "iPhone Distribution",
+  #     profile_name: "AdHoc_com.mizuki.RealitySuperApp.mobileprovision",
+  #     use_automatic_signing: true,
+  #   )
 
 	upload_to_testflight(api_key: api_key)
   end
