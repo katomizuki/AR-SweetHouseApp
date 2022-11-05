@@ -24,7 +24,7 @@ jobs:
         key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
         restore-keys: ${{ runner.os }}-spm-
     
-     - name: Upload a TestFlight
+     - name: Upload a AppStoreConnect
        env:
         ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
         ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
@@ -37,4 +37,5 @@ jobs:
         GIT_URL: ${{ secrets.GIT_URL }}
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        PROVISION: ${{ secrets.PROVISION }}
        run: bundle exec fastlane release
