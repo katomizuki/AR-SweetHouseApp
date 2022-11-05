@@ -6,14 +6,6 @@ platform :ios do
 	before_all do
   if is_ci?
 		setup_ci
-    # create_keychain(
-    #   name: ENV['USER_NAME'],
-    #   password: ENV["MATCH_PASSWORD"],
-    #   default_keychain: true,
-    #   unlock: true,
-    #   timeout: 3600,
-    #       lock_when_sleeps: false
-    # )
   end
 end
 
@@ -49,7 +41,7 @@ end
 			update_code_signing_settings(
   			path: "RealitySuperApp.xcodeproj",
  			 	code_sign_identity: "iPhone Distribution",
-  			profile_name: "match AppStore com.mizuki.RealitySuperApp",
+  			profile_name: ENV['PROVISION'],
   			use_automatic_signing: false,
 		)
 
@@ -58,7 +50,7 @@ end
 		export_options: {
       method: "app-store",
 			provisioningProfiles: {
-          "com.mizuki.RealitySuperApp" => "match AppStore com.mizuki.RealitySuperApp"
+          ENV['APP_ID'] => ENV['PROVISION']
         }
     }
 	)
@@ -66,7 +58,7 @@ end
 	update_code_signing_settings(
       path: "RealitySuperApp.xcodeproj",
       code_sign_identity: "iPhone Distribution",
-      profile_name: "match AppStore com.mizuki.RealitySuperApp",
+      profile_name: ENV['PROVISION'],
       use_automatic_signing: true,
    )
 
@@ -102,7 +94,7 @@ increment_build_number
 update_code_signing_settings(
   path: "RealitySuperApp.xcodeproj",
   code_sign_identity: "iPhone Distribution",
-  profile_name: "match AppStore com.mizuki.RealitySuperApp",
+  profile_name: ENV['PROVISION'],
   use_automatic_signing: false,
 )
 
@@ -111,7 +103,7 @@ update_code_signing_settings(
 		export_options: {
       method: "app-store",
 			provisioningProfiles: {
-          "com.mizuki.RealitySuperApp" => "match AppStore com.mizuki.RealitySuperApp"
+          ENV['APP_ID'] => ENV['PROVISION']
         }
     }
 	)
@@ -119,7 +111,7 @@ update_code_signing_settings(
 	update_code_signing_settings(
       path: "RealitySuperApp.xcodeproj",
       code_sign_identity: "iPhone Distribution",
-      profile_name: "match AppStore com.mizuki.RealitySuperApp",
+      profile_name: ENV['PROVISION'],
       use_automatic_signing: true,
    )
 
