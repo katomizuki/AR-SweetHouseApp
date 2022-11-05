@@ -8,7 +8,10 @@ platform :ios do
     create_keychain(
       name: ENV['USER_NAME'],
       password: ENV["MATCH_PASSWORD"],
-      timeout: 1800
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+          lock_when_sleeps: false
     )
   end
 end
@@ -36,13 +39,37 @@ end
   	git_basic_authorization: basic_authorization_token,
   	api_key: api_key,
   	type: "appstore",
-  	readonly: true
+  	readonly: true,
+	keychain_name: ENV['USER_NAME'],
+        keychain_password: ENV["MATCH_PASSWORD"],
 	)
 
     	increment_version_number(xcodeproj: "RealitySuperApp.xcodeproj")
     	increment_build_number
 
-    	build_app(scheme: "RealitySuperApp")
+			update_code_signing_settings(
+  			path: "RealitySuperApp.xcodeproj",
+ 			 	code_sign_identity: "iPhone Distribution",
+  			profile_name: "match AppStore com.mizuki.RealitySuperApp",
+  			use_automatic_signing: false,
+		)
+
+    	build_app(
+		scheme: "RealitySuperApp",
+		export_options: {
+      method: "app-store",
+			provisioningProfiles: {
+          "com.mizuki.RealitySuperApp" => "match AppStore com.mizuki.RealitySuperApp"
+        }
+    }
+	)
+
+	update_code_signing_settings(
+      path: "RealitySuperApp.xcodeproj",
+      code_sign_identity: "iPhone Distribution",
+      profile_name: "match AppStore com.mizuki.RealitySuperApp",
+      use_automatic_signing: true,
+   )
 
     	upload_to_app_store(
       	api_key: api_key,
@@ -72,7 +99,7 @@ end
   	readonly: is_ci
 	)
 	
-	# increment_build_number
+increment_build_number
 update_code_signing_settings(
   path: "RealitySuperApp.xcodeproj",
   code_sign_identity: "iPhone Distribution",
