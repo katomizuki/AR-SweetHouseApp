@@ -1,0 +1,40 @@
+name: Upload AppStoreConnect
+
+on: workflow_dispatch
+
+jobs: 
+  build: 
+    runs-on: macos-latest
+    
+    steps:
+     - uses: actions/checkout@v3
+     - name: Select Xcode Version
+       run: sudo xcode-select -s "/Applications/Xcode_13.2.1.app"
+ 
+     - name: Show Xcode version
+       run: xcodebuild -version
+
+     - name: Bundle Install
+       run: bundle install
+ 
+     - name: Cache Swift Packages
+       uses: actions/cache@v1
+       with:
+        path: SourcePackages
+        key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
+        restore-keys: ${{ runner.os }}-spm-
+    
+     - name: Upload a TestFlight
+       env:
+        ASC_API_KEY_ID: ${{ secrets.ASC_API_KEY_ID }}
+        ASC_API_ISSUER_ID: ${{ secrets.ASC_API_ISSUER_ID }}
+        ASC_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
+        PERSONAL_GITHUB_ACCESS_TOKEN: ${{ secrets.PERSONAL_GITHUB_ACCESS_TOKEN }}
+        USER_NAME: ${{ secrets.USER_NAME }}
+        APPLE_ID: ${{ secrets.APPLE_ID }}
+        APP_ID: ${{ secrets.APP_ID }} 
+        MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+        GIT_URL: ${{ secrets.GIT_URL }}
+        FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
+        FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+       run: bundle exec fastlane release
