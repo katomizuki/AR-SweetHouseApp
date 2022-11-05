@@ -37,6 +37,7 @@ jobs:
         GIT_URL: ${{ secrets.GIT_URL }}
         FASTLANE_USER: ${{ secrets.FASTLANE_USER }}
         FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+        PROVISION: ${{ secrets.PROVISION }}
        run: bundle exec fastlane beta
         
        
