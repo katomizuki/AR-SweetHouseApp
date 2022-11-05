@@ -89,7 +89,8 @@ end
   	type: "appstore",
   	readonly: is_ci
 	)
-	
+
+increment_version_number(xcodeproj: "RealitySuperApp.xcodeproj")
 increment_build_number
 update_code_signing_settings(
   path: "RealitySuperApp.xcodeproj",
