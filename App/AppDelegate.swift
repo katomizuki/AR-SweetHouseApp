@@ -8,6 +8,7 @@
 import UIKit
 import SwiftUI
 import Home
+import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         // Create the SwiftUI view that provides the window contents.
         let contentView = Home.ContentView()
-
+        FirebaseApp.configure()
         // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)
