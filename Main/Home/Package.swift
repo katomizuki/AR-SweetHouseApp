@@ -21,7 +21,8 @@ let package = Package(
             targets: ["DomainModule"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/firebase/firebase-ios-sdk.git",
+        .package(
+            name: "Firebase",url: "https://github.com/firebase/firebase-ios-sdk.git",
                  .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
                  .exactItem(.init("0.45.0")!))
@@ -33,8 +34,12 @@ let package = Package(
                                     package: "swift-composable-architecture")]),
         .target(
             name: "Repositry",
-            dependencies: [.product(name: "ComposableArchitecture",
-                                    package: "swift-composable-architecture")]),
+            dependencies: [
+                .product(name: "ComposableArchitecture",
+                         package: "swift-composable-architecture"),
+                .product(name: "FirebaseFirestore",
+                         package: "Firebase")
+            ]),
         .target(
             name: "ViewComponents",
             dependencies: []),
