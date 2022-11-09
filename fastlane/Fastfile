@@ -1,5 +1,5 @@
  ENV['ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD'] = 'true'
-ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "600"
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "900"
 
 default_platform(:ios)
 
@@ -13,7 +13,7 @@ end
 
   desc "Test"
   lane :test do
-    run_tests(device: "iPhone 14 Pro", 
+    run_tests(device: "iPhone 13 Pro", 
               scheme: "RealitySuperApp")
   end
 
