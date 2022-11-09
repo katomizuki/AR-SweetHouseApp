@@ -1,4 +1,6 @@
  ENV['ITMSTRANSPORTER_FORCE_ITMS_PACKAGE_UPLOAD'] = 'true'
+ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "600"
+
 default_platform(:ios)
 
 platform :ios do
