@@ -119,15 +119,6 @@
         }
       },
       {
-        "package": "swift-clocks",
-        "repositoryURL": "https://github.com/pointfreeco/swift-clocks",
-        "state": {
-          "branch": null,
-          "revision": "692ec4f5429a667bdd968c7260dfa2b23adfeffc",
-          "version": "0.1.4"
-        }
-      },
-      {
         "package": "swift-collections",
         "repositoryURL": "https://github.com/apple/swift-collections",
         "state": {
@@ -141,8 +132,8 @@
         "repositoryURL": "https://github.com/pointfreeco/swift-composable-architecture.git",
         "state": {
           "branch": null,
-          "revision": "1fcd53fc875bade47d850749ea53c324f74fd64d",
-          "version": "0.45.0"
+          "revision": "5c476994eaa79af8e466041f6de1ab116f37c528",
+          "version": "0.42.0"
         }
       },
       {
