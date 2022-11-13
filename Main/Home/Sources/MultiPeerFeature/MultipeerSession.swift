@@ -129,8 +129,10 @@ extension MultipeerSession: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String : String]?) {
+        // 端末発見時
         let accepted = peerDiscoverdHandler(peerID)
         if accepted {
+            // 招待を送る。
             browser.invitePeer(peerID,
                                to: session,
                                withContext: nil,

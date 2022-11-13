@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ComposableArchitecture
+import MultiPeerFeature
 
 public struct ContentView : View {
     public var body: some View {
