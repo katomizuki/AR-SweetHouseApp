@@ -19,6 +19,9 @@ let package = Package(
         .library(
             name: "DomainModule",
             targets: ["DomainModule"]),
+        .library(
+            name: "MultiPeerFeature",
+            targets: ["MultiPeerFeature"]),
     ],
     dependencies: [
         .package(
@@ -47,6 +50,9 @@ let package = Package(
             name: "DomainModule",
             dependencies: [.product(name: "ComposableArchitecture",
                                     package: "swift-composable-architecture")]),
+        .target(
+            name: "MultiPeerFeature",
+            dependencies: []),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home"]),
