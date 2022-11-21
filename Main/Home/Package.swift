@@ -22,6 +22,8 @@ let package = Package(
         .library(
             name: "MultiPeerFeature",
             targets: ["MultiPeerFeature"]),
+        .library(name: "FirebaseClient",
+                 targets: ["FirebaseClient"])
     ],
     dependencies: [
         .package(
@@ -55,6 +57,11 @@ let package = Package(
         .target(
             name: "MultiPeerFeature",
             dependencies: []),
+        .target(name: "FirebaseClient",
+                dependencies: [
+                    .product(name: "FirebaseFirestore",
+                                        package: "Firebase")
+                ]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",
