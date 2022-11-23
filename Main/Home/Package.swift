@@ -30,7 +30,7 @@ let package = Package(
             name: "Firebase",url: "https://github.com/firebase/firebase-ios-sdk.git",
                  .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-                 .exactItem(.init("0.40.0")!)),
+                 .exactItem(.init("0.42.0")!)),
         .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "11.2.0")),
         .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "6.0.1"))
     ],
