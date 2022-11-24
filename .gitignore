@@ -1,4 +1,5 @@
 build/
+
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -14,4 +15,9 @@ DerivedData
 *.hmap
 *.ipa
 *.xcuserstate
-
+*.env.default
+*.dSYM.zip
+*.dSYM
+fastlane/report.xml
+fastlane/test_output/
+vendor/
