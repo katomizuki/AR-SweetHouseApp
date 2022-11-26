@@ -17,13 +17,17 @@ let package = Package(
             name: "ViewComponents",
             targets: ["ViewComponents"]),
         .library(
-            name: "DomainModule",
-            targets: ["DomainModule"]),
+            name: "EntityModule",
+            targets: ["EntityModule"]),
         .library(
             name: "MultiPeerFeature",
             targets: ["MultiPeerFeature"]),
         .library(name: "FirebaseClient",
-                 targets: ["FirebaseClient"])
+                 targets: ["FirebaseClient"]),
+        .library(name: "WorldMapFeature",
+                 targets: ["WorldMapFeature"]),
+        .library(name: "CoachingOverlayFeature",
+                 targets: ["CoachingOverlayFeature"]),
     ],
     dependencies: [
         .package(
@@ -51,7 +55,7 @@ let package = Package(
             name: "ViewComponents",
             dependencies: []),
         .target(
-            name: "DomainModule",
+            name: "EntityModule",
             dependencies: [.product(name: "ComposableArchitecture",
                                     package: "swift-composable-architecture")]),
         .target(
@@ -62,6 +66,10 @@ let package = Package(
                     .product(name: "FirebaseFirestore",
                                         package: "Firebase")
                 ]),
+        .target(name: "WorldMapFeature",
+                dependencies: []),
+        .target(name: "CoachingOverlayFeature",
+                dependencies: []),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

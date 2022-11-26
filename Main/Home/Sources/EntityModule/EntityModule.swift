@@ -1,5 +1,5 @@
 
-public struct DomainModule {
+public struct EntityModule {
     public private(set) var text = "Hello, World!"
 
     public init() {
