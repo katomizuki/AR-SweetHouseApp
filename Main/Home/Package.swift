@@ -28,6 +28,8 @@ let package = Package(
                  targets: ["WorldMapFeature"]),
         .library(name: "CoachingOverlayFeature",
                  targets: ["CoachingOverlayFeature"]),
+        .library(name: "ThumbnailGeneratorFeature",
+                 targets: ["ThumbnailGeneratorFeature"])
     ],
     dependencies: [
         .package(
@@ -69,6 +71,8 @@ let package = Package(
         .target(name: "WorldMapFeature",
                 dependencies: []),
         .target(name: "CoachingOverlayFeature",
+                dependencies: []),
+        .target(name: "ThumbnailGeneratorFeature",
                 dependencies: []),
         .testTarget(
             name: "HomeTests",
