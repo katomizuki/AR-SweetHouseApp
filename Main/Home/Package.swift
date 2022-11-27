@@ -29,7 +29,9 @@ let package = Package(
         .library(name: "CoachingOverlayFeature",
                  targets: ["CoachingOverlayFeature"]),
         .library(name: "ThumbnailGeneratorFeature",
-                 targets: ["ThumbnailGeneratorFeature"])
+                 targets: ["ThumbnailGeneratorFeature"]),
+        .library(name: "HapticsFeature",
+                 targets: ["HapticsFeature"])
     ],
     dependencies: [
         .package(
@@ -73,6 +75,8 @@ let package = Package(
         .target(name: "CoachingOverlayFeature",
                 dependencies: []),
         .target(name: "ThumbnailGeneratorFeature",
+                dependencies: []),
+        .target(name: "HapticsFeature",
                 dependencies: []),
         .testTarget(
             name: "HomeTests",
