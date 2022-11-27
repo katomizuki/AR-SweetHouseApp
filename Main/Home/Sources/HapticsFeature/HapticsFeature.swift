@@ -52,8 +52,8 @@ struct HapticsFeature {
                                                                        value: 1)
                                                ],
                                         relativeTime: 0)
-                let pattern = try! CHHapticPattern(events: [audioEvent, hapticEvent],
+        let pattern = try! CHHapticPattern(events: [audioEvent, hapticEvent],
                                                    parameters: [])
-                return pattern
+        return pattern
     }
 }
