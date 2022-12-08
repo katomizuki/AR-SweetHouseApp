@@ -31,7 +31,9 @@ let package = Package(
         .library(name: "ThumbnailGeneratorFeature",
                  targets: ["ThumbnailGeneratorFeature"]),
         .library(name: "HapticsFeature",
-                 targets: ["HapticsFeature"])
+                 targets: ["HapticsFeature"]),
+        .library(name: "MotionFeature",
+                 targets: ["MotionFeature"])
     ],
     dependencies: [
         .package(
@@ -77,6 +79,8 @@ let package = Package(
         .target(name: "ThumbnailGeneratorFeature",
                 dependencies: []),
         .target(name: "HapticsFeature",
+                dependencies: []),
+        .target(name: "MotionFeature",
                 dependencies: []),
         .testTarget(
             name: "HomeTests",
