@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 public struct PuttingView: View {
+    public let store: StoreOf<PuttingFeature>
     
     public var body: some View {
-        HStack(content: {
-            
-        })
-        .background(.blue)
+        WithViewStore(self.store) { viewStore in
+            HStack(content: {
+                
+            })
+            .background(.blue)
+        }
     }
-    public init() { }
+    
+    public init(store: StoreOf<PuttingFeature>) {
+        self.store = store
+    }
 }

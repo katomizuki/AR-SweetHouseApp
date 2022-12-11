@@ -12,9 +12,9 @@ import SweetListFeature
 import SettingFeature
 import PuttingFeature
 
-struct HomeControlButtonsBarView: View {
-    let store: Store<HomeFeature.HomeState, HomeFeature.HomeAction>
-    var body: some View {
+public struct HomeControlButtonsBarView: View {
+    public let store: StoreOf<HomeFeature>
+    public var body: some View {
         HStack(alignment: .center,
                content: {
             HomeControlsButtons(store: store)
@@ -22,11 +22,10 @@ struct HomeControlButtonsBarView: View {
     }
 }
 
-struct HomeControlsButtons: View {
-    let store: Store<HomeFeature.HomeState, HomeFeature.HomeAction>
-    @Environment(\.presentationMode) var presentationMode
+public struct HomeControlsButtons: View {
+    public let store: StoreOf<HomeFeature>
     
-    var body: some View {
+    public var body: some View {
         WithViewStore(self.store,
                       content: { viewStore in
             HStack(content: {
@@ -36,7 +35,9 @@ struct HomeControlsButtons: View {
                 .sheet(isPresented: viewStore.binding(get: \.isSettingView,
                                                       send: .onTapSettingButton),
                        content: {
-                    SettingFeature.SettiingView()
+                    let store = self.store.scope(state: \.settingState,
+                                                 action: HomeFeature.Action.setting)
+                    SettiingView(store: store)
                 })
                 
                 Spacer()
@@ -47,7 +48,8 @@ struct HomeControlsButtons: View {
                 .sheet(isPresented: viewStore.binding(get: \.isSweetListView,
                                                       send: .onTapSweetListButton),
                        content: {
-                    SweetListFeature.SweetListView()
+                    let store = self.store.scope(state: \.sweetListState, action: HomeFeature.Action.sweetList)
+                    SweetListView(store: store)
                 })
                 
                 Spacer()
@@ -58,7 +60,9 @@ struct HomeControlsButtons: View {
                 .sheet(isPresented: viewStore.binding(get: \.isPuttingView,
                                                       send: .onTapPuttiingButton),
                        content: {
-                    PuttingFeature.PuttingView()
+                    let store = self.store.scope(state: \.puttingState,
+                                                 action: HomeFeature.Action.putting)
+                    PuttingView(store: store)
                 })
             })
             .frame(maxWidth: 500)
@@ -66,4 +70,5 @@ struct HomeControlsButtons: View {
             .background(.black.opacity(0.25))
         })
     }
+
 }

@@ -62,7 +62,8 @@ let package = Package(
                            "CoachingOverlayFeature",
                            "SweetListFeature",
                            "SettingFeature",
-                           "PuttingFeature"]),
+                           "PuttingFeature",
+                           "ViewComponents"]),
         .target(
             name: "Repositry",
             dependencies: [
@@ -101,11 +102,14 @@ let package = Package(
         .target(name: "MetalLibraryLoader",
                 dependencies: []),
         .target(name: "SweetListFeature",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .target(name: "SettingFeature",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .target(name: "PuttingFeature",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

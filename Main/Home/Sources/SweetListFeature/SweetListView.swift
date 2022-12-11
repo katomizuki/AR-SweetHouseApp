@@ -6,14 +6,21 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 
 public struct SweetListView: View {
     
+    public let store: StoreOf<SweetListFeature>
+    
     public var body: some View {
-        HStack(content: {
-            
-        })
-        .background(.red)
+        WithViewStore(self.store) { viewStore in
+            HStack(content: {
+                
+            })
+        }
     }
-    public init() { }
+    
+    public init(store: StoreOf<SweetListFeature>) {
+        self.store = store
+    }
 }

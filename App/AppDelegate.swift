@@ -18,12 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        let store = Store(initialState: HomeFeature.HomeState(),
+        let store = Store(initialState: HomeFeature.State(),
                           reducer: HomeFeature())
-        // Create the SwiftUI view that provides the window contents.
         let contentView = Home.HomeView(store: store)
         FirebaseApp.configure()
-        // Use a UIHostingController as window root view controller.
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)
         self.window = window

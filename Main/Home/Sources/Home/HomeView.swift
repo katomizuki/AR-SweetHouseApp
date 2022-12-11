@@ -10,7 +10,7 @@ import RealityKit
 import ComposableArchitecture
 
 public struct HomeView : View {
-    public let store: Store<HomeFeature.HomeState, HomeFeature.HomeAction>
+    public let store: StoreOf<HomeFeature>
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             ZStack(alignment: .bottom,
@@ -20,12 +20,12 @@ public struct HomeView : View {
             })
             .ignoresSafeArea(.all)
             .onAppear {
-                viewStore.send(.onApear)
+                viewStore.send(.onAppear)
             }
         }
     }
 
-    public init(store: Store<HomeFeature.HomeState, HomeFeature.HomeAction>) {
+    public init(store: StoreOf<HomeFeature>) {
         self.store = store
     }
 }
