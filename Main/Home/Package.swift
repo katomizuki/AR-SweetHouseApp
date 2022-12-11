@@ -33,7 +33,11 @@ let package = Package(
         .library(name: "HapticsFeature",
                  targets: ["HapticsFeature"]),
         .library(name: "MotionFeature",
-                 targets: ["MotionFeature"])
+                 targets: ["MotionFeature"]),
+        .library(name: "UtilFeature",
+                 targets: ["UtilFeature"]),
+        .library(name: "MetalLibraryLoader",
+                 targets: ["MetalLibraryLoader"])
     ],
     dependencies: [
         .package(
@@ -81,6 +85,10 @@ let package = Package(
         .target(name: "HapticsFeature",
                 dependencies: []),
         .target(name: "MotionFeature",
+                dependencies: []),
+        .target(name: "UtilFeature",
+                dependencies: []),
+        .target(name: "MetalLibraryLoader",
                 dependencies: []),
         .testTarget(
             name: "HomeTests",
