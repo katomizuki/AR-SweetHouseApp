@@ -37,7 +37,9 @@ let package = Package(
         .library(name: "UtilFeature",
                  targets: ["UtilFeature"]),
         .library(name: "MetalLibraryLoader",
-                 targets: ["MetalLibraryLoader"])
+                 targets: ["MetalLibraryLoader"]),
+        .library(name: "SweetListFeature",
+                 targets: ["SweetListFeature"])
     ],
     dependencies: [
         .package(
@@ -52,7 +54,8 @@ let package = Package(
         .target(
             name: "Home",
             dependencies: [.product(name: "ComposableArchitecture",
-                                    package: "swift-composable-architecture")]),
+                                    package: "swift-composable-architecture"),
+                           "CoachingOverlayFeature"]),
         .target(
             name: "Repositry",
             dependencies: [
@@ -89,6 +92,8 @@ let package = Package(
         .target(name: "UtilFeature",
                 dependencies: []),
         .target(name: "MetalLibraryLoader",
+                dependencies: []),
+        .target(name: "SweetListFeature",
                 dependencies: []),
         .testTarget(
             name: "HomeTests",

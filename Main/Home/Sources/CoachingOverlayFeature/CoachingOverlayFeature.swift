@@ -7,14 +7,15 @@
 
 import ARKit
 import RealityKit
+import SwiftUI
 
-final class CoachingOverlayFeature: NSObject {
+public final class CoachingOverlayFeature: NSObject {
 
     private let session: ARSession
     
     private let overlayView = ARCoachingOverlayView(frame: .zero)
     
-    init(session: ARSession) {
+    public init(session: ARSession) {
         self.session = session
         super.init()
         overlayView.activatesAutomatically = true
@@ -23,7 +24,7 @@ final class CoachingOverlayFeature: NSObject {
         overlayView.goal = .horizontalPlane
     }
     
-    func setupOverlayView(view: ARView) {
+    public func setupOverlayView(view: ARView) {
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(overlayView)
         NSLayoutConstraint.activate(
@@ -34,18 +35,18 @@ final class CoachingOverlayFeature: NSObject {
                 overlayView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             ])
     }
-    
 }
+
 extension CoachingOverlayFeature: ARCoachingOverlayViewDelegate {
-    func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
+    public func coachingOverlayViewWillActivate(_ coachingOverlayView: ARCoachingOverlayView) {
         print("コーチングが表示される前に呼ばれる")
     }
     
-    func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
+    public func coachingOverlayViewDidDeactivate(_ coachingOverlayView: ARCoachingOverlayView) {
         print("コーチングの非表示が完了したら呼ばれる")
     }
     
-    func coachingOverlayViewDidRequestSessionReset(_ coachingOverlayView: ARCoachingOverlayView) {
+    public func coachingOverlayViewDidRequestSessionReset(_ coachingOverlayView: ARCoachingOverlayView) {
         print("セッションをリセットしてリローカライズされると呼ばれる。")
     }
 }
