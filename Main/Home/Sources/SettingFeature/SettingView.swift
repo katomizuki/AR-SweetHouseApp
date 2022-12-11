@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-public struct SweetListView: View {
+public struct SettiingView: View {
     
     public var body: some View {
         HStack(content: {
             
         })
-        .background(.red)
+        .background(.green)
     }
     public init() { }
 }

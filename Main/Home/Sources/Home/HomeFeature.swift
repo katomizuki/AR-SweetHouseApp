@@ -7,23 +7,45 @@
 
 import ComposableArchitecture
 
-struct HomeFeature: ReducerProtocol {
+public struct HomeFeature: ReducerProtocol {
     
-    typealias State = HomeState
-    typealias Action = HomeAction
+    public typealias State = HomeState
+    public typealias Action = HomeAction
     
-    struct HomeState: Equatable {
+    public struct HomeState: Equatable {
+        var isSweetListView: Bool = false
+        var isSettingView: Bool = false
+        var isPuttingView: Bool = false
         
+        public init() { }
     }
     
-    enum HomeAction: Equatable {
+    public enum HomeAction: Equatable {
         case onApear
+        case onTapSweetListButton
+        case onTapSettingButton
+        case onTapPuttiingButton
     }
+    
+    public struct HomeEnvironment {
+        public init() { }
+    }
+    
+    public init() { }
     // Effectを使用する場合はEffect型を返す。
-    func reduce(into state: inout HomeState, action: HomeAction) -> ComposableArchitecture.Effect<HomeAction, Never> {
+    public func reduce(into state: inout HomeState, action: HomeAction) -> ComposableArchitecture.Effect<HomeAction, Never> {
         switch action {
         case .onApear:
             return .none
+        case .onTapSettingButton:
+            state.isSettingView.toggle()
+            return .none
+        case .onTapSweetListButton:
+            state.isSettingView.toggle()
+        case .onTapPuttiingButton:
+            state.isPuttingView.toggle()
+            return .none
         }
+        return .none
     }
 }

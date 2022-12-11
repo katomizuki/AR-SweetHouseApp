@@ -13,7 +13,7 @@ public struct ControlButton: View {
     
     public var body: some View {
         Button(action: {
-            
+           action()
         }, label: {
             Image(systemName: systemName)
                 .font(.system(size: 35))

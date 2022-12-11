@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3D4294B2917D71600E972FE /* GoogleService-Info.plist */; };
 		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37BEDA129017E4800FF3A73 /* Assets.xcassets */; };
@@ -153,6 +154,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */,
+				D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
