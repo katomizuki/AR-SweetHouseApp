@@ -17,7 +17,7 @@ public struct PuttingFeature: ReducerProtocol {
     }
     
     public enum Action: Equatable {
-        
+        case onAppear
     }
     
     public struct Environment {
@@ -27,6 +27,10 @@ public struct PuttingFeature: ReducerProtocol {
     public init() { }
     
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
+        switch action {
+        case .onAppear:
+            return .none
+        }
         return .none
     }
     

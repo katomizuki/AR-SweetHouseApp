@@ -15,7 +15,12 @@ public struct SweetListView: View {
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             HStack(content: {
-                
+                List(viewStore.sweets.list) { sweet in
+                    Text(sweet.name)
+                }
+            })
+            .onAppear(perform: {
+                viewStore.send(.onAppear)
             })
         }
     }

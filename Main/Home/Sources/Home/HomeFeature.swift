@@ -33,10 +33,6 @@ public struct HomeFeature: ReducerProtocol {
         case setting(SettingFeature.Action)
     }
     
-    public struct HomeEnvironment {
-        public init() { }
-    }
-    
     public init() { }
     
     public var body: some ReducerProtocol<State, Action> {
@@ -50,6 +46,7 @@ public struct HomeFeature: ReducerProtocol {
                 state.isSettingView.toggle()
             case .onTapPuttiingButton:
                 state.isPuttingView.toggle()
+            default: return .none
             }
             return .none
         }

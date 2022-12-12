@@ -17,6 +17,9 @@ public struct PuttingView: View {
                 
             })
             .background(.blue)
+            .onAppear(perform: {
+                viewStore.send(.onAppear)
+            })
         }
     }
     
