@@ -16,22 +16,12 @@ let list = [Sweet(name: "a", thumnail: Image(systemName: "apple.logo"), descript
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        
-        
         var sweets = Sweets(list: list)
         public init() { }
-        
-        public static func == (lhs: SweetListFeature.State, rhs: SweetListFeature.State) -> Bool {
-           return true
-        }
     }
     
     public enum Action: Equatable {
         case onAppear
-    }
-    
-    public struct SweetListEnvironment {
-        public init() { }
     }
     
     public init() { }
@@ -41,7 +31,6 @@ public struct SweetListFeature: ReducerProtocol {
         case .onAppear:
             return .none
         }
-        return .none
     }
     
 }

@@ -14,9 +14,11 @@ public struct SettiingView: View {
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             HStack(content: {
-                
             })
             .background(.green)
+            .onAppear(perform: {
+                viewStore.send(.onAppear)
+            })
         }
     }
     

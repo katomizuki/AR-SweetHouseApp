@@ -35,6 +35,8 @@ public struct HomeFeature: ReducerProtocol {
     
     public init() { }
     
+    @Dependency(\.mainQueue) var mainQueue
+    
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
@@ -43,7 +45,7 @@ public struct HomeFeature: ReducerProtocol {
             case .onTapSettingButton:
                 state.isSettingView.toggle()
             case .onTapSweetListButton:
-                state.isSettingView.toggle()
+                state.isSweetListView.toggle()
             case .onTapPuttiingButton:
                 state.isPuttingView.toggle()
             default: return .none

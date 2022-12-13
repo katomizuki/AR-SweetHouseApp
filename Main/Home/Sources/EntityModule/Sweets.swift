@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 public struct Sweets {
+    
     public let list: [Sweet]
     
     public init(list: [Sweet]) {
@@ -28,5 +29,11 @@ extension Sweets: Collection {
     
     public func index(after i: Int) -> Int {
         return i + 1
+    }
+}
+
+extension Sweets: Equatable {
+    public static func == (lhs: Sweets, rhs: Sweets) -> Bool {
+        return true
     }
 }
