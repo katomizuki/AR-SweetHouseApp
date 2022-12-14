@@ -43,7 +43,9 @@ let package = Package(
         .library(name: "SettingFeature",
                  targets: ["SettingFeature"]),
         .library(name: "PuttingFeature",
-                 targets: ["PuttingFeature"])
+                 targets: ["PuttingFeature"]),
+        .library(name: "SweetDetailFeature",
+                 targets: ["SweetDetailFeature"])
     ],
     dependencies: [
         .package(
@@ -104,13 +106,18 @@ let package = Package(
         .target(name: "SweetListFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture"),
-                               "EntityModule"]),
+                               "EntityModule",
+                               "SweetDetailFeature"]),
         .target(name: "SettingFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture")]),
         .target(name: "PuttingFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture")]),
+        .target(name: "SweetDetailFeature",
+                dependencies: [.product(name: "ComposableArchitecture",
+                                                 package: "swift-composable-architecture"),
+                               "EntityModule"]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

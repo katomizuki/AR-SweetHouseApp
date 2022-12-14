@@ -2,15 +2,17 @@
 //  File.swift
 //  
 //
-//  Created by ミズキ on 2022/12/11.
+//  Created by ミズキ on 2022/12/13.
 //
 
 import ComposableArchitecture
+import EntityModule
 
-public struct SettingFeature: ReducerProtocol {
+public struct SweetDetailFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        
+        var sweet: Sweet!
+
         public init() {
             
         }
@@ -20,7 +22,7 @@ public struct SettingFeature: ReducerProtocol {
         case onAppear
     }
     
-    public struct SettingEnvironment {
+    public struct Environment {
         public init() { }
     }
     
@@ -32,5 +34,5 @@ public struct SettingFeature: ReducerProtocol {
             return .none
         }
     }
+    
 }
-

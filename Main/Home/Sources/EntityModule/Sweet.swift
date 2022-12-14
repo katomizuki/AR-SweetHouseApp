@@ -7,7 +7,7 @@
 import Foundation
 import SwiftUI
 
-public struct Sweet: Identifiable, CustomStringConvertible, Equatable {
+public struct Sweet: Identifiable, CustomStringConvertible, Hashable {
     
     public let id: String = UUID().uuidString
     public let name: String
@@ -20,7 +20,11 @@ public struct Sweet: Identifiable, CustomStringConvertible, Equatable {
         self.description = description
     }
     
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(id)
+    }
+    
     public static func == (lhs: Sweet, rhs: Sweet) -> Bool {
-        return lhs.id == rhs.id
+            return lhs.id == rhs.id
     }
 }

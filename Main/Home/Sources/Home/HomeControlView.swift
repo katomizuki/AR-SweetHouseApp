@@ -32,7 +32,7 @@ public struct HomeControlsButtons: View {
                 ControlButton(systemName: "square.grid.2x2", action: {
                     viewStore.send(.onTapSettingButton)
                 })
-                .sheet(isPresented: viewStore.binding(get: \.isSettingView,
+                .fullScreenCover(isPresented: viewStore.binding(get: \.isSettingView,
                                                       send: .onTapSettingButton),
                        content: {
                     let store = self.store.scope(state: \.settingState,
@@ -45,7 +45,7 @@ public struct HomeControlsButtons: View {
                 ControlButton(systemName: "square.grid.2x2", action: {
                     viewStore.send(.onTapSweetListButton)
                 })
-                .sheet(isPresented: viewStore.binding(get: \.isSweetListView,
+                .fullScreenCover(isPresented: viewStore.binding(get: \.isSweetListView,
                                                       send: .onTapSweetListButton),
                        content: {
                     let store = self.store.scope(state: \.sweetListState, action: HomeFeature.Action.sweetList)
@@ -57,7 +57,7 @@ public struct HomeControlsButtons: View {
                 ControlButton(systemName: "square.grid.2x2", action: {
                     viewStore.send(.onTapPuttiingButton)
                 })
-                .sheet(isPresented: viewStore.binding(get: \.isPuttingView,
+                .fullScreenCover(isPresented: viewStore.binding(get: \.isPuttingView,
                                                       send: .onTapPuttiingButton),
                        content: {
                     let store = self.store.scope(state: \.puttingState,
