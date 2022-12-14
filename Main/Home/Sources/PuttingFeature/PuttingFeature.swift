@@ -31,7 +31,6 @@ public struct PuttingFeature: ReducerProtocol {
         case .onAppear:
             return .none
         }
-        return .none
     }
     
 }

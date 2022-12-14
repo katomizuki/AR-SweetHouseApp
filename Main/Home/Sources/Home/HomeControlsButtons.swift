@@ -12,16 +12,6 @@ import SweetListFeature
 import SettingFeature
 import PuttingFeature
 
-public struct HomeControlButtonsBarView: View {
-    public let store: StoreOf<HomeFeature>
-    public var body: some View {
-        HStack(alignment: .center,
-               content: {
-            HomeControlsButtons(store: store)
-        })
-    }
-}
-
 public struct HomeControlsButtons: View {
     public let store: StoreOf<HomeFeature>
     

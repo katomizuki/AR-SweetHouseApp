@@ -7,6 +7,7 @@
 import SwiftUI
 import ComposableArchitecture
 import SweetDetailFeature
+import ViewComponents
 
 public struct SweetListView: View {
     
@@ -23,7 +24,8 @@ public struct SweetListView: View {
                                 SweetDetailView(store: self.store.scope(state: \.detailState,
                                                                         action: SweetListFeature.Action.detailAction))
                             }, label: {
-                                Text(sweet.name)
+                                ListCellWithImage(image: Image(systemName: "eraser"),
+                                                  title: sweet.name)
                             })
                         })
                     })
