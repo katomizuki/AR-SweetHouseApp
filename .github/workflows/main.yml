@@ -15,6 +15,8 @@ jobs:
       run: xcodebuild -version
     - name: Bundle Install
       run: bundle install
+    - name: Bundle update
+      run: bundle update fastlane
     - name: Cache Swift Packages
       uses: actions/cache@v1
       with:
