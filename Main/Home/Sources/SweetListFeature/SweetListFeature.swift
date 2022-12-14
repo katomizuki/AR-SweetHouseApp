@@ -24,8 +24,6 @@ public struct SweetListFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
-        case onTapListCell
-        case setNavigation(sweet: Sweet)
         case detailAction(SweetDetailFeature.Action)
     }
     
@@ -36,12 +34,7 @@ public struct SweetListFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 return .none
-            case .onTapListCell:
-                state.detailState = SweetDetailFeature.State()
-                return .none
             case .detailAction:
-                return .none
-            case .setNavigation:
                 return .none
             }
         }

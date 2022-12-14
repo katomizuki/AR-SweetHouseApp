@@ -20,11 +20,14 @@ public struct HomeControlsButtons: View {
                       content: { viewStore in
             HStack(content: {
                 ControlButton(systemName: "square.grid.2x2", action: {
-                    viewStore.send(.onTapSettingButton)
+                    viewStore.send(.toggleSettingView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isSettingView,
-                                                      send: .onTapSettingButton),
-                       content: {
+                                                                send: .toggleSettingView),
+                                 onDismiss: {
+                    viewStore.send(.toggleSettingView)
+                } ,
+                                 content: {
                     let store = self.store.scope(state: \.settingState,
                                                  action: HomeFeature.Action.setting)
                     SettiingView(store: store)
@@ -33,11 +36,14 @@ public struct HomeControlsButtons: View {
                 Spacer()
                 
                 ControlButton(systemName: "square.grid.2x2", action: {
-                    viewStore.send(.onTapSweetListButton)
+                    viewStore.send(.toggleSweetListView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isSweetListView,
-                                                      send: .onTapSweetListButton),
-                       content: {
+                                                      send: .toggleSweetListView),
+                                 onDismiss: {
+                    viewStore.send(.toggleSweetListView)
+                },
+                                 content: {
                     let store = self.store.scope(state: \.sweetListState, action: HomeFeature.Action.sweetList)
                     SweetListView(store: store)
                 })
@@ -45,11 +51,14 @@ public struct HomeControlsButtons: View {
                 Spacer()
                 
                 ControlButton(systemName: "square.grid.2x2", action: {
-                    viewStore.send(.onTapPuttiingButton)
+                    viewStore.send(.togglePuttiingView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isPuttingView,
-                                                      send: .onTapPuttiingButton),
-                       content: {
+                                                      send: .togglePuttiingView),
+                                 onDismiss: {
+                    viewStore.send(.togglePuttiingView)
+                },
+                                 content: {
                     let store = self.store.scope(state: \.puttingState,
                                                  action: HomeFeature.Action.putting)
                     PuttingView(store: store)

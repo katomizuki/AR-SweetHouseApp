@@ -25,9 +25,9 @@ public struct HomeFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
-        case onTapSweetListButton
-        case onTapSettingButton
-        case onTapPuttiingButton
+        case toggleSweetListView
+        case toggleSettingView
+        case togglePuttiingView
         case sweetList(SweetListFeature.Action)
         case putting(PuttingFeature.Action)
         case setting(SettingFeature.Action)
@@ -42,11 +42,11 @@ public struct HomeFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 state = .init()
-            case .onTapSettingButton:
+            case .toggleSettingView:
                 state.isSettingView.toggle()
-            case .onTapSweetListButton:
+            case .toggleSweetListView:
                 state.isSweetListView.toggle()
-            case .onTapPuttiingButton:
+            case .togglePuttiingView:
                 state.isPuttingView.toggle()
             default: return .none
             }

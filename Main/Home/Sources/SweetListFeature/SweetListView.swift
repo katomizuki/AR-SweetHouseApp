@@ -12,6 +12,7 @@ import ViewComponents
 public struct SweetListView: View {
     
     private let store: StoreOf<SweetListFeature>
+    @Environment(\.dismiss) var dismiss
     
     public var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -30,12 +31,22 @@ public struct SweetListView: View {
                         })
                     })
                 })
-            .onAppear(perform: {
-                viewStore.send(.onAppear)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading,
+                                content: {
+                        Button(action: {
+                            dismiss()
+                        },label: {
+                             Image(systemName: "clear.fill")
+                        })
+                    })
+                })
+                .onAppear(perform: {
+                    viewStore.send(.onAppear)
+                })
             })
-        })
+        }
     }
-}
     
     public init(store: StoreOf<SweetListFeature>) {
         self.store = store
