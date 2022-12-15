@@ -13,8 +13,7 @@ end
 
   desc "Test"
   lane :test do
-    run_tests(project: "RealitySuperApp.xcodeproj",
-              device: "iPhone 14 Pro", 
+    run_tests(device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp",
  	      clean: true)
   end

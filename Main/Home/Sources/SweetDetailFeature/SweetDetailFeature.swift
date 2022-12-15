@@ -13,6 +13,8 @@ public struct SweetDetailFeature: ReducerProtocol {
     public struct State: Equatable {
         var sweet: Sweet!
 
+        var isVerticleLook: Bool = false
+        var rotationEffect: Double = 90
         public init() {
             
         }
@@ -20,6 +22,7 @@ public struct SweetDetailFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
+        case onTapNavigationTrailingButton
     }
     
     public struct Environment {
@@ -31,6 +34,10 @@ public struct SweetDetailFeature: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onAppear:
+            return .none
+        case .onTapNavigationTrailingButton:
+            state.isVerticleLook.toggle()
+            state.rotationEffect = state.isVerticleLook ? 90 : 0
             return .none
         }
     }
