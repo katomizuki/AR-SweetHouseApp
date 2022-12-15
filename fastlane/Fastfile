@@ -16,8 +16,7 @@ end
     run_tests(project: "RealitySuperApp.xcodeproj",
               device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp",
-		  sdk: iphonesimulator,
- 		  clean: true)
+ 	      clean: true)
   end
 
   lane :release do
