@@ -122,6 +122,10 @@ let package = Package(
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",
+                           "SweetListFeature",
+                           "SettingFeature",
+                           "PuttingFeature",
+                           "SweetDetailFeature",
                            .product(name: "Quick", package: "Quick"),
                            .product(name: "Nimble", package: "Nimble")]),
     ]
