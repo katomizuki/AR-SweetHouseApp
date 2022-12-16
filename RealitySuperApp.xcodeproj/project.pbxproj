@@ -10,8 +10,8 @@
 		D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3D4294B2917D71600E972FE /* GoogleService-Info.plist */; };
 		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
-		D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D37BEDA129017E4800FF3A73 /* Assets.xcassets */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
+		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
 		D3DF88572907F81700227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88562907F81700227BED /* Repositry */; };
 		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
 		D3F4C39E2931F00500218193 /* EntityModule in Frameworks */ = {isa = PBXBuildFile; productRef = D3F4C39D2931F00500218193 /* EntityModule */; };
@@ -20,8 +20,8 @@
 /* Begin PBXFileReference section */
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D37BEDA129017E4800FF3A73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D3D4294B2917D71600E972FE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "RealitySuperApp-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,7 +62,7 @@
 		D3760F892904FF1600356F63 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D37BEDA129017E4800FF3A73 /* Assets.xcassets */,
+				D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -153,7 +153,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D37BEDA229017E4800FF3A73 /* Assets.xcassets in Resources */,
+				D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */,
 				D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

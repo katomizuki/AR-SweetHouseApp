@@ -7,14 +7,16 @@
 
 import ComposableArchitecture
 import EntityModule
+import SceneKit
 
 public struct SweetDetailFeature: ReducerProtocol {
     
     public struct State: Equatable {
         var sweet: Sweet!
-
-        var isVerticleLook: Bool = false
+        var isVerticleLook: Bool = true
         var rotationEffect: Double = 90
+        var offset: CGFloat = .zero
+        var scene: SCNScene? = SCNScene(named: "yamatutudi.scn")
         public init() {
             
         }
@@ -23,6 +25,8 @@ public struct SweetDetailFeature: ReducerProtocol {
     public enum Action: Equatable {
         case onAppear
         case onTapNavigationTrailingButton
+        case rotateObject(isOffsetZero: Bool)
+        case changeOffset(_ newOffset: CGFloat)
     }
     
     public struct Environment {
@@ -39,7 +43,27 @@ public struct SweetDetailFeature: ReducerProtocol {
             state.isVerticleLook.toggle()
             state.rotationEffect = state.isVerticleLook ? 90 : 0
             return .none
+        case .changeOffset(let newOffset):
+            state.offset = newOffset
+            return .none
+        case .rotateObject(let animate):
+            if animate {
+                SCNTransaction.begin()
+                SCNTransaction.animationDuration = 0.4
+            }
+            if state.isVerticleLook {
+                let newAngle = Float((state.offset * .pi) / 180)
+                state.scene?.rootNode.childNode(withName: "Root",
+                                                    recursively: true)?.eulerAngles.y = newAngle
+            } else {
+                let newAngle = Float((state.offset * .pi) / 180)
+                state.scene?.rootNode.childNode(withName: "Root",
+                                                    recursively: true)?.eulerAngles.x = newAngle
+            }
+            if animate  {
+                SCNTransaction.commit()
+            }
+            return .none
         }
     }
-    
 }

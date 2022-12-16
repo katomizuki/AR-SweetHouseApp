@@ -9,7 +9,7 @@ import SceneKit
 import SwiftUI
 
 struct SweetSceneView: UIViewRepresentable {
-    @Binding var scene: SCNScene?
+    var scene: SCNScene?
     typealias UIViewType = SCNView
     
     

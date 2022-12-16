@@ -7,14 +7,29 @@
 
 import SwiftUI
 import ComposableArchitecture
+import SceneKit
 
 public struct SweetDetailView: View {
+    @GestureState var offset: CGFloat = 0
     private let store: StoreOf<SweetDetailFeature>
     
     public var body: some View {
         WithViewStore(self.store) { viewStore in
-            HStack(content: {
-                
+            ScrollView(.vertical,
+                       showsIndicators: false,
+                       content: {
+                VStack(content: {
+                    SweetSceneView(scene: viewStore.state.scene)
+                    .frame(height: 350)
+                    .padding(.top, -50)
+                    .padding(.bottom, -15)
+                    .zIndex(-10)
+                    
+                    CustomSweetSeaker(offset: offset,
+                                      store: self.store)
+                    
+                    PropertiesSweetView(store: self.store)
+                })
             })
             .toolbar(content: {
                 ToolbarItem(placement: .navigationBarTrailing) {
