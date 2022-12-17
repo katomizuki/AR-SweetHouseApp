@@ -7,7 +7,6 @@
 
 import SwiftUI
 import RealityKit
-import CoachingOverlayFeature
 
 struct HomeARViewContainer: UIViewRepresentable {
   typealias UIViewType = HomeARView

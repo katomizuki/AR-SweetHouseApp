@@ -45,7 +45,9 @@ let package = Package(
         .library(name: "PuttingFeature",
                  targets: ["PuttingFeature"]),
         .library(name: "SweetDetailFeature",
-                 targets: ["SweetDetailFeature"])
+                 targets: ["SweetDetailFeature"]),
+        .library(name: "ARSceneManager",
+                 targets: ["ARSceneManager"])
     ],
     dependencies: [
         .package(
@@ -65,7 +67,10 @@ let package = Package(
                            "SweetListFeature",
                            "SettingFeature",
                            "PuttingFeature",
-                           "ViewComponents"]),
+                           "ViewComponents",
+                           "WorldMapFeature",
+                           "HapticsFeature",
+                           "ARSceneManager"]),
         .target(
             name: "Repositry",
             dependencies: [
@@ -90,7 +95,8 @@ let package = Package(
                                         package: "Firebase")
                 ]),
         .target(name: "WorldMapFeature",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .target(name: "CoachingOverlayFeature",
                 dependencies: []),
         .target(name: "ThumbnailGeneratorFeature",
@@ -119,6 +125,9 @@ let package = Package(
                 dependencies: [.product(name: "ComposableArchitecture",
                                                  package: "swift-composable-architecture"),
                                "EntityModule"]),
+        .target(name: "ARSceneManager",
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

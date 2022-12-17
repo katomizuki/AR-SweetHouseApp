@@ -19,7 +19,8 @@ public struct HomeControlsButtons: View {
         WithViewStore(self.store,
                       content: { viewStore in
             HStack(content: {
-                ControlButton(systemName: "square.grid.2x2", action: {
+                ControlButton(systemName: "square.grid.2x2",
+                              action: {
                     viewStore.send(.toggleSettingView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isSettingView,
@@ -35,7 +36,8 @@ public struct HomeControlsButtons: View {
                 
                 Spacer()
                 
-                ControlButton(systemName: "square.grid.2x2", action: {
+                ControlButton(systemName: "square.grid.2x2",
+                              action: {
                     viewStore.send(.toggleSweetListView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isSweetListView,
@@ -44,13 +46,15 @@ public struct HomeControlsButtons: View {
                     viewStore.send(.toggleSweetListView)
                 },
                                  content: {
-                    let store = self.store.scope(state: \.sweetListState, action: HomeFeature.Action.sweetList)
+                    let store = self.store.scope(state: \.sweetListState,
+                                                 action: HomeFeature.Action.sweetList)
                     SweetListView(store: store)
                 })
                 
                 Spacer()
                 
-                ControlButton(systemName: "square.grid.2x2", action: {
+                ControlButton(systemName: "square.grid.2x2",
+                              action: {
                     viewStore.send(.togglePuttiingView)
                 })
                 .fullScreenCover(isPresented: viewStore.binding(get: \.isPuttingView,
@@ -63,6 +67,14 @@ public struct HomeControlsButtons: View {
                                                  action: HomeFeature.Action.putting)
                     PuttingView(store: store)
                 })
+            
+                Spacer()
+                
+                ControlButton(systemName: "square.grid.2x2",
+                              action: {
+                    viewStore.send(.onTapSaveWorldMapButton)
+                })
+                
             })
             .frame(maxWidth: 500)
             .padding(30)

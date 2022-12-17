@@ -19,6 +19,8 @@ public struct HomeView : View {
                 HomeControlButtonsBarView(store: store)
             })
             .ignoresSafeArea(.all)
+            .alert(self.store.scope(state: { $0.alert }),
+                   dismiss: .alertDismiss)
             .onAppear {
                 viewStore.send(.onAppear)
             }

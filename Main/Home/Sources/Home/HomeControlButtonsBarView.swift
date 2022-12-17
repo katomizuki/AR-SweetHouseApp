@@ -6,11 +6,7 @@
 //
 
 import SwiftUI
-import ViewComponents
 import ComposableArchitecture
-import SweetListFeature
-import SettingFeature
-import PuttingFeature
 
 public struct HomeControlButtonsBarView: View {
     public let store: StoreOf<HomeFeature>

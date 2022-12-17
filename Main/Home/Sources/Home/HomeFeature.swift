@@ -9,6 +9,11 @@ import ComposableArchitecture
 import SweetListFeature
 import PuttingFeature
 import SettingFeature
+import WorldMapFeature
+import ARKit
+import SwiftUI
+import ARSceneManager
+import HapticsFeature
 
 public struct HomeFeature: ReducerProtocol {
     
@@ -19,7 +24,7 @@ public struct HomeFeature: ReducerProtocol {
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
-        
+        var alert: AlertState<Action>?
         public init() { }
     }
     
@@ -31,11 +36,18 @@ public struct HomeFeature: ReducerProtocol {
         case sweetList(SweetListFeature.Action)
         case putting(PuttingFeature.Action)
         case setting(SettingFeature.Action)
+        case writeARWorldMap(_ worldMap: ARWorldMap)
+        case onTapSaveWorldMapButton
+        case showCompleteAlert
+        case showFailAlert
+        case alertDismiss
     }
     
-    public init() { }
+    public init() {
+    }
     
-    @Dependency(\.mainQueue) var mainQueue
+   @Dependency(\.mainQueue) var mainQueue
+   @Dependency(\.worldMap) var worldMapFeature
     
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -48,6 +60,31 @@ public struct HomeFeature: ReducerProtocol {
                 state.isSweetListView.toggle()
             case .togglePuttiingView:
                 state.isPuttingView.toggle()
+            case .onTapSaveWorldMapButton:
+                return .task {
+                    do {
+                        guard let session =  ARSceneClient.session else { return .showFailAlert }
+                        let worldMap = try await worldMapFeature.getCurrentWorldMap(session)
+                        return .writeARWorldMap(worldMap)
+                    } catch {
+                        return .showFailAlert
+                    }
+                }
+            case .writeARWorldMap(let worldMap):
+                return .task {
+                    do {
+                        try worldMapFeature.writeWorldMap(worldMap)
+                        return .showCompleteAlert
+                    } catch {
+                        return .showFailAlert
+                    }
+                }
+            case .showCompleteAlert:
+                state.alert = .init(title: .init("Completed"))
+            case .showFailAlert:
+                state.alert = .init(title: .init("Failed"))
+            case .alertDismiss:
+                state.alert = nil
             default: return .none
             }
             return .none

@@ -8,14 +8,16 @@
 import ARKit
 import RealityKit
 import CoachingOverlayFeature
+import Combine
+import ARSceneManager
 
 final class HomeARView: ARView {
-    
     required init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
         setupSessionDelegate()
         setupConfiguration()
         setupOverlayView()
+        setupSubscribeARScene()
     }
     
     private func setupSessionDelegate() {
@@ -34,6 +36,12 @@ final class HomeARView: ARView {
     
     @MainActor required dynamic init?(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupSubscribeARScene() {
+        let cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
+            ARSceneClient.session = self?.session
+        }
     }
 }
 
