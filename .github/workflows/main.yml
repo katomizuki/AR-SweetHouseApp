@@ -16,7 +16,7 @@ jobs:
     - name: Bundle Install
       run: bundle install
     - name: Cache Swift Packages
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
        path: SourcePackages
        key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
