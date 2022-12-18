@@ -6,11 +6,9 @@
 //
 
 import XCTest
-import Quick
-import Nimble
 import ComposableArchitecture
 @testable import SettingFeature
 
-final class SettingTests: QuickSpec {
+final class SettingTests: XCTestCase {
     
 }

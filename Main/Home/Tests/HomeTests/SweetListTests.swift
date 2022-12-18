@@ -6,22 +6,15 @@
 //
 
 import XCTest
-import Quick
-import Nimble
 import ComposableArchitecture
 @testable import SweetListFeature
 
-final class SweetListTests: QuickSpec {
+final class SweetListTests: XCTestCase {
     
-    override func spec() {
+    func test_起動時() {
         let store = TestStore(initialState: SweetListFeature.State(),
                             reducer: SweetListFeature())
-        
-        describe("起動時") {
-            context("数が0ではないか") {
-                store.send(.onAppear)
-                expect(store.state.sweets.count).notTo(equal(0))
-            }
-        }
+        store.send(.onAppear)
+        XCTAssertNotEqual(store.state.sweets.count, 0)
     }
 }

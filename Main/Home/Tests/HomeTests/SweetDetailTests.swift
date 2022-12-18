@@ -6,39 +6,37 @@
 //
 
 import XCTest
-import Quick
-import Nimble
 import ComposableArchitecture
 @testable import SweetDetailFeature
 
-final class SweetDetailTests: QuickSpec {
+final class SweetDetailTests: XCTestCase {
     
-    override func spec() {
+    let scheduler = DispatchQueue.test
+    func test_起動時() {
         let store = TestStore(initialState: SweetDetailFeature.State(),
                             reducer: SweetDetailFeature())
-        
-        describe("起動時") {
-            context("初期状態のテスト") {
-                store.send(.onAppear)
-                expect(store.state.isVerticleLook).to(equal(true))
-                expect(store.state.rotationEffect).to(equal(90))
-                expect(store.state.offset).to(equal(.zero))
-            }
+        store.send(.onAppear)
+        XCTAssertTrue(store.state.isVerticleLook)
+        XCTAssertEqual(store.state.rotationEffect, 90)
+        XCTAssertEqual(store.state.offset, .zero)
+    }
+    
+    func test_Offset変更時() {
+        let store = TestStore(initialState: SweetDetailFeature.State(),
+                              reducer: SweetDetailFeature())
+        store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
+        store.send(.changeOffset(90.0)) {
+            $0.offset = 90.0
         }
-        
-        describe("offset変更時") {
-            store.send(.changeOffset(90))
-            expect(store.state.offset).to(equal(90))
-        }
-        
-        describe("ナビゲーションの左ボタンタップ時") {
-            store.send(.onTapNavigationTrailingButton)
-            context("isVerticleLockがtoggle") {
-                expect(store.state.isVerticleLook).to(equal(false))
-            }
-            context("回転軸が変わる") {
-                expect(store.state.rotationEffect).to(equal(0))
-            }
+    }
+    
+    func test_ナビゲーションの左ボタンタップ時() {
+        let store = TestStore(initialState: SweetDetailFeature.State(),
+                            reducer: SweetDetailFeature())
+        store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
+        store.send(.onTapNavigationTrailingButton) {
+            $0.rotationEffect = 0
+            $0.isVerticleLook = false
         }
     }
 }

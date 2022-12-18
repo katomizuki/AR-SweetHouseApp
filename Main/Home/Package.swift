@@ -55,14 +55,15 @@ let package = Package(
                  .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
                  .exactItem(.init("0.42.0")!)),
-        .package(url: "https://github.com/Quick/Nimble.git", .upToNextMajor(from: "11.2.0")),
-        .package(url: "https://github.com/Quick/Quick.git", .upToNextMajor(from: "6.0.1"))
+        .package(url: "https://github.com/maxxfrazer/FocusEntity.git", .exactItem(.init("2.3.0")!))
     ],
     targets: [
         .target(
             name: "Home",
             dependencies: [.product(name: "ComposableArchitecture",
                                     package: "swift-composable-architecture"),
+                           .product(name: "FocusEntity",
+                                    package: "FocusEntity"),
                            "CoachingOverlayFeature",
                            "SweetListFeature",
                            "SettingFeature",
@@ -137,8 +138,6 @@ let package = Package(
                            "SweetListFeature",
                            "SettingFeature",
                            "PuttingFeature",
-                           "SweetDetailFeature",
-                           .product(name: "Quick", package: "Quick"),
-                           .product(name: "Nimble", package: "Nimble")]),
+                           "SweetDetailFeature"]),
     ]
 )

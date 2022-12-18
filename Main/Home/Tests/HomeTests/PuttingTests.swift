@@ -6,11 +6,9 @@
 //
 
 import XCTest
-import Quick
-import Nimble
 import ComposableArchitecture
 @testable import PuttingFeature
 
-final class PuttingTests: QuickSpec {
+final class PuttingTests: XCTestCase {
     
 }

@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D304BB21294F190C00EB7C45 /* RealitySuperApp copy.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "RealitySuperApp copy.xctestplan"; sourceTree = "<group>"; };
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,6 +71,7 @@
 		D37BED8F29017E4500FF3A73 = {
 			isa = PBXGroup;
 			children = (
+				D304BB21294F190C00EB7C45 /* RealitySuperApp copy.xctestplan */,
 				D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */,
 				D3D4294B2917D71600E972FE /* GoogleService-Info.plist */,
 				D3760F882904FEBC00356F63 /* App */,

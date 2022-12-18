@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "46DD5E4B-BE05-4DA3-99C9-0453FCF38714",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:RealitySuperApp.xcodeproj",
+      "identifier" : "D37BED9729017E4500FF3A73",
+      "name" : "RealitySuperApp"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Main\/Home",
+        "identifier" : "HomeTests",
+        "name" : "HomeTests"
+      }
+    }
+  ],
+  "version" : 1
+}
