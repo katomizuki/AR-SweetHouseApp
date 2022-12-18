@@ -6,8 +6,22 @@
 //
 
 import CoreHaptics
+import ComposableArchitecture
 
-struct HapticsFeature {
+extension DependencyValues {
+    public var hapticsFeature: HapticsFeature {
+        get { self[HapticsFeature.self] }
+        set { self[HapticsFeature.self] = newValue }
+    }
+}
+
+extension HapticsFeature: DependencyKey {
+    public static var liveValue: HapticsFeature {
+        return HapticsFeature()
+    }
+}
+
+public struct HapticsFeature {
     func supportedHaptics() -> Bool {
         return CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
@@ -56,4 +70,6 @@ struct HapticsFeature {
                                                    parameters: [])
         return pattern
     }
+    
+    public init() { }
 }

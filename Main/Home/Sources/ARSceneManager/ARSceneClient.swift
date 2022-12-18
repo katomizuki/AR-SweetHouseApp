@@ -15,7 +15,5 @@ public class ARSceneClient {
     
    private init() { }
     
-    func a(){}
-   
     
 }

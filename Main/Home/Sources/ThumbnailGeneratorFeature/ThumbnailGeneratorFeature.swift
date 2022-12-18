@@ -7,9 +7,23 @@
 
 import QuickLookThumbnailing
 import SwiftUI
+import ComposableArchitecture
 
-struct ThumnailGenerator {
-    private func generateThumnail(for resource: String,
+extension DependencyValues {
+    public var thumbNailGenerator: ThumbnailGenerator {
+        get { self[ThumbnailGenerator.self] }
+        set { self[ThumbnailGenerator.self] = newValue }
+    }
+}
+
+extension ThumbnailGenerator: DependencyKey {
+    public static var liveValue: ThumbnailGenerator {
+        return ThumbnailGenerator()
+    }
+}
+
+public struct ThumbnailGenerator {
+    private func generateThumbnail(for resource: String,
                                  withExtension: String = "usdz",
                                  size: CGSize,
                                  completion: @escaping(Result<Image, Error>) -> Void)  {
@@ -35,9 +49,11 @@ struct ThumnailGenerator {
         }
     }
     
-    func generateThumnail(for resource: String, size: CGSize) async throws -> Image {
+    public init() { }
+    
+    public func generateThumnail(for resource: String, size: CGSize) async throws -> Image {
         try await withCheckedThrowingContinuation({ continuation in
-            self.generateThumnail(for: resource, size: size) { result in
+            self.generateThumbnail(for: resource, size: size) { result in
                 do {
                     let image = try result.get()
                     continuation.resume(returning: image)
@@ -48,3 +64,5 @@ struct ThumnailGenerator {
         })
     }
 }
+
+
