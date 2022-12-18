@@ -15,7 +15,8 @@ end
   lane :test do
     run_tests(device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp",
- 	      clean: true)
+							testplan: "RealityTest.xctestplan",
+							clean: true)
   end
 
   lane :release do
