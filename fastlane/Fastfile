@@ -15,7 +15,7 @@ end
   lane :test do
     run_tests(device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp",
-							testplan: "RealityTest.xctestplan",
+							testplan: "RealityTest",
 							clean: true)
   end
 
