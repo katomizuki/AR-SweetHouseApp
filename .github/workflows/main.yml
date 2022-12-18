@@ -18,7 +18,7 @@ jobs:
     - name: Cache Swift Packages
       uses: actions/cache@v3
       with:
-       path: SourcePackages
+       path: ~/Library/Developer/Xcode/DerivedData/RealitySuperApp/SourcePackages/
        key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
        restore-keys: ${{ runner.os }}-spm-
    
