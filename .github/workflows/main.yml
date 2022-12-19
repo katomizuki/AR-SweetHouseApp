@@ -20,7 +20,8 @@ jobs:
       with:
        path: .build
        key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-       restore-keys: ${{ runner.os }}-spm-
+       restore-keys: | 
+        ${{ runner.os }}-spm-
    
     - name: UnitTest
       run: bundle exec fastlane test
