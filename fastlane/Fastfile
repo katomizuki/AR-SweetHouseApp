@@ -16,7 +16,8 @@ end
     run_tests(device: "iPhone 14 Pro", 
               scheme: "RealitySuperApp",
 							testplan: "RealityTest",
-							clean: true)
+							clean: true,
+ cloned_source_packages_path: "SourcePackages")
   end
 
   lane :release do
