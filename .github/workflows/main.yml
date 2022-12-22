@@ -18,9 +18,10 @@ jobs:
     - name: Cache Swift Packages
       uses: actions/cache@v3
       with:
-       path: ~/Library/Developer/Xcode/DerivedData/RealitySuperApp/SourcePackages/
-       key: ${{ runner.os }}-spm-${{ hashFiles('*.xcodeproj/project.xcworkspace/ xcshareddata/swiftpm/Package.resolved') }}
-       restore-keys: ${{ runner.os }}-spm-
+       path: SourcePackages
+       key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+       restore-keys: | 
+        ${{ runner.os }}-spm-
    
     - name: UnitTest
       run: bundle exec fastlane test
