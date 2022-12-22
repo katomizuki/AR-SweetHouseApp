@@ -59,13 +59,9 @@ public struct HomeFeature: ReducerProtocol {
             case .onAppear:
                 state = .init()
                 return .task {
-                    if #available(iOS 16.0, *) {
                         if !RoomCaptureSession.isSupported && ARConfiguration.supportsFrameSemantics([.sceneDepth,.smoothedSceneDepth]) {
                             return .showDontUseAppAlert
                         }
-                    } else {
-                        return .showDontUseAppAlert
-                    }
                     return .toggleCanUseApp
                 }
             case .toggleSettingView:
