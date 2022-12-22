@@ -14,6 +14,7 @@ import ARKit
 import SwiftUI
 import ARSceneManager
 import HapticsFeature
+import RoomPlan
 
 public struct HomeFeature: ReducerProtocol {
     
@@ -21,6 +22,7 @@ public struct HomeFeature: ReducerProtocol {
         var isSweetListView: Bool = false
         var isSettingView: Bool = false
         var isPuttingView: Bool = false
+        var canUseApp: Bool = false
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
@@ -41,6 +43,8 @@ public struct HomeFeature: ReducerProtocol {
         case showCompleteAlert
         case showFailAlert
         case alertDismiss
+        case showDontUseAppAlert
+        case toggleCanUseApp
     }
     
     public init() {
@@ -54,6 +58,16 @@ public struct HomeFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 state = .init()
+                return .task {
+                    if #available(iOS 16.0, *) {
+                        if !RoomCaptureSession.isSupported && ARConfiguration.supportsFrameSemantics([.sceneDepth,.smoothedSceneDepth]) {
+                            return .showDontUseAppAlert
+                        }
+                    } else {
+                        return .showDontUseAppAlert
+                    }
+                    return .toggleCanUseApp
+                }
             case .toggleSettingView:
                 state.isSettingView.toggle()
             case .toggleSweetListView:
@@ -80,11 +94,15 @@ public struct HomeFeature: ReducerProtocol {
                     }
                 }
             case .showCompleteAlert:
-                state.alert = .init(title: .init("Completed"))
+                state.alert = .init(title: .init("AR世界の保存に成功しました"))
             case .showFailAlert:
-                state.alert = .init(title: .init("Failed"))
+                state.alert = .init(title: .init("AR世界の保存に失敗しました"))
             case .alertDismiss:
                 state.alert = nil
+            case .showDontUseAppAlert:
+                state.alert = .init(title: .init("iOS16以上かつLidarを搭載しているIPhone出ないとこのアプリは使用できません"))
+            case .toggleCanUseApp:
+                state.canUseApp.toggle()
             default: return .none
             }
             return .none
