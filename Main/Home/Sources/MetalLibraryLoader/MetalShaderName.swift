@@ -6,5 +6,6 @@
 //
 
 enum MetalShaderKeys: String {
-    case test
+    case toon
+    case suisai
 }
