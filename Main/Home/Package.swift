@@ -71,7 +71,8 @@ let package = Package(
                            "ViewComponents",
                            "WorldMapFeature",
                            "HapticsFeature",
-                           "ARSceneManager"]),
+                           "ARSceneManager",
+                           "MetalLibraryLoader"]),
         .target(
             name: "Repositry",
             dependencies: [

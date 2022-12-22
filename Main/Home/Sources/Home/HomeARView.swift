@@ -12,6 +12,7 @@ import Combine
 import ARSceneManager
 import RoomPlan
 import FocusEntity
+import MetalLibraryLoader
 
 final class HomeARView: ARView {
 
@@ -23,23 +24,72 @@ final class HomeARView: ARView {
         return captureSession
     }()
     private let roomBuilder = RoomBuilder(options: [.beautifyObjects])
+    var focusEntity: FocusEntity?
     
     required init(frame frameRect: CGRect) {
         super.init(frame: frameRect)
-        setupSessionDelegate()
-        setupConfiguration()
-        setupOverlayView()
-        setupSubscribeARScene()
-        setupRoomCaptureDelegate()
-        
+        setupPostProcessing()
     }
     
     private func setupSessionDelegate() {
         session.delegate = self
     }
     
+    private func setupFocusEntity() {
+        self.focusEntity = FocusEntity(on: self,style: .classic(color: .orange))
+    }
+    
     private func setupRoomCaptureDelegate() {
-//        caputureSession.delegate = self
+        caputureSession.delegate = self
+    }
+    
+    private func setupPostProcessing() {
+        renderCallbacks.postProcess = self.postProcess
+        renderCallbacks.prepareWithDevice = self.postProcessCallBack
+    }
+    
+    private func postProcessCallBack(device: MTLDevice) {
+        setupSessionDelegate()
+        setupConfiguration()
+        setupOverlayView()
+        setupSubscribeARScene()
+        setupFocusEntity()
+//        setupRoomCaptureDelegate()
+//        loadMetalShader(device: device)
+    }
+    
+    private func setupTouchUpEvent() {
+        let touchGesture = UITapGestureRecognizer(target: self, action: #selector(onTouchARView))
+    }
+    
+    @objc private func onTouchARView(_ sender: UITapGestureRecognizer) {
+        let tapPoint = sender.location(in: self)
+        guard let rayResults = ray(through: tapPoint) else { return }
+        let hitResults = scene.raycast(from: rayResults.origin, to: rayResults.direction)
+        if let collisionPoint = hitResults.first {
+            var position = collisionPoint.position
+            position.y += 0.15
+        } else {
+            let results = raycast(from: tapPoint, allowing: .estimatedPlane, alignment: .horizontal)
+            if let hitPoint = results.first {
+                let position = simd_make_float3(hitPoint.worldTransform.columns.3)
+                putSweet(at: position)
+            }
+        }
+    }
+    
+    private func putSweet(at position: simd_float3) {
+        
+    }
+    
+    private func loadMetalShader(device: MTLDevice) {
+        let loader = MetalLibraryLoader.shared
+        let suisai = loader.getPostProcessingShader(metalShaderName: .suisai)
+        let toon = loader.getPostProcessingShader(metalShaderName: .toon)
+    }
+    
+    private func postProcess(context: ARView.PostProcessContext) {
+        
     }
     
     private func setupConfiguration() {

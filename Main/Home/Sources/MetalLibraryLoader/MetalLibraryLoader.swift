@@ -8,8 +8,8 @@
 import MetalKit
 import RealityKit
 
-final class  MetalLibraryLoader {
-    static let shared = MetalLibraryLoader()
+public final class MetalLibraryLoader {
+    public static let shared = MetalLibraryLoader()
     private static let device: MTLDevice = MTLCreateSystemDefaultDevice()!
     private let library: MTLLibrary
     
@@ -19,17 +19,17 @@ final class  MetalLibraryLoader {
         self.library = library
     }
     
-    func getGeometryModiferShader(metalShaderName :MetalShaderKeys) -> CustomMaterial.GeometryModifier {
+    public func getGeometryModiferShader(metalShaderName :MetalShaderKeys) -> CustomMaterial.GeometryModifier {
         return CustomMaterial.GeometryModifier(named: metalShaderName.rawValue,
                                                in: library)
     }
     
-    func getSurfaceShader(metalShaderName: MetalShaderKeys) -> CustomMaterial.SurfaceShader {
+    public func getSurfaceShader(metalShaderName: MetalShaderKeys) -> CustomMaterial.SurfaceShader {
         return CustomMaterial.SurfaceShader(named: metalShaderName.rawValue,
                                             in: library)
     }
     
-    func getPostProcessingShader(metalShaderName: MetalShaderKeys) -> MTLFunction? {
+    public func getPostProcessingShader(metalShaderName: MetalShaderKeys) -> MTLFunction? {
         return library.makeFunction(name: metalShaderName.rawValue)
     }
     
