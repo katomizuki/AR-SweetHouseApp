@@ -7,6 +7,19 @@
 
 import MetalKit
 import RealityKit
+import ComposableArchitecture
+
+extension DependencyValues {
+    public var metalLoader: MetalLibraryLoader {
+        get { self[MetalLibraryLoader.self] }
+        set { self[MetalLibraryLoader.self] = newValue }
+    }
+}
+extension MetalLibraryLoader: DependencyKey {
+    public static var liveValue: MetalLibraryLoader{
+        return MetalLibraryLoader.shared
+    }
+}
 
 public final class MetalLibraryLoader {
     public static let shared = MetalLibraryLoader()

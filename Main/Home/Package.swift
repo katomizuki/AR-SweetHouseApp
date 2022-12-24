@@ -46,8 +46,6 @@ let package = Package(
                  targets: ["PuttingFeature"]),
         .library(name: "SweetDetailFeature",
                  targets: ["SweetDetailFeature"]),
-        .library(name: "ARSceneManager",
-                 targets: ["ARSceneManager"])
     ],
     dependencies: [
         .package(
@@ -113,7 +111,8 @@ let package = Package(
         .target(name: "UtilFeature",
                 dependencies: []),
         .target(name: "MetalLibraryLoader",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .target(name: "SweetListFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture"),
@@ -130,9 +129,6 @@ let package = Package(
                 dependencies: [.product(name: "ComposableArchitecture",
                                                  package: "swift-composable-architecture"),
                                "EntityModule"]),
-        .target(name: "ARSceneManager",
-                dependencies: [.product(name: "ComposableArchitecture",
-                                        package: "swift-composable-architecture")]),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

@@ -13,10 +13,12 @@ import ARSceneManager
 import RoomPlan
 import FocusEntity
 import MetalLibraryLoader
+import ComposableArchitecture
 
 final class HomeARView: ARView {
 
     private var cancellable: Cancellable?
+    private let viewStore: ViewStoreOf<ARFeature>
     
     private lazy var caputureSession: RoomCaptureSession = {
         let captureSession = RoomCaptureSession()
@@ -26,8 +28,10 @@ final class HomeARView: ARView {
     private let roomBuilder = RoomBuilder(options: [.beautifyObjects])
     var focusEntity: FocusEntity?
     
-    required init(frame frameRect: CGRect) {
-        super.init(frame: frameRect)
+    required init(store: StoreOf<ARFeature>) {
+        self.viewStore = ViewStore(store)
+        super.init(frame: .zero)
+        viewStore.send(.initialize)
         setupPostProcessing()
     }
     
@@ -79,13 +83,13 @@ final class HomeARView: ARView {
     }
     
     private func putSweet(at position: simd_float3) {
+        guard let selectedModel = viewStore.state.selectedModel else { return }
         
     }
     
-    private func loadMetalShader(device: MTLDevice) {
-        let loader = MetalLibraryLoader.shared
-        let suisai = loader.getPostProcessingShader(metalShaderName: .suisai)
-        let toon = loader.getPostProcessingShader(metalShaderName: .toon)
+    private func loadMetalShader() {
+        let suisai = viewStore.state.postProcessiingShader2
+        let toon = viewStore.state.postProcessingShader1
     }
     
     private func postProcess(context: ARView.PostProcessContext) {
@@ -106,9 +110,14 @@ final class HomeARView: ARView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @MainActor required dynamic init(frame frameRect: CGRect) {
+        fatalError("init(frame:) has not been implemented")
+    }
+    
     func setupSubscribeARScene() {
         self.cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
             ARSceneClient.session = self?.session
+            self?.viewStore.send(.subscriveEvent(session: self?.session))
         }
     }
 }

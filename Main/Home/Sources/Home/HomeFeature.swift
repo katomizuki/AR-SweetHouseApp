@@ -16,6 +16,17 @@ import ARSceneManager
 import HapticsFeature
 import RoomPlan
 
+
+public class ARSceneClient {
+   public static let shared: ARSceneClient = .init()
+    public static var session: ARSession?
+    
+   private init() { }
+    
+    
+}
+
+
 public struct HomeFeature: ReducerProtocol {
     
     public struct State: Equatable {
@@ -26,6 +37,7 @@ public struct HomeFeature: ReducerProtocol {
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
+        var arViewState = ARFeature.State()
         var alert: AlertState<Action>?
         public init() { }
     }
@@ -38,6 +50,7 @@ public struct HomeFeature: ReducerProtocol {
         case sweetList(SweetListFeature.Action)
         case putting(PuttingFeature.Action)
         case setting(SettingFeature.Action)
+        case arView(ARFeature.Action)
         case writeARWorldMap(_ worldMap: ARWorldMap)
         case onTapSaveWorldMapButton
         case showCompleteAlert
@@ -114,6 +127,10 @@ public struct HomeFeature: ReducerProtocol {
         
         Scope(state: \.settingState, action: /Action.setting) {
             SettingFeature()
+        }
+        
+        Scope(state: \.arViewState, action: /Action.arView) {
+            ARFeature()
         }
     }
 }

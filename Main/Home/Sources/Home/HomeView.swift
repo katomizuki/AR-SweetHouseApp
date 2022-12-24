@@ -15,7 +15,7 @@ public struct HomeView : View {
         WithViewStore(self.store) { viewStore in
             ZStack(alignment: .bottom,
                    content: {
-                HomeARViewContainer()
+                HomeARViewContainer(store: store)
                 HomeControlButtonsBarView(store: store)
             })
             .ignoresSafeArea(.all)
