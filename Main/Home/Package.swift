@@ -69,7 +69,6 @@ let package = Package(
                            "ViewComponents",
                            "WorldMapFeature",
                            "HapticsFeature",
-                           "ARSceneManager",
                            "MetalLibraryLoader"]),
         .target(
             name: "Repositry",
