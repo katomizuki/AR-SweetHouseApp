@@ -49,8 +49,9 @@ public struct WorldMapFeature {
         }
     }
     
-    public func getCurrentWorldMap(_ session: ARSession) async throws -> ARWorldMap {
-         try await withCheckedThrowingContinuation({ continuation in
+    public func getCurrentWorldMap(_ session: ARSession?) async throws -> ARWorldMap {
+        guard let session = session else { throw ARError(.requestFailed) }
+        return try await withCheckedThrowingContinuation({ continuation in
              getWorldMap(session) { result in
                  do {
                      let worldMap = try result.get()

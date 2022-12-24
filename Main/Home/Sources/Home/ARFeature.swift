@@ -24,6 +24,8 @@ public struct ARFeature: ReducerProtocol {
         var postProcessingShader1: MTLFunction?
         var postProcessiingShader2: MTLFunction?
         var arSession: ARSession?
+        
+        
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
             return true
         }
@@ -46,7 +48,4 @@ public struct ARFeature: ReducerProtocol {
         return .none
     }
     
-    public init() {
-//        self.me
-    }
 }

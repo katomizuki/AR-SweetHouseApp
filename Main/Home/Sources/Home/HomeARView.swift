@@ -9,7 +9,6 @@ import ARKit
 import RealityKit
 import CoachingOverlayFeature
 import Combine
-import ARSceneManager
 import RoomPlan
 import FocusEntity
 import MetalLibraryLoader
@@ -64,6 +63,7 @@ final class HomeARView: ARView {
     
     private func setupTouchUpEvent() {
         let touchGesture = UITapGestureRecognizer(target: self, action: #selector(onTouchARView))
+        self.addGestureRecognizer(touchGesture)
     }
     
     @objc private func onTouchARView(_ sender: UITapGestureRecognizer) {
@@ -116,7 +116,6 @@ final class HomeARView: ARView {
     
     func setupSubscribeARScene() {
         self.cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
-            ARSceneClient.session = self?.session
             self?.viewStore.send(.subscriveEvent(session: self?.session))
         }
     }

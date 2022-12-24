@@ -9,7 +9,6 @@ import SwiftUI
 import Home
 import Firebase
 import ComposableArchitecture
-import ARSceneManager
 import WorldMapFeature
 
 @main

@@ -12,22 +12,11 @@ import SettingFeature
 import WorldMapFeature
 import ARKit
 import SwiftUI
-import ARSceneManager
 import HapticsFeature
 import RoomPlan
 
-
-public class ARSceneClient {
-   public static let shared: ARSceneClient = .init()
-    public static var session: ARSession?
-    
-   private init() { }
-    
-    
-}
-
-
 public struct HomeFeature: ReducerProtocol {
+    private static var arSession: ARSession?
     
     public struct State: Equatable {
         var isSweetListView: Bool = false
@@ -37,7 +26,13 @@ public struct HomeFeature: ReducerProtocol {
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
-        var arViewState = ARFeature.State()
+        var arViewState: ARFeature.State {
+            get {
+                ARFeature.State()
+            } set {
+                HomeFeature.arSession = newValue.arSession
+            }
+        }
         var alert: AlertState<Action>?
         public init() { }
     }
@@ -86,7 +81,7 @@ public struct HomeFeature: ReducerProtocol {
             case .onTapSaveWorldMapButton:
                 return .task {
                     do {
-                        guard let session =  ARSceneClient.session else { return .showFailAlert }
+                        guard  let session = Self.arSession else { return .showFailAlert }
                         let worldMap = try await worldMapFeature.getCurrentWorldMap(session)
                         return .writeARWorldMap(worldMap)
                     } catch {
