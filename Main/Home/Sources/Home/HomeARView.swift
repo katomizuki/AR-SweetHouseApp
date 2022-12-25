@@ -57,7 +57,7 @@ final class HomeARView: ARView {
         setupOverlayView()
         setupSubscribeARScene()
         setupFocusEntity()
-//        setupRoomCaptureDelegate()
+        setupRoomCaptureDelegate()
 //        loadMetalShader(device: device)
     }
     
@@ -98,6 +98,12 @@ final class HomeARView: ARView {
     
     private func setupConfiguration() {
         let configuration = ARWorldTrackingConfiguration()
+        if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) && ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth) {
+            configuration.sceneReconstruction = [.meshWithClassification,.mesh]
+            configuration.frameSemantics = [.smoothedSceneDepth, .sceneDepth]
+            configuration.planeDetection = [.horizontal, .vertical]
+            
+        }
         session.run(configuration)
     }
     
