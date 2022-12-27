@@ -6,48 +6,85 @@
 //
 
 import CoreMotion
+import ComposableArchitecture
 
-final class MotionFeature: NSObject {
+extension DependencyValues{
+    public var motionFeature: MotionFeature {
+        get { self[MotionFeature.self] }
+        set { self[MotionFeature.self] = newValue }
+    }
+}
+
+extension MotionFeature: DependencyKey {
+    public static var liveValue: MotionFeature {
+        return MotionFeature()
+    }
+}
+
+
+enum MotionError: Error {
+    case notSupported
+    case noData
+}
+final public class MotionFeature: NSObject {
     
     let motionManager = CMMotionManager()
     
-    func start() {
+    private func getDeviceMotion(completion: @escaping(Result<CMDeviceMotion, MotionError>) -> Void) {
         if motionManager.isDeviceMotionAvailable {
             motionManager.deviceMotionUpdateInterval = 0.1
-            motionManager.startDeviceMotionUpdates(to: OperationQueue.current!, withHandler: {(motion:CMDeviceMotion?, error:Error?) in
-                self.updateMotionData(deviceMotion: motion!)
+            motionManager.startDeviceMotionUpdates(to: OperationQueue.current!,
+                                                   withHandler: { (motion: CMDeviceMotion?,
+                                                                   error: Error?) in
+                guard let motion = motion else {
+                    completion(.failure(MotionError.noData))
+                    return
+                }
+                completion(.success(motion))
             })
+        } else {
+            completion(.failure(MotionError.notSupported))
         }
     }
     
-    
-    func updateMotionData(deviceMotion: CMDeviceMotion) {
-        print(deviceMotion.userAcceleration.x)
-        print(deviceMotion.userAcceleration.y)
-        print(deviceMotion.userAcceleration.z)
-        print(deviceMotion.attitude.pitch)
-        print(deviceMotion.attitude.yaw)
-        print(deviceMotion.attitude.roll)
-        print(deviceMotion.gravity.x)
-        print(deviceMotion.gravity.y)
-        print(deviceMotion.gravity.z)
-        print(deviceMotion.sensorLocation)
-        print(deviceMotion.heading)
-        print(deviceMotion.magneticField)
+    public func getDeviceMotion() async throws -> CMDeviceMotion {
+        try await withCheckedThrowingContinuation({ continuation in
+            self.getDeviceMotion { result in
+                switch result {
+                case .success(let deviceMotion):
+                    continuation.resume(returning: deviceMotion)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        })
     }
-    
-    func startGyro() {
+
+    private func getGryro(completion: @escaping(Result<CMGyroData, MotionError>) -> Void) {
         if motionManager.isGyroAvailable {
             motionManager.gyroUpdateInterval = 0.1
-            motionManager.startGyroUpdates(to: OperationQueue.current!) { gyro, error in
-                self.updateGyro(gyro!)
+            motionManager.startGyroUpdates(to: OperationQueue.current!) { gyro, _ in
+                guard let gyro = gyro else {
+                    completion(.failure(.noData))
+                    return
+                }
+                completion(.success(gyro))
             }
+        } else {
+            completion(.failure(.notSupported))
         }
     }
     
-    func updateGyro(_ gyro: CMGyroData) {
-        print(gyro.rotationRate.x)
-        print(gyro.rotationRate.y)
-        print(gyro.rotationRate.z)
+    public func getGryro() async throws -> CMGyroData {
+        try await withCheckedThrowingContinuation({ continuation in
+            self.getGryro { result in
+                switch result {
+                case .success(let success):
+                    continuation.resume(returning: success)
+                case .failure(let failure):
+                    continuation.resume(throwing: failure)
+                }
+            }
+        })
     }
 }

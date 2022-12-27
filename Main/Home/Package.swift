@@ -87,7 +87,8 @@ let package = Package(
                                     package: "swift-composable-architecture")]),
         .target(
             name: "MultiPeerFeature",
-            dependencies: []),
+            dependencies: [.product(name: "ComposableArchitecture",
+                                    package: "swift-composable-architecture")]),
         .target(name: "FirebaseClient",
                 dependencies: [
                     .product(name: "FirebaseFirestore",

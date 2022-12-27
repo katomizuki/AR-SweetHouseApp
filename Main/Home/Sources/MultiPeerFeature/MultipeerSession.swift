@@ -7,7 +7,7 @@
 
 import MultipeerConnectivity
 
-final class MultipeerSession: NSObject {
+public final class MultipeerSession: NSObject {
     
     static let serviceType = "ar-collab"
     private let myPeerID = MCPeerID(displayName: UIDevice.current.name)
@@ -50,7 +50,7 @@ final class MultipeerSession: NSObject {
         serviceBrowser.startBrowsingForPeers()
     }
     
-    func sendToAllPeers(_ data: Data,
+    public func sendToAllPeers(_ data: Data,
                         reliably: Bool) {
         sendToPeers(data,
                     reliably: reliably,
@@ -58,7 +58,7 @@ final class MultipeerSession: NSObject {
     }
     
     // PeerIDを送る。
-    func sendToPeers(_ data: Data,
+    public func sendToPeers(_ data: Data,
                      reliably: Bool,
                      peers: [MCPeerID]) {
         // 空だったらreturn
@@ -80,7 +80,7 @@ final class MultipeerSession: NSObject {
 extension MultipeerSession: MCSessionDelegate {
     
     // バイトストリーム接続
-    func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                  didReceive stream: InputStream,
                  withName streamName: String,
                  fromPeer peerID: MCPeerID) {
@@ -88,7 +88,7 @@ extension MultipeerSession: MCSessionDelegate {
     }
     
     // ファイル受信開始
-    func session(_ session: MCSession, didStartReceivingResourceWithName
+    public func session(_ session: MCSession, didStartReceivingResourceWithName
                  resourceName: String,
                  fromPeer peerID: MCPeerID,
                  with progress: Progress) {
@@ -96,7 +96,7 @@ extension MultipeerSession: MCSessionDelegate {
     }
     
     // ファイル時受信終了
-    func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                  didFinishReceivingResourceWithName resourceName: String,
                  fromPeer peerID: MCPeerID,
                  at localURL: URL?,
@@ -105,7 +105,7 @@ extension MultipeerSession: MCSessionDelegate {
     }
     
     // PtoPの接続状態を変更
-    func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                  peer peerID: MCPeerID,
                  didChange state: MCSessionState) {
         if state == .connected {
@@ -116,7 +116,7 @@ extension MultipeerSession: MCSessionDelegate {
     }
     
     // データを受信
-    func session(_ session: MCSession,
+    public func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {
         receiveDataHandler(data, peerID)
@@ -126,7 +126,7 @@ extension MultipeerSession: MCSessionDelegate {
 // MARK: - MCNearbyServiceBrowserDelegate
 extension MultipeerSession: MCNearbyServiceBrowserDelegate {
     // 端末を発見した時を検知
-    func browser(_ browser: MCNearbyServiceBrowser,
+    public func browser(_ browser: MCNearbyServiceBrowser,
                  foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String : String]?) {
         // 端末発見時
@@ -141,7 +141,7 @@ extension MultipeerSession: MCNearbyServiceBrowserDelegate {
     }
     
     // 発見した端末をロスト時に呼ばれる
-    func browser(_ browser: MCNearbyServiceBrowser,
+    public func browser(_ browser: MCNearbyServiceBrowser,
                  lostPeer peerID: MCPeerID) { }
 }
 
@@ -149,13 +149,13 @@ extension MultipeerSession: MCNearbyServiceBrowserDelegate {
 extension MultipeerSession: MCNearbyServiceAdvertiserDelegate {
 
     // Peerの招待を受け取ることを検知
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID,
+    public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID,
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
         invitationHandler(true, self.session)
     }
     
-    func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
+    public func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didNotStartAdvertisingPeer error: Error) {
         print("advertiseが失敗")
     }
 }
