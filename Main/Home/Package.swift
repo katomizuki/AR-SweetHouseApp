@@ -90,10 +90,9 @@ let package = Package(
             dependencies: [.product(name: "ComposableArchitecture",
                                     package: "swift-composable-architecture")]),
         .target(name: "FirebaseClient",
-                dependencies: [
-                    .product(name: "FirebaseFirestore",
-                                        package: "Firebase")
-                ]),
+                dependencies: [.product(name: "FirebaseFirestore",
+                                        package: "Firebase"),
+                               "EntityModule"]),
         .target(name: "WorldMapFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture")]),
