@@ -40,10 +40,11 @@ public struct ARFeature: ReducerProtocol {
         case .subscriveEvent(let arSession):
             state.arSession = arSession
         case .initialize:
-          let suisai = metalLoader.getPostProcessingShader(metalShaderName: .suisai)
-          let toon = metalLoader.getPostProcessingShader(metalShaderName: .toon)
-          state.postProcessingShader1 = suisai
-          state.postProcessiingShader2 = toon
+            break
+//          let suisai = metalLoader.getPostProcessingShader(metalShaderName: .suisai)
+//          let toon = metalLoader.getPostProcessingShader(metalShaderName: .toon)
+//          state.postProcessingShader1 = suisai
+//          state.postProcessiingShader2 = toon
         }
         return .none
     }

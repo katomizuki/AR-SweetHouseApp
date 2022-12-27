@@ -31,7 +31,13 @@ final class HomeARView: ARView {
         self.viewStore = ViewStore(store)
         super.init(frame: .zero)
         viewStore.send(.initialize)
-        setupPostProcessing()
+//        setupPostProcessing()
+        setupSessionDelegate()
+        setupConfiguration()
+        setupOverlayView()
+        setupSubscribeARScene()
+        setupFocusEntity()
+//        setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
@@ -40,6 +46,7 @@ final class HomeARView: ARView {
     
     private func setupFocusEntity() {
         self.focusEntity = FocusEntity(on: self,style: .classic(color: .orange))
+        self.focusEntity?.delegate = self
     }
     
     private func setupRoomCaptureDelegate() {
@@ -52,13 +59,7 @@ final class HomeARView: ARView {
     }
     
     private func postProcessCallBack(device: MTLDevice) {
-        setupSessionDelegate()
-        setupConfiguration()
-        setupOverlayView()
-        setupSubscribeARScene()
-        setupFocusEntity()
-        setupRoomCaptureDelegate()
-//        loadMetalShader(device: device)
+//        loadMetalShader()
     }
     
     private func setupTouchUpEvent() {
@@ -84,7 +85,9 @@ final class HomeARView: ARView {
     
     private func putSweet(at position: simd_float3) {
         guard let selectedModel = viewStore.state.selectedModel else { return }
-        
+        let anchorEntity = AnchorEntity(world: position)
+        anchorEntity.addChild(selectedModel)
+        scene.anchors.append(anchorEntity)
     }
     
     private func loadMetalShader() {
@@ -99,8 +102,8 @@ final class HomeARView: ARView {
     private func setupConfiguration() {
         let configuration = ARWorldTrackingConfiguration()
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) && ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth) {
-            configuration.sceneReconstruction = [.meshWithClassification,.mesh]
-            configuration.frameSemantics = [.smoothedSceneDepth, .sceneDepth]
+            configuration.sceneReconstruction = [.meshWithClassification]
+            configuration.frameSemantics = [.smoothedSceneDepth]
             configuration.planeDetection = [.horizontal, .vertical]
             
         }
@@ -211,5 +214,23 @@ extension HomeARView: RoomCaptureSessionDelegate {
               print(error)
             }
         }
+    }
+}
+
+extension HomeARView: FocusEntityDelegate {
+    func toTrackingState() {
+        
+    }
+    
+    func toInitializingState() {
+        
+    }
+    
+    private func focusEntity(_ focusEntity: FocusEntity.State, trackingUpdated trackingState: FocusEntity.State, oldState: FocusEntity.State) {
+        
+    }
+    
+    func focusEntity(_ focusEntity: FocusEntity, planeChanged: ARPlaneAnchor?, oldPlane: ARPlaneAnchor?) {
+        
     }
 }
