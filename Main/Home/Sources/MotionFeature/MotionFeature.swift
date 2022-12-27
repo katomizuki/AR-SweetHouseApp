@@ -21,11 +21,11 @@ extension MotionFeature: DependencyKey {
     }
 }
 
-
 enum MotionError: Error {
     case notSupported
     case noData
 }
+
 final public class MotionFeature: NSObject {
     
     let motionManager = CMMotionManager()

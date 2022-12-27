@@ -7,14 +7,14 @@
 import Foundation
 import SwiftUI
 
-public struct Sweet: Identifiable, CustomStringConvertible, Hashable {
+public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
-    public let id: String = UUID().uuidString
+    public var id: String = UUID().uuidString
     public let name: String
-    public let thumnail: Image
+    public let thumnail: String
     public var description: String
     
-    public init(name: String, thumnail: Image, description: String) {
+    public init(name: String, thumnail: String, description: String) {
         self.name = name
         self.thumnail = thumnail
         self.description = description

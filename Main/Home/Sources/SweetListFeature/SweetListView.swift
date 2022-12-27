@@ -25,7 +25,7 @@ public struct SweetListView: View {
                                 SweetDetailView(store: self.store.scope(state: \.detailState,
                                                                         action: SweetListFeature.Action.detailAction))
                             }, label: {
-                                ListCellWithImage(image: sweet.thumnail,
+                                ListCellWithImage(image: Image(systemName: sweet.thumnail),
                                                   title: sweet.name)
                             })
                         })
