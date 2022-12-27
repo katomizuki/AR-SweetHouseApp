@@ -94,6 +94,8 @@ let package = Package(
                                         package: "Firebase"),
                                .product(name: "FirebaseStorage",
                                         package: "Firebase"),
+                               .product(name: "FirebaseFirestoreSwift",
+                                        package: "Firebase"),
                                "EntityModule",
                     .product(name: "ComposableArchitecture",
                              package: "swift-composable-architecture")]),
