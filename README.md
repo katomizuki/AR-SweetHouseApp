@@ -3,4 +3,4 @@
 ##### 主要ライブラリ　
 => The Composable Architecture/Firebase
 ##### CICD 
-=> GithubActions fastlane
+=> GithubActions/fastlane
