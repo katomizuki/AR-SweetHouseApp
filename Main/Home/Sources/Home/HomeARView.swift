@@ -15,7 +15,7 @@ import MetalLibraryLoader
 import ComposableArchitecture
 
 final class HomeARView: ARView {
-
+    
     private var cancellable: Cancellable?
     private let viewStore: ViewStoreOf<ARFeature>
     private let meshHelper = MeshHelper()
@@ -31,7 +31,7 @@ final class HomeARView: ARView {
         self.viewStore = ViewStore(store)
         super.init(frame: .zero)
         viewStore.send(.initialize)
-//        setupPostProcessing()
+        //        setupPostProcessing()
         setupSessionDelegate()
         setupConfiguration()
         setupOverlayView()
@@ -51,8 +51,8 @@ final class HomeARView: ARView {
     }
     
     private func setupRoomCaptureDelegate() {
-//        caputureSession.delegate = self
-//        caputureSession.run(configuration: .init())
+        //        caputureSession.delegate = self
+        //        caputureSession.run(configuration: .init())
     }
     
     private func setupPostProcessing() {
@@ -61,7 +61,7 @@ final class HomeARView: ARView {
     }
     
     private func postProcessCallBack(device: MTLDevice) {
-//        loadMetalShader()
+        //        loadMetalShader()
     }
     
     private func setupTouchUpEvent() {
@@ -81,7 +81,6 @@ final class HomeARView: ARView {
             if let hitPoint = results.first {
                 let position = simd_make_float3(hitPoint.worldTransform.columns.3)
                 putSweet(at: position)
-                stickTexture(at: position)
             }
         }
     }
@@ -91,32 +90,6 @@ final class HomeARView: ARView {
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
-    }
-    
-    private func stickTexture(at position: simd_float3) {
-        guard let frame = session.currentFrame else { return }
-        let meshAnchors = frame.anchors.map { $0 as? ARMeshAnchor }
-        meshAnchors.forEach {
-            guard let geometry = $0?.geometry else { return }
-            let verticesSource = geometry.vertices
-            let faces = geometry.faces
-            let normalsSource = geometry.normals
-            var positions = [SIMD3<Float>]()
-            var normals = [SIMD3<Float>]()
-            var indices = [UInt32]()
-            for index in 0..<faces.count {
-                let vertex = meshHelper.vertex(at: UInt32(index), vertices: verticesSource)
-                let normal = meshHelper.normal(at: UInt32(index), normals: normalsSource)
-                positions.append(vertex)
-                normals.append(normal)
-                indices.append(UInt32(index))
-                print(positions, normal, indices)
-            }
-            guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
-            let anchorEntity = AnchorEntity(world: position)
-            anchorEntity.addChild(mesh)
-            scene.anchors.append(anchorEntity)
-        }
     }
     
     private func loadMetalShader() {
@@ -190,7 +163,27 @@ extension HomeARView: ARSessionDelegate {
         
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-        
+        guard let meshAnchor = anchors.map({ $0 as? ARMeshAnchor }).last else { return }
+        guard let meshAnchor = meshAnchor else { return }
+        let geometry = meshAnchor.geometry
+        let verticesSource = geometry.vertices
+        let faces = geometry.faces
+        let normalsSource = geometry.normals
+        var positions = [SIMD3<Float>]()
+        var normals = [SIMD3<Float>]()
+        var indices = [UInt32]()
+        for index in 0..<faces.count {
+            let vertex = meshHelper.vertex(at: UInt32(index), vertices: verticesSource)
+            let normal = meshHelper.normal(at: UInt32(index), normals: normalsSource)
+            positions.append(vertex)
+            normals.append(normal)
+            indices.append(UInt32(index))
+            print(positions, normal, indices)
+        }
+        guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
+        let anchorEntity = AnchorEntity(world: meshAnchor.transform)
+        anchorEntity.addChild(mesh)
+        scene.anchors.append(anchorEntity)
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -206,7 +199,7 @@ extension HomeARView: ARSessionDelegate {
     }
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
-       return true
+        return true
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
@@ -229,7 +222,7 @@ extension HomeARView: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
         let roomObjectAnchors = room.objects.map { RoomObjectAnchor($0) }
         print(roomObjectAnchors)
-//        roomObjectAnchors[0]
+        //        roomObjectAnchors[0]
         
     }
     
@@ -262,7 +255,7 @@ extension HomeARView: RoomCaptureSessionDelegate {
             do {
                 let finalRoom = try await roomBuilder.capturedRoom(from: data)
             } catch {
-              print(error)
+                print(error)
             }
         }
     }
