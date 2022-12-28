@@ -37,6 +37,7 @@ final class HomeARView: ARView {
         setupOverlayView()
         setupSubscribeARScene()
         setupFocusEntity()
+        setupTouchUpEvent()
         setupRoomCaptureDelegate()
     }
     
@@ -50,8 +51,8 @@ final class HomeARView: ARView {
     }
     
     private func setupRoomCaptureDelegate() {
-        caputureSession.delegate = self
-        caputureSession.run(configuration: .init())
+//        caputureSession.delegate = self
+//        caputureSession.run(configuration: .init())
     }
     
     private func setupPostProcessing() {
@@ -80,6 +81,7 @@ final class HomeARView: ARView {
             if let hitPoint = results.first {
                 let position = simd_make_float3(hitPoint.worldTransform.columns.3)
                 putSweet(at: position)
+                stickTexture(at: position)
             }
         }
     }
@@ -89,6 +91,24 @@ final class HomeARView: ARView {
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
+    }
+    
+    private func stickTexture(at position: simd_float3) {
+        guard let frame = session.currentFrame else { return }
+        // ARMeshClassification
+        let meshAnchors = frame.anchors.compactMap { $0 as? ARMeshAnchor }
+        meshAnchors.forEach { arMeshAnchor in
+            let geometry = arMeshAnchor.geometry
+            let vertices = geometry.vertices
+            let normals = geometry.normals
+            let verticesBufferPointer = vertices.buffer.contents()
+            let normalBufferPointer = normals.buffer.contents()
+            
+            for index in 0..<geometry.faces.count {
+                let classification = arMeshAnchor.geometry.classificationOf(index: index)
+                print(classification.rawValue)
+            }
+        }
     }
     
     private func loadMetalShader() {
@@ -104,9 +124,7 @@ final class HomeARView: ARView {
         let configuration = ARWorldTrackingConfiguration()
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) && ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth) {
             configuration.sceneReconstruction = [.meshWithClassification]
-            configuration.frameSemantics = [.smoothedSceneDepth]
             configuration.planeDetection = [.horizontal, .vertical]
-            
         }
         session.run(configuration)
     }
@@ -129,10 +147,14 @@ final class HomeARView: ARView {
             self?.viewStore.send(.subscriveEvent(session: self?.session))
         }
     }
+    
+    
+    
 }
 
 extension HomeARView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
@@ -180,6 +202,9 @@ extension HomeARView: ARSessionDelegate {
 }
 extension HomeARView: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
+        let roomObjectAnchors = room.objects.map { RoomObjectAnchor($0) }
+        print(roomObjectAnchors)
+//        roomObjectAnchors[0]
         
     }
     
@@ -200,7 +225,7 @@ extension HomeARView: RoomCaptureSessionDelegate {
     }
     
     func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
-        
+        print(#function)
     }
     
     func captureSession(_ session: RoomCaptureSession, didEndWith data: CapturedRoomData, error: Error?) {
@@ -233,5 +258,14 @@ extension HomeARView: FocusEntityDelegate {
     
     func focusEntity(_ focusEntity: FocusEntity, planeChanged: ARPlaneAnchor?, oldPlane: ARPlaneAnchor?) {
         
+    }
+}
+
+extension ARMeshGeometry {
+    func classificationOf(index: Int) -> ARMeshClassification {
+        guard let classification = classification else  { return .none }
+        let classificationPointer = classification.buffer.contents().advanced(by: classification.offset + (classification.stride * index))
+        let classificationValue = Int(classificationPointer.assumingMemoryBound(to: CUnsignedChar.self).pointee)
+        return ARMeshClassification(rawValue: classificationValue) ?? .none
     }
 }
