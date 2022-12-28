@@ -37,7 +37,7 @@ final class HomeARView: ARView {
         setupOverlayView()
         setupSubscribeARScene()
         setupFocusEntity()
-//        setupRoomCaptureDelegate()
+        setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
@@ -51,6 +51,7 @@ final class HomeARView: ARView {
     
     private func setupRoomCaptureDelegate() {
         caputureSession.delegate = self
+        caputureSession.run(configuration: .init())
     }
     
     private func setupPostProcessing() {
