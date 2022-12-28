@@ -19,7 +19,7 @@ final class MeshHelper {
         let uiImage = UIImage(cgImage: cameraImage)
         return Image(uiImage: uiImage)
     }
-// Indexから頂点を割り出すHelper
+    // Indexから頂点を割り出すHelper
     func vertex(at index: UInt32, vertices: ARGeometrySource) -> SIMD3<Float> {
         assert(vertices.format == MTLVertexFormat.float3,"not float3")
         let vertexPointer = vertices.buffer.contents().advanced(by: vertices.offset + (vertices.stride * Int(index)))
@@ -34,7 +34,8 @@ final class MeshHelper {
         return normal
     }
     
-    func faces(at index: Int, faces: ARGeometryElement) -> [Int] {
+    // Indexからその面を構成する頂点配列をゲットする。
+    func vertexIndicesOf(at index: Int, faces: ARGeometryElement) -> [Int] {
         let indicesPerFace = faces.indexCountPerPrimitive
         let facesPointer = faces.buffer.contents()
         var vertexIndices = [Int]()
@@ -44,5 +45,4 @@ final class MeshHelper {
         }
         return vertexIndices
     }
-    
 }

@@ -18,7 +18,7 @@ final class HomeARView: ARView {
 
     private var cancellable: Cancellable?
     private let viewStore: ViewStoreOf<ARFeature>
-    
+    private let meshHelper = MeshHelper()
     private lazy var caputureSession: RoomCaptureSession = {
         let captureSession = RoomCaptureSession()
         session = captureSession.arSession
@@ -95,19 +95,27 @@ final class HomeARView: ARView {
     
     private func stickTexture(at position: simd_float3) {
         guard let frame = session.currentFrame else { return }
-        // ARMeshClassification
-        let meshAnchors = frame.anchors.compactMap { $0 as? ARMeshAnchor }
-        meshAnchors.forEach { arMeshAnchor in
-            let geometry = arMeshAnchor.geometry
-            let vertices = geometry.vertices
-            let normals = geometry.normals
-            let verticesBufferPointer = vertices.buffer.contents()
-            let normalBufferPointer = normals.buffer.contents()
-            
-            for index in 0..<geometry.faces.count {
-                let classification = arMeshAnchor.geometry.classificationOf(index: index)
-                print(classification.rawValue)
+        let meshAnchors = frame.anchors.map { $0 as? ARMeshAnchor }
+        meshAnchors.forEach {
+            guard let geometry = $0?.geometry else { return }
+            let verticesSource = geometry.vertices
+            let faces = geometry.faces
+            let normalsSource = geometry.normals
+            var positions = [SIMD3<Float>]()
+            var normals = [SIMD3<Float>]()
+            var indices = [UInt32]()
+            for index in 0..<faces.count {
+                let vertex = meshHelper.vertex(at: UInt32(index), vertices: verticesSource)
+                let normal = meshHelper.normal(at: UInt32(index), normals: normalsSource)
+                positions.append(vertex)
+                normals.append(normal)
+                indices.append(UInt32(index))
+                print(positions, normal, indices)
             }
+            guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
+            let anchorEntity = AnchorEntity(world: position)
+            anchorEntity.addChild(mesh)
+            scene.anchors.append(anchorEntity)
         }
     }
     
@@ -154,7 +162,24 @@ final class HomeARView: ARView {
 
 extension HomeARView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-
+        
+        
+    }
+    
+    private func makeMesh(normals: [SIMD3<Float>],
+                          positions: [SIMD3<Float>],
+                          indices:[UInt32]) -> ModelEntity? {
+        var descriptor = MeshDescriptor(name: "mesh")
+        descriptor.positions = MeshBuffer(positions)
+        descriptor.normals = MeshBuffer(normals)
+        descriptor.primitives = .triangles(indices)
+        let material: Material = SimpleMaterial(color: .red, isMetallic: false)
+        do {
+            let mesh = try MeshResource.generate(from: [descriptor])
+            return ModelEntity(mesh: mesh, materials: [material])
+        } catch {
+            return nil
+        }
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
