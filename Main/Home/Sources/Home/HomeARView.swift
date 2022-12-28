@@ -26,6 +26,7 @@ final class HomeARView: ARView {
     }()
     private let roomBuilder = RoomBuilder(options: [.beautifyObjects])
     var focusEntity: FocusEntity?
+    private let device: MTLDevice = MTLCreateSystemDefaultDevice()!
     
     required init(store: StoreOf<ARFeature>) {
         self.viewStore = ViewStore(store)
@@ -181,6 +182,7 @@ extension HomeARView: ARSessionDelegate {
             normals.append(normal)
             indices.append(UInt32(index))
         }
+        // 0, 1, 2, 2, 3, 0
         guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
         let anchorEntity = AnchorEntity(world: meshAnchor.transform)
         anchorEntity.addChild(mesh)
