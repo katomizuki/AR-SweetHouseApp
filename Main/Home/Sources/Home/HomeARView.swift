@@ -163,6 +163,8 @@ extension HomeARView: ARSessionDelegate {
         
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
+        if anchors.isEmpty { return }
+        
         guard let meshAnchor = anchors.map({ $0 as? ARMeshAnchor }).last else { return }
         guard let meshAnchor = meshAnchor else { return }
         let geometry = meshAnchor.geometry
@@ -178,7 +180,6 @@ extension HomeARView: ARSessionDelegate {
             positions.append(vertex)
             normals.append(normal)
             indices.append(UInt32(index))
-            print(positions, normal, indices)
         }
         guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
         let anchorEntity = AnchorEntity(world: meshAnchor.transform)
