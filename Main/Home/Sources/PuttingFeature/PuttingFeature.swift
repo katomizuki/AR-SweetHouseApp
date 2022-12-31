@@ -11,6 +11,7 @@ public struct PuttingFeature: ReducerProtocol {
     
     public struct State: Equatable {
         
+        var alert: AlertState<Action>?
         public init() {
             
         }
@@ -18,6 +19,8 @@ public struct PuttingFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
+        case showFailedAlert
+        case dismissAlert
     }
     
     public struct Environment {
@@ -29,8 +32,13 @@ public struct PuttingFeature: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onAppear:
-            return .none
+            break
+        case .showFailedAlert:
+            state.alert = .init(title: .init("不明なエラーが発生しました"))
+        case .dismissAlert:
+            state.alert = nil
         }
+        return .none
     }
     
 }

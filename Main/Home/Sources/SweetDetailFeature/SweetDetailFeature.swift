@@ -17,6 +17,7 @@ public struct SweetDetailFeature: ReducerProtocol {
         var rotationEffect: Double = 90
         var offset: CGFloat = .zero
         var scene: SCNScene? = SCNScene(named: "yamatutudi.scn")
+        var alert: AlertState<Action>?
         public init() {
             
         }
@@ -27,6 +28,8 @@ public struct SweetDetailFeature: ReducerProtocol {
         case onTapNavigationTrailingButton
         case rotateObject(isOffsetZero: Bool)
         case changeOffset(_ newOffset: CGFloat)
+        case showFailedAlert
+        case dismissAlert
     }
     
     public struct Environment {
@@ -63,7 +66,11 @@ public struct SweetDetailFeature: ReducerProtocol {
             if animate  {
                 SCNTransaction.commit()
             }
-            return .none
+        case .showFailedAlert:
+            state.alert = .init(title: .init("不明なエラーが発生しました"))
+        case .dismissAlert:
+            state.alert = nil
         }
+        return .none
     }
 }

@@ -10,7 +10,7 @@ import ComposableArchitecture
 public struct SettingFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        
+        var alert: AlertState<Action>?
         public init() {
             
         }
@@ -18,6 +18,8 @@ public struct SettingFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
+        case showFailedAlert
+        case dismissAlert
     }
     
     public struct SettingEnvironment {
@@ -29,8 +31,13 @@ public struct SettingFeature: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onAppear:
-            return .none
+            break
+        case .dismissAlert:
+            state.alert = nil
+        case .showFailedAlert:
+            state.alert = .init(title: .init("不明なエラーが発生しました"))
         }
+        return .none
     }
 }
 
