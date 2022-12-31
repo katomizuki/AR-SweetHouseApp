@@ -16,6 +16,8 @@ public struct ARFeature: ReducerProtocol {
         case subscriveEvent(session: ARSession?)
         case onTouchARView
         case initialize
+        case showFailedAlert
+        case dismissAlert
     }
     
     public struct State: Equatable {
@@ -24,6 +26,7 @@ public struct ARFeature: ReducerProtocol {
         var postProcessingShader1: MTLFunction?
         var postProcessiingShader2: MTLFunction?
         var arSession: ARSession?
+        var alert: AlertState<Action>?
         
         
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
@@ -45,6 +48,10 @@ public struct ARFeature: ReducerProtocol {
 //          let toon = metalLoader.getPostProcessingShader(metalShaderName: .toon)
 //          state.postProcessingShader1 = suisai
 //          state.postProcessiingShader2 = toon
+        case .showFailedAlert:
+            state.alert = .init(title: .init("不明なエラーが発生しました"))
+        case .dismissAlert:
+            state.alert = nil
         }
         return .none
     }
