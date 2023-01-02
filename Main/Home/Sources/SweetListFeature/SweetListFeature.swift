@@ -51,8 +51,10 @@ public struct SweetListFeature: ReducerProtocol {
                 return .none
             case .sweetResponse(.failure):
                 state.alert = .init(title: .init("通信に失敗しました"))
+                return .none
             case .sweetResponse(.success(let sweets)):
                 state.sweets = sweets
+                return .none
             case .dismissAlert:
                 state.alert = nil
             }
