@@ -25,12 +25,14 @@ public struct SweetListView: View {
                                 SweetDetailView(store: self.store.scope(state: \.detailState,
                                                                         action: SweetListFeature.Action.detailAction))
                             }, label: {
-                                ListCellWithImage(image: Image(systemName: sweet.thumnail),
+                                ListCellWithImage(image: Image(systemName: sweet.thumbnail),
                                                   title: sweet.name)
                             })
                         })
                     })
                 })
+                .alert(self.store.scope(state: { $0.alert }),
+                       dismiss: .dismissAlert)
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading,
                                 content: {
@@ -41,8 +43,6 @@ public struct SweetListView: View {
                         })
                     })
                 })
-                .alert(self.store.scope(state: { $0.alert }),
-                       dismiss: .dismissAlert)
                 .onAppear(perform: {
                     viewStore.send(.onAppear)
                 })

@@ -27,4 +27,10 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     public static func == (lhs: Sweet, rhs: Sweet) -> Bool {
             return lhs.id == rhs.id
     }
+    
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case thumbnail
+        case description
+    }
 }

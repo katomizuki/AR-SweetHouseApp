@@ -47,7 +47,7 @@ public final class FirebaseClient {
                     do {
                         return try Firestore.Decoder().decode(Sweet.self, from: $0.data())
                     } catch {
-                        throw FirebaseError.normalError
+                        throw FirebaseError.decodeError
                     }
                 })
             return Sweets(list: list)

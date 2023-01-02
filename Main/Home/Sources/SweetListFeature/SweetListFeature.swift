@@ -14,7 +14,7 @@ import FirebaseClient
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets = Sweets(list: [])
+        var sweets = Sweets(list: [Sweet]())
         var detailState = SweetDetailFeature.State()
         var alert: AlertState<Action>?
         public init() { }
