@@ -32,21 +32,16 @@ public struct SweetListFeature: ReducerProtocol {
     
     @Dependency(\.firebaseClient) var firebaseClient
     
-    enum SweetId {
-        
-    }
-    
     public init() { }
 
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state , action in
             switch action {
             case .onAppear:
-                return .task {
+                return Effect.task {
                     await .sweetResponse(TaskResult {
                         try await firebaseClient.fetchSweets() })
-                }
-                .cancellable(id: SweetId.self)
+                }.eraseToEffect()
             case .detailAction:
                 return .none
             case .sweetResponse(.failure):
