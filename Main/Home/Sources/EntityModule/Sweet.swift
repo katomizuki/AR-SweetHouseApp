@@ -11,12 +11,12 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
     public var id: String = UUID().uuidString
     public let name: String
-    public let thumnail: String
+    public let thumbnail: String
     public var description: String
     
-    public init(name: String, thumnail: String, description: String) {
+    public init(name: String, thumbnail: String, description: String) {
         self.name = name
-        self.thumnail = thumnail
+        self.thumbnail = thumbnail
         self.description = description
     }
     

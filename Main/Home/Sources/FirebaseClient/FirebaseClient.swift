@@ -27,6 +27,11 @@ extension FirebaseClient: DependencyKey {
     }
 }
 
+enum FirebaseError: Error {
+    case normalError
+    case decodeError
+}
+
 public final class FirebaseClient {
     private init() { }
     public static let shared = FirebaseClient()
@@ -35,12 +40,20 @@ public final class FirebaseClient {
     private var cancellable: AnyCancellable?
     
     public func fetchSweets() async throws -> Sweets {
-        let list = try await db.getDocuments()
-            .documents
-            .map({
-                return try Firestore.Decoder().decode(Sweet.self, from: $0.data())
-            })
-        return Sweets(list: list)
+        do {
+            let list = try await db.getDocuments()
+                .documents
+                .map({
+                    do {
+                        return try Firestore.Decoder().decode(Sweet.self, from: $0.data())
+                    } catch {
+                        throw FirebaseError.normalError
+                    }
+                })
+            return Sweets(list: list)
+        } catch {
+            throw FirebaseError.normalError
+        }
     }
 
     private func fetchUsdzModel(url: URL,

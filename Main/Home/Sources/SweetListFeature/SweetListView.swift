@@ -41,6 +41,8 @@ public struct SweetListView: View {
                         })
                     })
                 })
+                .alert(self.store.scope(state: { $0.alert }),
+                       dismiss: .dismissAlert)
                 .onAppear(perform: {
                     viewStore.send(.onAppear)
                 })

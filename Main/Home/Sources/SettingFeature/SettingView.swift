@@ -15,6 +15,8 @@ public struct SettiingView: View {
         WithViewStore(self.store) { viewStore in
             HStack(content: {
             })
+            .alert(self.store.scope(state: { $0.alert }),
+                   dismiss: .dismissAlert)
             .onAppear(perform: {
                 viewStore.send(.onAppear)
             })

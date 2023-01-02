@@ -11,9 +11,9 @@ import SwiftUI
 import SweetDetailFeature
 import FirebaseClient
 
-let list = [Sweet(name: "a", thumnail: "apple.logo", description: "説明"),
-              Sweet(name: "b", thumnail: "apple.logo", description: "説明"),
-              Sweet(name: "c", thumnail: "apple.logo", description: "説明")]
+let list = [Sweet(name: "a", thumbnail: "apple.logo", description: "説明"),
+              Sweet(name: "b", thumbnail: "apple.logo", description: "説明"),
+              Sweet(name: "c", thumbnail: "apple.logo", description: "説明")]
 
 public struct SweetListFeature: ReducerProtocol {
     

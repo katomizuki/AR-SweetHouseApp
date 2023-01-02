@@ -12,7 +12,6 @@
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
 		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
-		D3DF88572907F81700227BED /* Repositry in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88562907F81700227BED /* Repositry */; };
 		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
 		D3F4C39E2931F00500218193 /* EntityModule in Frameworks */ = {isa = PBXBuildFile; productRef = D3F4C39D2931F00500218193 /* EntityModule */; };
 /* End PBXBuildFile section */
@@ -33,7 +32,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3760F9C29051B6B00356F63 /* Home in Frameworks */,
-				D3DF88572907F81700227BED /* Repositry in Frameworks */,
 				D3F4C39E2931F00500218193 /* EntityModule in Frameworks */,
 				D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */,
 				D3DF88592907F82000227BED /* ViewComponents in Frameworks */,
@@ -106,7 +104,6 @@
 			name = RealitySuperApp;
 			packageProductDependencies = (
 				D3760F9B29051B6B00356F63 /* Home */,
-				D3DF88562907F81700227BED /* Repositry */,
 				D3DF88582907F82000227BED /* ViewComponents */,
 				D37D919B2920621F003B03FD /* MultiPeerFeature */,
 				D3F4C39D2931F00500218193 /* EntityModule */,
@@ -405,10 +402,6 @@
 		D37D919B2920621F003B03FD /* MultiPeerFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MultiPeerFeature;
-		};
-		D3DF88562907F81700227BED /* Repositry */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Repositry;
 		};
 		D3DF88582907F82000227BED /* ViewComponents */ = {
 			isa = XCSwiftPackageProductDependency;

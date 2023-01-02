@@ -11,9 +11,6 @@ let package = Package(
             name: "Home",
             targets: ["Home"]),
         .library(
-            name: "Repositry",
-            targets: ["Repositry"]),
-        .library(
             name: "ViewComponents",
             targets: ["ViewComponents"]),
         .library(
@@ -70,14 +67,6 @@ let package = Package(
                            "WorldMapFeature",
                            "HapticsFeature",
                            "MetalLibraryLoader"]),
-        .target(
-            name: "Repositry",
-            dependencies: [
-                .product(name: "ComposableArchitecture",
-                         package: "swift-composable-architecture"),
-                .product(name: "FirebaseFirestore",
-                         package: "Firebase")
-            ]),
         .target(
             name: "ViewComponents",
             dependencies: []),
