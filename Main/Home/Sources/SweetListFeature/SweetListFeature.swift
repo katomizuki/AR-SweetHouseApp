@@ -11,14 +11,10 @@ import SwiftUI
 import SweetDetailFeature
 import FirebaseClient
 
-let list = [Sweet(name: "a", thumbnail: "apple.logo", description: "説明"),
-              Sweet(name: "b", thumbnail: "apple.logo", description: "説明"),
-              Sweet(name: "c", thumbnail: "apple.logo", description: "説明")]
-
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets = Sweets(list: list)
+        var sweets = Sweets(list: [])
         var detailState = SweetDetailFeature.State()
         var alert: AlertState<Action>?
         public init() { }
