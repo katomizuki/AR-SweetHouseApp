@@ -15,7 +15,7 @@ public struct SweetListView: View {
     @Environment(\.dismiss) var dismiss
     
     public var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationView(content: {
                 HStack(content: {
                     List(content: {
