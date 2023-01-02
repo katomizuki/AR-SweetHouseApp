@@ -25,13 +25,16 @@ public struct SweetListFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
-        case showFailedAlert
         case detailAction(SweetDetailFeature.Action)
-        case changeSweets(sweets: Sweets)
+        case sweetResponse(TaskResult<Sweets>)
         case dismissAlert
     }
     
     @Dependency(\.firebaseClient) var firebaseClient
+    
+    enum SweetId {
+        
+    }
     
     public init() { }
 
@@ -40,19 +43,15 @@ public struct SweetListFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 return .task {
-                    do {
-                        let sweets =  try await firebaseClient.fetchSweets()
-                        return .changeSweets(sweets: sweets)
-                    } catch {
-                        return .showFailedAlert
-                    }
+                    await .sweetResponse(TaskResult {
+                        try await firebaseClient.fetchSweets() })
                 }
+                .cancellable(id: SweetId.self)
             case .detailAction:
                 return .none
-            case .showFailedAlert:
+            case .sweetResponse(.failure):
                 state.alert = .init(title: .init("通信に失敗しました"))
-                return .none
-            case .changeSweets(let sweets):
+            case .sweetResponse(.success(let sweets)):
                 state.sweets = sweets
             case .dismissAlert:
                 state.alert = nil
