@@ -16,7 +16,7 @@ public struct SweetDetailFeature: ReducerProtocol {
         var isVerticleLook: Bool = true
         var rotationEffect: Double = 90
         var offset: CGFloat = .zero
-        var scene: SCNScene? = SCNScene(named: "yamatutudi.scn")
+        var scene: SCNScene?
         var alert: AlertState<Action>?
         public init() {
             
@@ -41,6 +41,7 @@ public struct SweetDetailFeature: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onAppear:
+            state.scene = ScnGenerator.generate(state.sweet.name)
             return .none
         case .onTapNavigationTrailingButton:
             state.isVerticleLook.toggle()
