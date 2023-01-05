@@ -66,7 +66,7 @@ let package = Package(
                            "HapticsFeature"]),
         .target(
             name: "ViewComponents",
-            dependencies: []),
+            dependencies: ["EntityModule"]),
         .target(
             name: "EntityModule",
             dependencies: [.product(name: "ComposableArchitecture",

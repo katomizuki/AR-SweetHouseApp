@@ -22,11 +22,11 @@ extension HapticsFeature: DependencyKey {
 }
 
 public struct HapticsFeature {
-    func supportedHaptics() -> Bool {
+    public func supportedHaptics() -> Bool {
         return CHHapticEngine.capabilitiesForHardware().supportsHaptics
     }
     
-    func eventHaptics() {
+    public func eventHaptics() {
         // CoreHapticsをする
         guard let  hapticEngine = try? CHHapticEngine() else { return }
         do {

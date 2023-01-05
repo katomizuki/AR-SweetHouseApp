@@ -6,9 +6,18 @@
 //
 
 
-enum ARSceneMode {
+public enum ARSceneMode: String, CaseIterable, Identifiable {
     case roomPlan
     case objectPutting
-    case stickTexture
+    public var description: String {
+        switch self {
+        case .roomPlan:
+            return "部屋のものをお菓子にみたてて遊んでみよう！"
+        case .objectPutting:
+            return "好きにお菓子を配置しよう!!"
+        }
+    }
+    
+    public var id: String { rawValue }
 }
 

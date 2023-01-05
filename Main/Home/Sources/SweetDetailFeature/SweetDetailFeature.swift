@@ -32,10 +32,6 @@ public struct SweetDetailFeature: ReducerProtocol {
         case dismissAlert
     }
     
-    public struct Environment {
-        public init() { }
-    }
-    
     public init() { }
     
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {

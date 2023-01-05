@@ -14,6 +14,7 @@ import ARKit
 import SwiftUI
 import HapticsFeature
 import RoomPlan
+import EntityModule
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
@@ -23,6 +24,7 @@ public struct HomeFeature: ReducerProtocol {
         var isSettingView: Bool = false
         var isPuttingView: Bool = false
         var canUseApp: Bool = false
+        var currentARSceneMode: ARSceneMode = .objectPutting
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
@@ -53,6 +55,7 @@ public struct HomeFeature: ReducerProtocol {
         case alertDismiss
         case showDontUseAppAlert
         case toggleCanUseApp
+        case completedConnectOtherApp
     }
     
     public init() {
@@ -60,6 +63,7 @@ public struct HomeFeature: ReducerProtocol {
     
    @Dependency(\.mainQueue) var mainQueue
    @Dependency(\.worldMap) var worldMapFeature
+   @Dependency(\.hapticsFeature) var hapticsFeature
     
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
@@ -98,6 +102,9 @@ public struct HomeFeature: ReducerProtocol {
                     }
                 }
             case .showCompleteAlert:
+                if hapticsFeature.supportedHaptics() {
+                    hapticsFeature.eventHaptics()
+                }
                 state.alert = .init(title: .init("AR世界の保存に成功しました"))
             case .showFailAlert:
                 state.alert = .init(title: .init("AR世界の保存に失敗しました"))
@@ -107,6 +114,10 @@ public struct HomeFeature: ReducerProtocol {
                 state.alert = .init(title: .init("iOS16以上かつLidarを搭載しているIPhone出ないとこのアプリは使用できません"))
             case .toggleCanUseApp:
                 state.canUseApp.toggle()
+            case .completedConnectOtherApp:
+                if hapticsFeature.supportedHaptics() {
+                    hapticsFeature.eventHaptics()
+                }
             default: return .none
             }
             return .none
