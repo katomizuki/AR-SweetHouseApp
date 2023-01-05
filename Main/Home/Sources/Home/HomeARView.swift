@@ -11,7 +11,6 @@ import CoachingOverlayFeature
 import Combine
 import RoomPlan
 import FocusEntity
-import MetalLibraryLoader
 import ComposableArchitecture
 
 final class HomeARView: ARView {
@@ -32,7 +31,6 @@ final class HomeARView: ARView {
         self.viewStore = ViewStore(store)
         super.init(frame: .zero)
         viewStore.send(.initialize)
-        //        setupPostProcessing()
         setupSessionDelegate()
         setupConfiguration()
         setupOverlayView()
@@ -54,15 +52,6 @@ final class HomeARView: ARView {
     private func setupRoomCaptureDelegate() {
         //        caputureSession.delegate = self
         //        caputureSession.run(configuration: .init())
-    }
-    
-    private func setupPostProcessing() {
-        renderCallbacks.postProcess = self.postProcess
-        renderCallbacks.prepareWithDevice = self.postProcessCallBack
-    }
-    
-    private func postProcessCallBack(device: MTLDevice) {
-        //        loadMetalShader()
     }
     
     private func setupTouchUpEvent() {
@@ -91,15 +80,6 @@ final class HomeARView: ARView {
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
-    }
-    
-    private func loadMetalShader() {
-        let suisai = viewStore.state.postProcessiingShader2
-        let toon = viewStore.state.postProcessingShader1
-    }
-    
-    private func postProcess(context: ARView.PostProcessContext) {
-        
     }
     
     private func setupConfiguration() {

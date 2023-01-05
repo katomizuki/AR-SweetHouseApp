@@ -34,8 +34,6 @@ public struct ARFeature: ReducerProtocol {
         }
     }
     
-    @Dependency(\.metalLoader) var metalLoader
-    
    public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onTouchARView:
@@ -44,10 +42,6 @@ public struct ARFeature: ReducerProtocol {
             state.arSession = arSession
         case .initialize:
             break
-//          let suisai = metalLoader.getPostProcessingShader(metalShaderName: .suisai)
-//          let toon = metalLoader.getPostProcessingShader(metalShaderName: .toon)
-//          state.postProcessingShader1 = suisai
-//          state.postProcessiingShader2 = toon
         case .showFailedAlert:
             state.alert = .init(title: .init("不明なエラーが発生しました"))
         case .dismissAlert:
