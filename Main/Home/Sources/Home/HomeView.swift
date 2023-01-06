@@ -17,7 +17,8 @@ public struct HomeView : View {
             ZStack(alignment: .top,
                    content: {
                 VStack(content: {
-                    CustomSegmentView().padding(.top, 30)
+                    CustomSegmentView(store: self.store)
+                        .padding(.top, 30)
                     ZStack(alignment: .bottom,
                            content: {
                             if viewStore.state.currentARSceneMode == .objectPutting {

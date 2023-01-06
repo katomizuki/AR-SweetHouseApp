@@ -56,6 +56,7 @@ public struct HomeFeature: ReducerProtocol {
         case showDontUseAppAlert
         case toggleCanUseApp
         case completedConnectOtherApp
+        case onTapSegment
     }
     
     public init() {
@@ -118,6 +119,8 @@ public struct HomeFeature: ReducerProtocol {
                 if hapticsFeature.supportedHaptics() {
                     hapticsFeature.eventHaptics()
                 }
+            case .onTapSegment:
+                state.currentARSceneMode = .objectPutting
             default: return .none
             }
             return .none
