@@ -10,7 +10,6 @@ import RealityKit
 import ARKit
 
 public struct ARFeature: ReducerProtocol {
-    public var function: MTLFunction?
     
     public enum Action: Equatable {
         case subscriveEvent(session: ARSession?)
@@ -23,8 +22,6 @@ public struct ARFeature: ReducerProtocol {
     public struct State: Equatable {
         var isSelectedModel = false
         var selectedModel: ModelEntity?
-        var postProcessingShader1: MTLFunction?
-        var postProcessiingShader2: MTLFunction?
         var arSession: ARSession?
         var alert: AlertState<Action>?
         

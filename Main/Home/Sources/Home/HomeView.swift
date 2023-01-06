@@ -24,7 +24,7 @@ public struct HomeView : View {
                             if viewStore.state.currentARSceneMode == .objectPutting {
                                 HomeARViewContainer(store: store)
                             } else {
-                                
+                                CustomARScnViewContainer(store: store)
                             }
                             HomeControlButtonsBarView(store: store)
                         })
