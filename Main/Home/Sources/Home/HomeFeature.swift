@@ -103,9 +103,12 @@ public struct HomeFeature: ReducerProtocol {
                     }
                 }
             case .showCompleteAlert:
+            #if targetEnvironment(simulator)
+            #else
                 if hapticsFeature.supportedHaptics() {
                     hapticsFeature.eventHaptics()
                 }
+            #endif
                 state.alert = .init(title: .init("AR世界の保存に成功しました"))
             case .showFailAlert:
                 state.alert = .init(title: .init("AR世界の保存に失敗しました"))
