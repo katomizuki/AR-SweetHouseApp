@@ -1,5 +1,5 @@
 ##### 主要技術 
-=> RealityKit/ARKit/Metal
+=> RealityKit/ARKit/SceneKit/
 ##### 主要ライブラリ　
 => The Composable Architecture/Firebase
 ##### CICD 
