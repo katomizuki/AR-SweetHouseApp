@@ -52,4 +52,13 @@ class HomeTests: XCTestCase {
             $0.alert = .init(title: .init("iOS16以上かつLidarを搭載しているIPhone出ないとこのアプリは使用できません"))
         }
     }
+    
+    func test_Segmentタップ時() {
+        let store = TestStore(initialState: HomeFeature.State(),
+                              reducer: HomeFeature())
+        store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
+        store.send(.onTapSegment) {
+            $0.currentARSceneMode = .roomPlan
+        }
+    }
 }
