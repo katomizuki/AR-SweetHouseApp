@@ -65,19 +65,35 @@ final class CustomARScnViewController: UIViewController {
     }
     
     private func removeObjectNodes(with room: CapturedRoom) {
-        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            viewStore.send(.removeRoomNode(roomNode))
+        }
     }
     
     private func changeObjectNodes(with room: CapturedRoom) {
-        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            
+        }
     }
     
     private func addObjectNodes(with room: CapturedRoom) {
-        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            viewStore.send(.addRoomNode(roomNode))
+        }
     }
     
     private func updateObjectNodes(with room: CapturedRoom) {
-        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            
+        }
     }
 }
 

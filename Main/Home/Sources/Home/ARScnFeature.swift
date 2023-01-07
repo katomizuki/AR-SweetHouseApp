@@ -11,11 +11,18 @@ public struct ARScnFeature: ReducerProtocol {
     public enum Action: Equatable {
         case showFailedAlert
         case dismissAlert
+        case addRoomNode(_ roomNode: RoomNode)
+        case removeRoomNode(_ roomNode: RoomNode)
+        case updateRoomNode(_ roomNode: RoomNode)
+        case changeRoomNode(_ roomNode: RoomNode)
+        public static func == (lhs: ARScnFeature.Action, rhs: ARScnFeature.Action) -> Bool {
+            return true
+        }
     }
     
     public struct State: Equatable {
         var alert: AlertState<Action>?
-        var roomNodes: [RoomNode] = []
+        var roomNodes: Set<RoomNode> = []
         public static func == (lhs: ARScnFeature.State, rhs: ARScnFeature.State) -> Bool {
            return true
         }
@@ -27,6 +34,14 @@ public struct ARScnFeature: ReducerProtocol {
             state.alert = .init(title: .init("不明なエラーが発生しました"))
         case .dismissAlert:
             state.alert = nil
+        case .addRoomNode(let roomNode):
+            state.roomNodes.insert(roomNode)
+        case .removeRoomNode(let roomNode):
+            state.roomNodes.remove(roomNode)
+        case .changeRoomNode(let roomNode):
+            break
+        case .updateRoomNode(let roomNode):
+            break
         }
         return .none
     }

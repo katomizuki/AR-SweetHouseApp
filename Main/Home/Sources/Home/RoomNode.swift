@@ -8,12 +8,23 @@
 import SceneKit
 import RoomPlan
 
-final class RoomNode {
+public final class RoomNode: Hashable, Equatable {
+   
     private var boxNode: SCNNode = SCNNode()
     private let roomObject: RoomObjectAnchor
+    private let uuid: String
     
-    init(roomObject: RoomObjectAnchor) {
+    init(roomObject: RoomObjectAnchor,uuid: String) {
         self.roomObject = roomObject
+        self.uuid = uuid
+    }
+
+    public static func == (lhs: RoomNode, rhs: RoomNode) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
     }
 }
 extension RoomNode {
