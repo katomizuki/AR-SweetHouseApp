@@ -4,6 +4,21 @@ import ComposableArchitecture
 
 class HomeTests: XCTestCase {
     let scheduler = DispatchQueue.test
+    
+    func test_起動時() {
+        let store = TestStore(initialState: HomeFeature.State(),
+                            reducer: HomeFeature())
+        XCTAssertFalse(store.state.isSweetListView)
+        XCTAssertFalse(store.state.isPuttingView)
+        XCTAssertFalse(store.state.isSettingView)
+        XCTAssertFalse(store.state.canUseApp)
+        XCTAssertNil(store.state.alert)
+        XCTAssertNotNil(store.state.arScnState)
+        XCTAssertNotNil(store.state.puttingState)
+        XCTAssertNotNil(store.state.settingState)
+        XCTAssertNotNil(store.state.arViewState)
+        XCTAssertEqual(store.state.currentARSceneMode, .objectPutting)
+    }
     func test_画面表示時() {
         let store = TestStore(initialState: HomeFeature.State(),
                             reducer: HomeFeature())

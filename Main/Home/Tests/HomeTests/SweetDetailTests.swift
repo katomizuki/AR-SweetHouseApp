@@ -39,4 +39,16 @@ final class SweetDetailTests: XCTestCase {
             $0.isVerticleLook = false
         }
     }
+    
+    func test_エラー時() {
+        let store = TestStore(initialState: SweetDetailFeature.State(),
+                            reducer: SweetDetailFeature())
+        store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
+        store.send(.showFailedAlert) {
+            $0.alert = .init(title: .init("不明なエラーが発生しました"))
+        }
+        store.send(.dismissAlert) {
+            $0.alert = nil
+        }
+    }
 }

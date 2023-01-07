@@ -10,11 +10,11 @@ import ComposableArchitecture
 @testable import SweetListFeature
 
 final class SweetListTests: XCTestCase {
-    
-//    func test_起動時() {
-//        let store = TestStore(initialState: SweetListFeature.State(),
-//                            reducer: SweetListFeature())
-//        store.send(.onAppear)
-//        XCTAssertNotEqual(store.state.sweets.count, 0)
-//    }
+    let scheduler = DispatchQueue.test
+    func test_起動時() {
+        let store = TestStore(initialState: SweetListFeature.State(),
+                            reducer: SweetListFeature())
+        XCTAssertNil(store.state.alert)
+        XCTAssertNotNil(store.state.detailState)
+    }
 }

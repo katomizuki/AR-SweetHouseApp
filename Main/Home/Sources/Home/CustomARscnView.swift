@@ -26,6 +26,7 @@ final class CustomARScnViewController: UIViewController {
         self.viewStore = ViewStore(store)
         super.init(nibName: nil, bundle: nil)
         setUp()
+        setupRoomCaptureDelegate()
     }
     
     private func setUp() {
@@ -39,10 +40,13 @@ final class CustomARScnViewController: UIViewController {
         ])
         
         sceneView.delegate = self
+        sceneView.scene = SCNScene()
+        sceneView.automaticallyUpdatesLighting = true
         sceneView.autoenablesDefaultLighting = true
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
         sceneView.session.run(configuration)
+        
     }
     
     required init?(coder: NSCoder) {
@@ -51,29 +55,49 @@ final class CustomARScnViewController: UIViewController {
     
     private func setupRoomCaptureDelegate() {
         caputureSession.delegate = self
-        caputureSession.run(configuration: .init())
+        var config = RoomCaptureSession.Configuration()
+        config.isCoachingEnabled = true
+        caputureSession.run(configuration: config)
+    }
+    
+    private func stopCaptureSession() {
+        caputureSession.stop()
+    }
+    
+    private func removeObjectNodes(with room: CapturedRoom) {
+        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+    }
+    
+    private func changeObjectNodes(with room: CapturedRoom) {
+        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+    }
+    
+    private func addObjectNodes(with room: CapturedRoom) {
+        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
+    }
+    
+    private func updateObjectNodes(with room: CapturedRoom) {
+        let roomObject = room.objects.compactMap({ RoomObjectAnchor($0) })
     }
 }
 
 extension CustomARScnViewController: ARSCNViewDelegate {
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        
-    }
-
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-        
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        viewStore.state.roomNodes.forEach({
+            $0.updateAt(time: time)
+        })
     }
 }
 
 extension CustomARScnViewController: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
-        let roomObjectAnchors = room.objects.map { RoomObjectAnchor($0) }
-        //        roomObjectAnchors[0]
-        
+        print(#function)
+        self.addObjectNodes(with: room)
     }
     
     func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
-        
+        print(#function)
+        self.removeObjectNodes(with: room)
     }
     
     func captureSession(_ session: RoomCaptureSession, didProvide instruction: RoomCaptureSession.Instruction) {
@@ -81,15 +105,18 @@ extension CustomARScnViewController: RoomCaptureSessionDelegate {
     }
     
     func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
-        
+        print(#function)
+        self.updateObjectNodes(with: room)
     }
     
     func captureSession(_ session: RoomCaptureSession, didChange room: CapturedRoom) {
-        
+        print(#function)
+        self.changeObjectNodes(with: room)
     }
     
     func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
         print(#function)
+        sceneView.session = session.arSession
     }
     
     func captureSession(_ session: RoomCaptureSession, didEndWith data: CapturedRoomData, error: Error?) {

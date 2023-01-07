@@ -15,6 +15,10 @@ public struct ARScnFeature: ReducerProtocol {
     
     public struct State: Equatable {
         var alert: AlertState<Action>?
+        var roomNodes: [RoomNode] = []
+        public static func == (lhs: ARScnFeature.State, rhs: ARScnFeature.State) -> Bool {
+           return true
+        }
     }
     
    public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {

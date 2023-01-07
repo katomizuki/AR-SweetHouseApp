@@ -11,9 +11,9 @@ import RealityKit
 
 final class RoomObjectAnchor: ARAnchor {
     
-    private var roomObjTransform: simd_float4x4
-    private var dimensions: simd_float3
-    private var category: CapturedRoom.Object.Category
+    private(set) var roomObjTransform: simd_float4x4
+    private(set)var dimensions: simd_float3
+    private(set) var category: CapturedRoom.Object.Category
     
     
     init(_ object: CapturedRoom.Object) {

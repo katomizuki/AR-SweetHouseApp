@@ -27,6 +27,7 @@ public struct SweetListFeature: ReducerProtocol {
         case onAppear
         case detailAction(SweetDetailFeature.Action)
         case sweetResponse(TaskResult<Sweets>)
+        case showFailedAlert
         case dismissAlert
     }
     
@@ -55,6 +56,8 @@ public struct SweetListFeature: ReducerProtocol {
             case .sweetResponse(.success(let sweets)):
                 state.sweets = sweets
                 return .none
+            case .showFailedAlert:
+                state.alert = .init(title: .init("不明なエラーが発生しました"))
             case .dismissAlert:
                 state.alert = nil
             }

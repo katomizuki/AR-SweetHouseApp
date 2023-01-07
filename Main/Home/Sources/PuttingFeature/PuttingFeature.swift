@@ -10,21 +10,14 @@ import ComposableArchitecture
 public struct PuttingFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        
         var alert: AlertState<Action>?
-        public init() {
-            
-        }
+        public init() { }
     }
     
     public enum Action: Equatable {
         case onAppear
         case showFailedAlert
         case dismissAlert
-    }
-    
-    public struct Environment {
-        public init() { }
     }
     
     public init() { }
