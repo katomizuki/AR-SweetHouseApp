@@ -23,6 +23,15 @@ final class RoomObjectAnchor: ARAnchor {
         super.init(transform: object.transform)
     }
     
+    init(roomObjTransform: simd_float4x4,
+         dimensions: simd_float3,
+         category: CapturedRoom.Object.Category) {
+        self.roomObjTransform = roomObjTransform
+        self.dimensions = dimensions
+        self.category = category
+        super.init(transform: roomObjTransform)
+    }
+    
     required init(anchor: ARAnchor) {
         fatalError("init(anchor:) has not been implemented")
     }
