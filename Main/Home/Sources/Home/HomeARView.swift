@@ -17,13 +17,6 @@ final class HomeARView: ARView {
     
     private var cancellable: Cancellable?
     private let viewStore: ViewStoreOf<ARFeature>
-    private let meshHelper = MeshHelper()
-    private lazy var caputureSession: RoomCaptureSession = {
-        let captureSession = RoomCaptureSession()
-        session = captureSession.arSession
-        return captureSession
-    }()
-    private let roomBuilder = RoomBuilder(options: [.beautifyObjects])
     var focusEntity: FocusEntity?
     private let device: MTLDevice = MTLCreateSystemDefaultDevice()!
     
@@ -37,7 +30,6 @@ final class HomeARView: ARView {
         setupSubscribeARScene()
         setupFocusEntity()
         setupTouchUpEvent()
-        setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
@@ -47,11 +39,6 @@ final class HomeARView: ARView {
     private func setupFocusEntity() {
         self.focusEntity = FocusEntity(on: self,style: .classic(color: .orange))
         self.focusEntity?.delegate = self
-    }
-    
-    private func setupRoomCaptureDelegate() {
-        //        caputureSession.delegate = self
-        //        caputureSession.run(configuration: .init())
     }
     
     private func setupTouchUpEvent() {
@@ -179,47 +166,6 @@ extension HomeARView: ARSessionDelegate {
         
     }
 }
-extension HomeARView: RoomCaptureSessionDelegate {
-    func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
-        let roomObjectAnchors = room.objects.map { RoomObjectAnchor($0) }
-        //        roomObjectAnchors[0]
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didProvide instruction: RoomCaptureSession.Instruction) {
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didChange room: CapturedRoom) {
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
-        print(#function)
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didEndWith data: CapturedRoomData, error: Error?) {
-        if error != nil {
-            viewStore.send(.showFailedAlert)
-            return
-        }
-        Task {
-            do {
-                let finalRoom = try await roomBuilder.capturedRoom(from: data)
-            } catch {
-                viewStore.send(.showFailedAlert)
-            }
-        }
-    }
-}
 
 extension HomeARView: FocusEntityDelegate {
     func toTrackingState() {
@@ -247,26 +193,3 @@ extension ARMeshGeometry {
         return ARMeshClassification(rawValue: classificationValue) ?? .none
     }
 }
-//        if anchors.isEmpty { return }
-//
-//        guard let meshAnchor = anchors.map({ $0 as? ARMeshAnchor }).last else { return }
-//        guard let meshAnchor = meshAnchor else { return }
-//        let geometry = meshAnchor.geometry
-//        let verticesSource = geometry.vertices
-//        let faces = geometry.faces
-//        let normalsSource = geometry.normals
-//        var positions = [SIMD3<Float>]()
-//        var normals = [SIMD3<Float>]()
-//        var indices = [UInt32]()
-//        for index in 0..<faces.count {
-//            let vertex = meshHelper.vertex(at: UInt32(index), vertices: verticesSource)
-//            let normal = meshHelper.normal(at: UInt32(index), normals: normalsSource)
-//            positions.append(vertex)
-//            normals.append(normal)
-//            indices.append(UInt32(index))
-//        }
-//        // 0, 1, 2, 2, 3, 0
-//        guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
-//        let anchorEntity = AnchorEntity(world: meshAnchor.transform)
-//        anchorEntity.addChild(mesh)
-//        scene.anchors.append(anchorEntity)
