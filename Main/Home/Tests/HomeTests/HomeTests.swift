@@ -13,7 +13,6 @@ class HomeTests: XCTestCase {
         XCTAssertFalse(store.state.isSettingView)
         XCTAssertFalse(store.state.canUseApp)
         XCTAssertNil(store.state.alert)
-        XCTAssertNotNil(store.state.arScnState)
         XCTAssertNotNil(store.state.puttingState)
         XCTAssertNotNil(store.state.settingState)
         XCTAssertNotNil(store.state.arViewState)
