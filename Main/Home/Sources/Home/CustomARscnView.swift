@@ -69,14 +69,7 @@ final class CustomARScnViewController: UIViewController {
             let roomObject = RoomObjectAnchor($0)
             let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
             viewStore.send(.removeRoomNode(roomNode))
-        }
-    }
-    
-    private func changeObjectNodes(with room: CapturedRoom) {
-        room.objects.forEach {
-            let roomObject = RoomObjectAnchor($0)
-            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
-            
+            roomNode.boxNode.removeFromParentNode()
         }
     }
     
@@ -85,23 +78,15 @@ final class CustomARScnViewController: UIViewController {
             let roomObject = RoomObjectAnchor($0)
             let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
             viewStore.send(.addRoomNode(roomNode))
+            roomNode.updateAt()
+            sceneView.scene.rootNode.addChildNode(roomNode.boxNode)
         }
     }
     
-    private func updateObjectNodes(with room: CapturedRoom) {
-        room.objects.forEach {
-            let roomObject = RoomObjectAnchor($0)
-            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
-            
-        }
-    }
 }
 
 extension CustomARScnViewController: ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        viewStore.state.roomNodes.forEach({
-            $0.updateAt(time: time)
-        })
     }
 }
 
@@ -114,20 +99,6 @@ extension CustomARScnViewController: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
         print(#function)
         self.removeObjectNodes(with: room)
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didProvide instruction: RoomCaptureSession.Instruction) {
-        
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
-        print(#function)
-        self.updateObjectNodes(with: room)
-    }
-    
-    func captureSession(_ session: RoomCaptureSession, didChange room: CapturedRoom) {
-        print(#function)
-        self.changeObjectNodes(with: room)
     }
     
     func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {

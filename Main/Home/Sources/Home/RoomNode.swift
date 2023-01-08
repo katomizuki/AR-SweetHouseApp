@@ -10,9 +10,9 @@ import RoomPlan
 
 public final class RoomNode: Hashable, Equatable {
    
-    private var boxNode: SCNNode = SCNNode()
-    private let roomObject: RoomObjectAnchor
-    private let uuid: String
+    var boxNode: SCNNode = SCNNode()
+    let roomObject: RoomObjectAnchor
+    let uuid: String
     
     init(roomObject: RoomObjectAnchor,uuid: String) {
         self.roomObject = roomObject
@@ -28,7 +28,7 @@ public final class RoomNode: Hashable, Equatable {
     }
 }
 extension RoomNode {
-    func updateAt(time: TimeInterval) {
+    func updateAt() {
         update(with: roomObject.dimensions, category: roomObject.category)
         boxNode.simdTransform = roomObject.transform
     }
@@ -38,9 +38,26 @@ extension RoomNode {
         let width = CGFloat(dimensions.x)
         let height = CGFloat(dimensions.y)
         let length = CGFloat(dimensions.z)
-        let boxColor = UIColor.green
         let boxGeometry = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
-        boxGeometry.firstMaterial?.diffuse.contents = boxColor
+        let material = SCNMaterial()
+        switch roomObject.category {
+        case .storage:
+            material.diffuse.contents = UIImage(named: "cookie")
+        case .television:
+            material.diffuse.contents = UIImage(named: "chocolate")
+        case .refrigerator:
+            material.diffuse.contents = UIImage(named: "candy")
+        case .bed:
+            material.diffuse.contents = UIImage(named: "chocolate")
+        case .table:
+            material.diffuse.contents = UIImage(named: "whitechocolate")
+        case .sofa:
+            material.diffuse.contents = UIImage(named: "candy")
+        default: break
+        }
+        
+        boxGeometry.firstMaterial? = material
+        boxNode.opacity = 1.0
         boxNode.geometry = boxGeometry
     }
 }

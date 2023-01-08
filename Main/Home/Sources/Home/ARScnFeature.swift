@@ -13,8 +13,6 @@ public struct ARScnFeature: ReducerProtocol {
         case dismissAlert
         case addRoomNode(_ roomNode: RoomNode)
         case removeRoomNode(_ roomNode: RoomNode)
-        case updateRoomNode(_ roomNode: RoomNode)
-        case changeRoomNode(_ roomNode: RoomNode)
         public static func == (lhs: ARScnFeature.Action, rhs: ARScnFeature.Action) -> Bool {
             return true
         }
@@ -38,10 +36,6 @@ public struct ARScnFeature: ReducerProtocol {
             state.roomNodes.insert(roomNode)
         case .removeRoomNode(let roomNode):
             state.roomNodes.remove(roomNode)
-        case .changeRoomNode(let roomNode):
-            break
-        case .updateRoomNode(let roomNode):
-            break
         }
         return .none
     }
