@@ -18,7 +18,11 @@ final class HomeARView: ARView {
     private var cancellable: Cancellable?
     private let viewStore: ViewStoreOf<ARFeature>
     var focusEntity: FocusEntity?
-    private let device: MTLDevice = MTLCreateSystemDefaultDevice()!
+    private lazy var caputureSession: RoomCaptureSession = {
+        let captureSession = RoomCaptureSession()
+        session = captureSession.arSession
+        return captureSession
+    }()
     
     required init(store: StoreOf<ARFeature>) {
         self.viewStore = ViewStore(store)
@@ -30,6 +34,7 @@ final class HomeARView: ARView {
         setupSubscribeARScene()
         setupFocusEntity()
         setupTouchUpEvent()
+        setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
@@ -38,7 +43,6 @@ final class HomeARView: ARView {
     
     private func setupFocusEntity() {
         self.focusEntity = FocusEntity(on: self,style: .classic(color: .orange))
-        self.focusEntity?.delegate = self
     }
     
     private func setupTouchUpEvent() {
@@ -73,6 +77,7 @@ final class HomeARView: ARView {
         let configuration = ARWorldTrackingConfiguration()
         if ARWorldTrackingConfiguration.supportsSceneReconstruction(.meshWithClassification) && ARWorldTrackingConfiguration.supportsFrameSemantics(.sceneDepth) {
             configuration.sceneReconstruction = [.meshWithClassification]
+            configuration.frameSemantics = [.sceneDepth]
             configuration.planeDetection = [.horizontal, .vertical]
         }
         session.run(configuration)
@@ -81,6 +86,13 @@ final class HomeARView: ARView {
     private func setupOverlayView() {
         let overlayFeature = CoachingOverlayFeature(session: session)
         overlayFeature.setupOverlayView(view: self)
+    }
+    
+    private func setupRoomCaptureDelegate() {
+        caputureSession.delegate = self
+        var config = RoomCaptureSession.Configuration()
+        config.isCoachingEnabled = true
+        caputureSession.run(configuration: config)
     }
     
     @MainActor required dynamic init?(coder decoder: NSCoder) {
@@ -97,41 +109,82 @@ final class HomeARView: ARView {
         }
     }
     
+    private func removeObjectNodes(with room: CapturedRoom) {
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            scene.removeAnchor(roomNode.anchorEntity)
+        }
+        room.doors.forEach {
+            let roomDoor = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomDoor, uuid: $0.identifier.uuidString)
+            scene.removeAnchor(roomNode.anchorEntity)
+        }
+        room.openings.forEach {
+            let roomOpenings = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomOpenings, uuid: $0.identifier.uuidString)
+            scene.removeAnchor(roomNode.anchorEntity)
+        }
+        room.windows.forEach {
+            let roomWindow = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomWindow, uuid: $0.identifier.uuidString)
+            scene.removeAnchor(roomNode.anchorEntity)
+        }
+        room.walls.forEach {
+            let roomWall = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomWall, uuid: $0.identifier.uuidString)
+            scene.removeAnchor(roomNode.anchorEntity)
+        }
+    }
     
+    private func stopCaptureSession() {
+        caputureSession.stop()
+    }
     
+    private func addObjectNodes(with room: CapturedRoom) {
+        room.objects.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            roomNode.updateObject()
+            scene.anchors.append(roomNode.anchorEntity)
+        }
+        room.walls.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+//            roomNode.updateSurface()
+            scene.anchors.append(roomNode.anchorEntity)
+        }
+        room.doors.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            roomNode.updateSurface()
+            scene.anchors.append(roomNode.anchorEntity)
+        }
+        room.openings.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            roomNode.updateSurface()
+            scene.anchors.append(roomNode.anchorEntity)
+        }
+        room.windows.forEach {
+            let roomObject = RoomObjectAnchor($0)
+            let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
+            roomNode.updateSurface()
+            scene.anchors.append(roomNode.anchorEntity)
+        }
+    }
 }
 
 extension HomeARView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-        
-    }
-    
-    private func makeMesh(normals: [SIMD3<Float>],
-                          positions: [SIMD3<Float>],
-                          indices:[UInt32]) -> ModelEntity? {
-        var descriptor = MeshDescriptor(name: "mesh")
-        descriptor.positions = MeshBuffer(positions)
-        descriptor.normals = MeshBuffer(normals)
-        descriptor.primitives = .triangles(indices)
-        let material: Material = SimpleMaterial(color: .red, isMetallic: false)
-        do {
-            let mesh = try MeshResource.generate(from: [descriptor])
-            return ModelEntity(mesh: mesh, materials: [material])
-        } catch {
-            return nil
-        }
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
-        
     }
     
     func session(_ session: ARSession, didRemove anchors: [ARAnchor]) {
-        
     }
     func session(_ session: ARSession, didUpdate anchors: [ARAnchor]) {
-
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
@@ -139,11 +192,9 @@ extension HomeARView: ARSessionDelegate {
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
-        
     }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
-        
     }
     
     func sessionShouldAttemptRelocalization(_ session: ARSession) -> Bool {
@@ -151,45 +202,33 @@ extension HomeARView: ARSessionDelegate {
     }
     
     func sessionInterruptionEnded(_ session: ARSession) {
-        
     }
     
     func session(_ session: ARSession, didOutputAudioSampleBuffer audioSampleBuffer: CMSampleBuffer) {
-        
     }
     
     func session(_ session: ARSession, didChange geoTrackingStatus: ARGeoTrackingStatus) {
-        
     }
     
     func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
-        
     }
 }
 
-extension HomeARView: FocusEntityDelegate {
-    func toTrackingState() {
-        
+extension HomeARView: RoomCaptureSessionDelegate {
+    
+    func captureSession(_ session: RoomCaptureSession, didAdd room: CapturedRoom) {
+        print(#function)
+        self.addObjectNodes(with: room)
     }
     
-    func toInitializingState() {
-        
+    func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
+        print(#function)
+        self.removeObjectNodes(with: room)
     }
     
-    private func focusEntity(_ focusEntity: FocusEntity.State, trackingUpdated trackingState: FocusEntity.State, oldState: FocusEntity.State) {
-        
-    }
-    
-    func focusEntity(_ focusEntity: FocusEntity, planeChanged: ARPlaneAnchor?, oldPlane: ARPlaneAnchor?) {
-        
+    func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
+        print(#function)
+        self.session = session.arSession
     }
 }
 
-extension ARMeshGeometry {
-    func classificationOf(index: Int) -> ARMeshClassification {
-        guard let classification = classification else  { return .none }
-        let classificationPointer = classification.buffer.contents().advanced(by: classification.offset + (classification.stride * index))
-        let classificationValue = Int(classificationPointer.assumingMemoryBound(to: CUnsignedChar.self).pointee)
-        return ARMeshClassification(rawValue: classificationValue) ?? .none
-    }
-}

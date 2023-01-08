@@ -18,11 +18,7 @@ public struct HomeView : View {
                    content: {
                 ZStack(alignment: .top,
                        content: {
-                    if viewStore.state.currentARSceneMode == .objectPutting {
                         HomeARViewContainer(store: store)
-                        } else {
-                            CustomARScnViewContainer(store: store)
-                        }
                         CustomSegmentView(store: self.store)
                             .padding(.top, 70)
                             .frame(width: 300)

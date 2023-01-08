@@ -28,7 +28,6 @@ public struct HomeFeature: ReducerProtocol {
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
-        var arScnState = ARScnFeature.State()
         var arViewState: ARFeature.State {
             get {
                 ARFeature.State()
@@ -49,7 +48,6 @@ public struct HomeFeature: ReducerProtocol {
         case putting(PuttingFeature.Action)
         case setting(SettingFeature.Action)
         case arView(ARFeature.Action)
-        case arScn(ARScnFeature.Action)
         case writeARWorldMap(_ worldMap: ARWorldMap)
         case onTapSaveWorldMapButton
         case showCompleteAlert
@@ -150,10 +148,5 @@ public struct HomeFeature: ReducerProtocol {
         Scope(state: \.arViewState, action: /Action.arView) {
             ARFeature()
         }
-        
-        Scope(state: \.arScnState, action: /Action.arScn) {
-            ARScnFeature()
-        }
-        
     }
 }

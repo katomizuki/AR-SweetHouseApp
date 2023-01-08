@@ -8,6 +8,7 @@
 import ARKit
 import SwiftUI
 import UIKit
+import RealityKit
 
 final class MeshHelper {
     func getTextureImage(frame: ARFrame) -> Image? {
@@ -67,6 +68,30 @@ final class MeshHelper {
                    }
                    return textureCoordinates
         }
+    
+//    private func makeMesh(normals: [SIMD3<Float>],
+//                          positions: [SIMD3<Float>],
+//                          indices:[UInt32]) -> ModelEntity? {
+//        var descriptor = MeshDescriptor(name: "mesh")
+//        descriptor.positions = MeshBuffer(positions)
+//        descriptor.normals = MeshBuffer(normals)
+//        descriptor.primitives = .triangles(indices)
+//        let material = SimpleMaterial(color: .red, isMetallic: false)
+//        do {
+//            let mesh = try MeshResource.generate(from: [descriptor])
+//            return ModelEntity(mesh: mesh, materials: [material])
+//        } catch {
+//            return nil
+//        }
+//    }
+}
+extension ARMeshGeometry {
+    func classificationOf(index: Int) -> ARMeshClassification {
+        guard let classification = classification else  { return .none }
+        let classificationPointer = classification.buffer.contents().advanced(by: classification.offset + (classification.stride * index))
+        let classificationValue = Int(classificationPointer.assumingMemoryBound(to: CUnsignedChar.self).pointee)
+        return ARMeshClassification(rawValue: classificationValue) ?? .none
+    }
 }
 
 //        if anchors.isEmpty { return }

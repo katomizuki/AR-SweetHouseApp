@@ -5,12 +5,13 @@
 //  Created by ミズキ on 2023/01/07.
 //
 
-import SceneKit
 import RoomPlan
+import RealityKit
+import ARKit
 
 public final class RoomNode: Hashable, Equatable {
    
-    var boxNode: SCNNode = SCNNode()
+    var anchorEntity = AnchorEntity()
     let roomObject: RoomObjectAnchor
     let uuid: String
     
@@ -28,37 +29,60 @@ public final class RoomNode: Hashable, Equatable {
     }
 }
 extension RoomNode {
-    func updateAt() {
+    func updateObject() {
         update(with: roomObject.dimensions, category: roomObject.category)
-        boxNode.simdTransform = roomObject.transform
+        anchorEntity.transform = Transform(matrix: roomObject.transform)
+    }
+    
+    func updateSurface() {
+        update(with: roomObject.dimensions, surface: roomObject.surfaceCategory)
+        anchorEntity.transform = Transform(matrix: roomObject.transform)
+    }
+    
+    func update(with dimensions: simd_float3, surface: CapturedRoom.Surface.Category) {
+        DispatchQueue.main.async {
+            let mesh = MeshResource.generateBox(size: dimensions)
+            var material = SimpleMaterial()
+            switch surface {
+            case .wall:
+                material.color.texture = .init(self.makeTexture(name: "cookie"))
+            case .opening:
+                material.color.texture = .init(self.makeTexture(name: "whitechocolate"))
+            case .window:
+                material.color.texture = .init(self.makeTexture(name: "chocolate"))
+            case .door(_):
+                material.color.texture = .init(self.makeTexture(name: "candy"))
+            @unknown default:
+                fatalError()
+            }
+            self.anchorEntity.addChild(ModelEntity(mesh: mesh,materials: [material]))
+        }
+    }
+    
+    private func makeTexture(name: String) -> TextureResource {
+        return try! TextureResource.load(named: name)
     }
 
     func update(with dimensions: simd_float3,
                 category: CapturedRoom.Object.Category?) {
-        let width = CGFloat(dimensions.x)
-        let height = CGFloat(dimensions.y)
-        let length = CGFloat(dimensions.z)
-        let boxGeometry = SCNBox(width: width, height: height, length: length, chamferRadius: 0)
-        let material = SCNMaterial()
-        switch roomObject.category {
-        case .storage:
-            material.diffuse.contents = UIImage(named: "cookie")
-        case .television:
-            material.diffuse.contents = UIImage(named: "chocolate")
-        case .refrigerator:
-            material.diffuse.contents = UIImage(named: "candy")
-        case .bed:
-            material.diffuse.contents = UIImage(named: "chocolate")
-        case .table:
-            material.diffuse.contents = UIImage(named: "whitechocolate")
-        case .sofa:
-            material.diffuse.contents = UIImage(named: "candy")
-        default: break
+        DispatchQueue.main.async {
+            let mesh = MeshResource.generateBox(size: dimensions)
+            var material = SimpleMaterial()
+            switch self.roomObject.category {
+            case .storage:
+                material.color.texture = .init(self.makeTexture(name: "cookie"))
+            case .television:
+                material.color.texture = .init(self.makeTexture(name: "chocolate"))
+            case .refrigerator:
+                material.color.texture = .init(self.makeTexture(name: "candy"))
+            case .bed:
+                material.color.texture = .init(self.makeTexture(name: "chocolate"))
+            case .table:
+                material.color.texture = .init(self.makeTexture(name: "whitechocolate"))
+            default: break
+            }
+            self.anchorEntity.addChild(ModelEntity(mesh: mesh,materials: [material]))
         }
-        
-        boxGeometry.firstMaterial? = material
-        boxNode.opacity = 1.0
-        boxNode.geometry = boxGeometry
     }
 }
 

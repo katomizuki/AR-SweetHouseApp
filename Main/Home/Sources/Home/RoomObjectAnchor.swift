@@ -12,8 +12,9 @@ import RealityKit
 final class RoomObjectAnchor: ARAnchor {
     
     private(set) var roomObjTransform: simd_float4x4
-    private(set)var dimensions: simd_float3
-    private(set) var category: CapturedRoom.Object.Category
+    private(set) var dimensions: simd_float3
+    private(set) var category: CapturedRoom.Object.Category!
+    private(set) var surfaceCategory: CapturedRoom.Surface.Category!
     
     
     init(_ object: CapturedRoom.Object) {
@@ -21,6 +22,13 @@ final class RoomObjectAnchor: ARAnchor {
         self.dimensions = object.dimensions
         self.category = object.category
         super.init(transform: object.transform)
+    }
+    
+    init(_ surface: CapturedRoom.Surface) {
+        self.roomObjTransform = surface.transform
+        self.dimensions = surface.dimensions
+        self.surfaceCategory = surface.category
+        super.init(transform: surface.transform)
     }
     
     init(roomObjTransform: simd_float4x4,
