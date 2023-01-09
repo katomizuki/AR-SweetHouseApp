@@ -18,6 +18,7 @@ import EntityModule
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
+    private static var roomSession: RoomCaptureSession?
     
     public struct State: Equatable {
         var isSweetListView: Bool = false
@@ -32,6 +33,7 @@ public struct HomeFeature: ReducerProtocol {
             get {
                 ARFeature.State()
             } set {
+                HomeFeature.roomSession = newValue.roomSession
                 HomeFeature.arSession = newValue.arSession
             }
         }
@@ -127,6 +129,7 @@ public struct HomeFeature: ReducerProtocol {
                     state.currentARSceneMode = .roomPlan
                 } else {
                     state.currentARSceneMode = .objectPutting
+                    Self.roomSession?.stop()
                 }
             default: return .none
             }

@@ -20,7 +20,6 @@ final class HomeARView: ARView {
     var focusEntity: FocusEntity?
     private lazy var caputureSession: RoomCaptureSession = {
         let captureSession = RoomCaptureSession()
-        session = captureSession.arSession
         return captureSession
     }()
     
@@ -105,7 +104,8 @@ final class HomeARView: ARView {
     
     func setupSubscribeARScene() {
         self.cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
-            self?.viewStore.send(.subscriveEvent(session: self?.session))
+            self?.viewStore.send(.subscriveEvent(session: self?.session,
+                                                 roomSession: self?.caputureSession))
         }
     }
     

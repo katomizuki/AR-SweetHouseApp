@@ -8,23 +8,27 @@
 import ComposableArchitecture
 import RealityKit
 import ARKit
+import RoomPlan
 
 public struct ARFeature: ReducerProtocol {
     
     public enum Action: Equatable {
-        case subscriveEvent(session: ARSession?)
+        case subscriveEvent(session: ARSession?, roomSession: RoomCaptureSession?)
         case onTouchARView
         case initialize
         case showFailedAlert
         case dismissAlert
+        public static func == (lhs: ARFeature.Action, rhs: ARFeature.Action) -> Bool {
+            return true
+        }
     }
     
     public struct State: Equatable {
         var isSelectedModel = false
         var selectedModel: ModelEntity?
         var arSession: ARSession?
+        var roomSession: RoomCaptureSession?
         var alert: AlertState<Action>?
-        
         
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
             return true
@@ -35,8 +39,9 @@ public struct ARFeature: ReducerProtocol {
         switch action {
         case .onTouchARView:
             state.isSelectedModel = false
-        case .subscriveEvent(let arSession):
+        case .subscriveEvent(let arSession, let roomSession):
             state.arSession = arSession
+            state.roomSession = roomSession
         case .initialize:
             break
         case .showFailedAlert:
