@@ -12,6 +12,7 @@ import Combine
 import RoomPlan
 import FocusEntity
 import ComposableArchitecture
+import EntityModule
 
 final class HomeARView: ARView {
     
@@ -31,7 +32,9 @@ final class HomeARView: ARView {
         setupConfiguration()
         setupOverlayView()
         setupSubscribeARScene()
-        setupFocusEntity()
+        if UserSetting.sceneMode == .objectPutting {
+         setupFocusEntity()
+        }
         setupTouchUpEvent()
         setupRoomCaptureDelegate()
     }

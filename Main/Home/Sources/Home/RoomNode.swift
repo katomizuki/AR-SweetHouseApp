@@ -8,6 +8,7 @@
 import RoomPlan
 import RealityKit
 import ARKit
+import EntityModule
 
 public final class RoomNode: Hashable, Equatable {
    
@@ -30,6 +31,7 @@ public final class RoomNode: Hashable, Equatable {
 }
 extension RoomNode {
     func updateObject() {
+        if UserSetting.sceneMode == .objectPutting { return }
         update(with: roomObject.dimensions, category: roomObject.category)
         anchorEntity.transform = Transform(matrix: roomObject.transform)
     }

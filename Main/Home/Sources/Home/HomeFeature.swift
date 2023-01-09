@@ -107,7 +107,7 @@ public struct HomeFeature: ReducerProtocol {
             case .showCompleteAlert:
             #if targetEnvironment(simulator)
             #else
-                if hapticsFeature.supportedHaptics() {
+                if hapticsFeature.supportedHaptics(), UserSetting.isAllowHaptics {
                     hapticsFeature.eventHaptics()
                 }
             #endif
@@ -121,15 +121,16 @@ public struct HomeFeature: ReducerProtocol {
             case .toggleCanUseApp:
                 state.canUseApp.toggle()
             case .completedConnectOtherApp:
-                if hapticsFeature.supportedHaptics() {
+                if hapticsFeature.supportedHaptics(), UserSetting.isAllowHaptics {
                     hapticsFeature.eventHaptics()
                 }
             case .onTapSegment:
                 if state.currentARSceneMode == .objectPutting {
                     state.currentARSceneMode = .roomPlan
+                    UserSetting.sceneMode = .roomPlan
                 } else {
                     state.currentARSceneMode = .objectPutting
-                    Self.roomSession?.stop()
+                    UserSetting.sceneMode = .objectPutting
                 }
             default: return .none
             }

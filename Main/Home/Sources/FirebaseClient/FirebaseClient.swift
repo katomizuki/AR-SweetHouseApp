@@ -71,7 +71,8 @@ public final class FirebaseClient {
     }
     
     public func fetchUsdzModels(modelNames: [String]) async throws -> [ModelEntity] {
-        try await withThrowingTaskGroup(of: ModelEntity.self, body: { group in
+        try await withThrowingTaskGroup(of: ModelEntity.self,
+                                        body: { group in
             for name in modelNames {
                 group.addTask {
                     return try await self.fetchUsdzModel(name: name)

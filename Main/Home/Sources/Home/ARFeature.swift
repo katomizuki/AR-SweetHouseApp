@@ -9,6 +9,7 @@ import ComposableArchitecture
 import RealityKit
 import ARKit
 import RoomPlan
+import EntityModule
 
 public struct ARFeature: ReducerProtocol {
     
@@ -43,6 +44,7 @@ public struct ARFeature: ReducerProtocol {
             state.arSession = arSession
             state.roomSession = roomSession
         case .initialize:
+            state.selectedModel = UserSetting.selectedModel
             break
         case .showFailedAlert:
             state.alert = .init(title: .init("不明なエラーが発生しました"))
