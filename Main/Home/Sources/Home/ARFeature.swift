@@ -19,17 +19,21 @@ public struct ARFeature: ReducerProtocol {
         case initialize
         case showFailedAlert
         case dismissAlert
+        case completeAddAnchor
+        case disAppear
         public static func == (lhs: ARFeature.Action, rhs: ARFeature.Action) -> Bool {
             return true
         }
     }
     
+
     public struct State: Equatable {
         var isSelectedModel = false
         var selectedModel: ModelEntity?
         var arSession: ARSession?
         var roomSession: RoomCaptureSession?
         var alert: AlertState<Action>?
+        var addAnchorState = UserSetting.currentAnchorState
         
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
             return true
@@ -43,6 +47,10 @@ public struct ARFeature: ReducerProtocol {
         case .subscriveEvent(let arSession, let roomSession):
             state.arSession = arSession
             state.roomSession = roomSession
+            if UserSetting.sceneMode == .roomPlan,
+                state.addAnchorState != .finishAddAnchor {
+                UserSetting.currentAnchorState = .objToRoom
+            }
         case .initialize:
             state.selectedModel = UserSetting.selectedModel
             break
@@ -50,6 +58,11 @@ public struct ARFeature: ReducerProtocol {
             state.alert = .init(title: .init("不明なエラーが発生しました"))
         case .dismissAlert:
             state.alert = nil
+        case .completeAddAnchor:
+            state.addAnchorState = .finishAddAnchor
+            UserSetting.currentAnchorState = .finishAddAnchor
+        case .disAppear:
+            UserSetting.currentAnchorState = .normal
         }
         return .none
     }

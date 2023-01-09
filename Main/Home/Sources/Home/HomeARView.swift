@@ -16,7 +16,7 @@ import EntityModule
 
 final class HomeARView: ARView {
     
-    private var cancellable: Cancellable?
+    private var cancellables: Set<AnyCancellable> = []
     private let viewStore: ViewStoreOf<ARFeature>
     private lazy var focusEntity: FocusEntity = {
         FocusEntity(on: self,
@@ -102,12 +102,12 @@ final class HomeARView: ARView {
     }
     
     func setupSubscribeARScene() {
-        self.cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
+        scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
             guard let self = self else { return }
             self.viewStore.send(.subscriveEvent(session: self.session,
                                                  roomSession: self.caputureSession))
             self.focusEntity.isEnabled = !(UserSetting.sceneMode == .roomPlan)
-        }
+        }.store(in: &self.cancellables)
     }
     
     private func removeObjectNodes(with room: CapturedRoom) {
@@ -138,10 +138,6 @@ final class HomeARView: ARView {
         }
     }
     
-    private func stopCaptureSession() {
-        caputureSession.stop()
-    }
-    
     private func addObjectNodes(with room: CapturedRoom) {
         room.objects.forEach {
             let roomObject = RoomObjectAnchor($0)
@@ -152,8 +148,8 @@ final class HomeARView: ARView {
         room.walls.forEach {
             let roomObject = RoomObjectAnchor($0)
             let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
-//            roomNode.updateSurface()
-//            scene.anchors.append(roomNode.anchorEntity)
+            roomNode.updateSurface()
+            scene.anchors.append(roomNode.anchorEntity)
         }
         room.doors.forEach {
             let roomObject = RoomObjectAnchor($0)
@@ -206,12 +202,6 @@ extension HomeARView: ARSessionDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
     }
     
-    func session(_ session: ARSession, didOutputAudioSampleBuffer audioSampleBuffer: CMSampleBuffer) {
-    }
-    
-    func session(_ session: ARSession, didChange geoTrackingStatus: ARGeoTrackingStatus) {
-    }
-    
     func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
     }
 }
@@ -226,6 +216,14 @@ extension HomeARView: RoomCaptureSessionDelegate {
     func captureSession(_ session: RoomCaptureSession, didRemove room: CapturedRoom) {
         print(#function)
         self.removeObjectNodes(with: room)
+    }
+    
+    func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
+        print(#function)
+        if UserSetting.currentAnchorState == .objToRoom {
+            self.addObjectNodes(with: room)
+            viewStore.send(.completeAddAnchor)
+        }
     }
     
     func captureSession(_ session: RoomCaptureSession, didStartWith configuration: RoomCaptureSession.Configuration) {
