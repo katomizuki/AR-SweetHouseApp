@@ -18,7 +18,10 @@ final class HomeARView: ARView {
     
     private var cancellable: Cancellable?
     private let viewStore: ViewStoreOf<ARFeature>
-    var focusEntity: FocusEntity?
+    private lazy var focusEntity: FocusEntity = {
+        FocusEntity(on: self,
+                    style: .classic(color: .orange))
+    }()
     private lazy var caputureSession: RoomCaptureSession = {
         let captureSession = RoomCaptureSession()
         return captureSession
@@ -32,19 +35,12 @@ final class HomeARView: ARView {
         setupConfiguration()
         setupOverlayView()
         setupSubscribeARScene()
-        if UserSetting.sceneMode == .objectPutting {
-         setupFocusEntity()
-        }
         setupTouchUpEvent()
         setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
         session.delegate = self
-    }
-    
-    private func setupFocusEntity() {
-        self.focusEntity = FocusEntity(on: self,style: .classic(color: .orange))
     }
     
     private func setupTouchUpEvent() {
@@ -107,8 +103,10 @@ final class HomeARView: ARView {
     
     func setupSubscribeARScene() {
         self.cancellable = scene.subscribe(to: SceneEvents.Update.self) { [weak self] _ in
-            self?.viewStore.send(.subscriveEvent(session: self?.session,
-                                                 roomSession: self?.caputureSession))
+            guard let self = self else { return }
+            self.viewStore.send(.subscriveEvent(session: self.session,
+                                                 roomSession: self.caputureSession))
+            self.focusEntity.isEnabled = !(UserSetting.sceneMode == .roomPlan)
         }
     }
     
@@ -155,7 +153,7 @@ final class HomeARView: ARView {
             let roomObject = RoomObjectAnchor($0)
             let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
 //            roomNode.updateSurface()
-            scene.anchors.append(roomNode.anchorEntity)
+//            scene.anchors.append(roomNode.anchorEntity)
         }
         room.doors.forEach {
             let roomObject = RoomObjectAnchor($0)
@@ -180,6 +178,7 @@ final class HomeARView: ARView {
 
 extension HomeARView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {

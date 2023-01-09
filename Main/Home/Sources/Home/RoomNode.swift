@@ -37,6 +37,7 @@ extension RoomNode {
     }
     
     func updateSurface() {
+        if UserSetting.sceneMode == .objectPutting { return }
         update(with: roomObject.dimensions, surface: roomObject.surfaceCategory)
         anchorEntity.transform = Transform(matrix: roomObject.transform)
     }

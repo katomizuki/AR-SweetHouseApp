@@ -23,12 +23,12 @@ public struct HomeControlsButtons: View {
                               action: {
                     viewStore.send(.toggleSettingView)
                 })
-                .fullScreenCover(isPresented: viewStore.binding(get: \.isSettingView,
-                                                                send: .toggleSettingView),
-                                 onDismiss: {
+                .sheet(isPresented: viewStore.binding(get: \.isSettingView,
+                                                      send: .toggleSettingView),
+                       onDismiss: {
                     viewStore.send(.toggleSettingView)
                 } ,
-                                 content: {
+                       content: {
                     let store = self.store.scope(state: \.settingState,
                                                  action: HomeFeature.Action.setting)
                     SettiingView(store: store)

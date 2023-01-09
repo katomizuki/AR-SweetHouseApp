@@ -10,15 +10,38 @@ import ComposableArchitecture
 
 public struct SettiingView: View {
     private let store: StoreOf<SettingFeature>
+    @Environment(\.dismiss) var dismiss
     
     public var body: some View {
         WithViewStore(self.store) { viewStore in
-            HStack(content: {
-            })
-            .alert(self.store.scope(state: { $0.alert }),
-                   dismiss: .dismissAlert)
-            .onAppear(perform: {
-                viewStore.send(.onAppear)
+            NavigationView(content: {
+                VStack(content: {
+                    List(content: {
+                        Toggle(isOn: viewStore.binding(get: \.isAllowHaptics,
+                                                       send: .toggleHaptics),
+                               label: {
+                            Text("振動するのを許可する")
+                        })
+                        .tint(.orange)
+                    })
+                })
+                .alert(self.store.scope(state: { $0.alert }),
+                       dismiss: .dismissAlert)
+                .toolbar(content: {
+                    ToolbarItem(placement: .navigationBarLeading,
+                                content: {
+                        Text("設定")
+                            .foregroundColor(.orange)
+                            .font(.title2)
+                            .bold()
+                    })
+                })
+                .onAppear(perform: {
+                    viewStore.send(.onAppear)
+                })
+                .onDisappear(perform: {
+                    dismiss()
+                })
             })
         }
     }

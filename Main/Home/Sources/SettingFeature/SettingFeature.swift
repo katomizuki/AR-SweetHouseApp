@@ -6,24 +6,21 @@
 //
 
 import ComposableArchitecture
+import EntityModule
 
 public struct SettingFeature: ReducerProtocol {
     
     public struct State: Equatable {
         var alert: AlertState<Action>?
-        public init() {
-            
-        }
+        var isAllowHaptics: Bool = UserSetting.isAllowHaptics
+        public init() { }
     }
     
     public enum Action: Equatable {
         case onAppear
         case showFailedAlert
         case dismissAlert
-    }
-    
-    public struct SettingEnvironment {
-        public init() { }
+        case toggleHaptics
     }
     
     public init() { }
@@ -32,6 +29,9 @@ public struct SettingFeature: ReducerProtocol {
         switch action {
         case .onAppear:
             break
+        case .toggleHaptics:
+            state.isAllowHaptics.toggle()
+            UserSetting.isAllowHaptics = state.isAllowHaptics
         case .dismissAlert:
             state.alert = nil
         case .showFailedAlert:
