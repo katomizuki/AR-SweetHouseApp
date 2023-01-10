@@ -23,7 +23,7 @@ extension ThumbnailGenerator: DependencyKey {
 }
 
 public struct ThumbnailGenerator {
-    private func generateThumbnail(for resource: String,
+    private static func generateThumbnail(for resource: String,
                                  withExtension: String = "usdz",
                                  size: CGSize,
                                  completion: @escaping(Result<Image, Error>) -> Void)  {
@@ -49,9 +49,9 @@ public struct ThumbnailGenerator {
         }
     }
     
-    public init() { }
+    private init() { }
     
-    public func generateThumnail(for resource: String, size: CGSize) async throws -> Image {
+    public static func generateThumnail(for resource: String, size: CGSize) async throws -> Image {
         try await withCheckedThrowingContinuation({ continuation in
             self.generateThumbnail(for: resource, size: size) { result in
                 do {

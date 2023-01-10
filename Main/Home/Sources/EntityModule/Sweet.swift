@@ -6,6 +6,8 @@
 //
 import Foundation
 import SwiftUI
+import RealityKit
+import ThumbnailGeneratorFeature
 
 public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
@@ -13,11 +15,13 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     public let name: String
     public let thumbnail: String
     public var description: String
+    public var entity: Entity?
     
     public init(name: String, thumbnail: String, description: String) {
         self.name = name
         self.thumbnail = thumbnail
         self.description = description
+        self.entity = try? ModelEntity.load(named: name)
     }
     
     public func hash(into hasher: inout Hasher) {

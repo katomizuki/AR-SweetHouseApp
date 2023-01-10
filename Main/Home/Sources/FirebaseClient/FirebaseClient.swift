@@ -50,7 +50,7 @@ public final class FirebaseClient {
                         throw FirebaseError.decodeError
                     }
                 })
-            return Sweets(list: list)
+            return Sweets()
         } catch {
             throw FirebaseError.normalError
         }

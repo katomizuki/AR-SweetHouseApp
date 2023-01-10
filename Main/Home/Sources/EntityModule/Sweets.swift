@@ -8,13 +8,18 @@
 import Foundation
 import SwiftUI
 
+
 public struct Sweets {
     
-    public let list: [Sweet]
+    public let list: [Sweet] = [
+        Sweet(name: "cupcake", thumbnail: "cupcake", description: "カップケーキ"),
+        Sweet(name: "cookie", thumbnail: "cookie", description: "クッキー"),
+        Sweet(name: "chocolate", thumbnail: "cookie", description: "チョコレート"),
+        Sweet(name: "iceCream", thumbnail: "iceCream", description: "アイスクリーム"),
+        Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ"),
+    ]
     
-    public init(list: [Sweet]) {
-        self.list = list
-    }
+    public init() { }
 }
 
 extension Sweets: Collection {

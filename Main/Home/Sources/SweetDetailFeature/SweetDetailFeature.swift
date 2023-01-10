@@ -12,14 +12,14 @@ import SceneKit
 public struct SweetDetailFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweet: Sweet!
+        var sweet: Sweet?
         var isVerticleLook: Bool = true
         var rotationEffect: Double = 90
         var offset: CGFloat = .zero
         var scene: SCNScene?
         var alert: AlertState<Action>?
-        public init() {
-            
+        public init(_ sweet: Sweet? = nil) {
+            self.sweet = sweet
         }
     }
     
@@ -37,6 +37,7 @@ public struct SweetDetailFeature: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onAppear:
+            state.scene = SCNScene(named: "\(state.sweet?.name ?? "").scn")
             return .none
         case .onTapNavigationTrailingButton:
             state.isVerticleLook.toggle()

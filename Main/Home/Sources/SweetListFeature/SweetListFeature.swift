@@ -14,7 +14,7 @@ import FirebaseClient
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets = Sweets(list: [Sweet]())
+        var sweets = Sweets()
         var detailState = SweetDetailFeature.State()
         var alert: AlertState<Action>?
         public init() { }
@@ -43,11 +43,7 @@ public struct SweetListFeature: ReducerProtocol {
         Reduce { state , action in
             switch action {
             case .onAppear:
-                return .task {
-                    await .sweetResponse(TaskResult {
-                        try await firebaseClient.fetchSweets() })
-                }
-                .cancellable(id: SweetID.self)
+                return .none
             case .detailAction:
                 return .none
             case .sweetResponse(.failure):

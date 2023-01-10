@@ -70,7 +70,8 @@ let package = Package(
         .target(
             name: "EntityModule",
             dependencies: [.product(name: "ComposableArchitecture",
-                                    package: "swift-composable-architecture")]),
+                                    package: "swift-composable-architecture"),
+                           "ThumbnailGeneratorFeature"]),
         .target(
             name: "MultiPeerFeature",
             dependencies: [.product(name: "ComposableArchitecture",
