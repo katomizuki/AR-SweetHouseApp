@@ -17,6 +17,7 @@
 		D37B34E0296D918F00AB17B7 /* cupcake.scn in Resources */ = {isa = PBXBuildFile; fileRef = D37B34DF296D918F00AB17B7 /* cupcake.scn */; };
 		D37B34E2296D921D00AB17B7 /* cookie.scn in Resources */ = {isa = PBXBuildFile; fileRef = D37B34E1296D921D00AB17B7 /* cookie.scn */; };
 		D37B34E4296D925300AB17B7 /* chocolate.scn in Resources */ = {isa = PBXBuildFile; fileRef = D37B34E3296D925300AB17B7 /* chocolate.scn */; };
+		D37B34E6296D93B900AB17B7 /* iceCream.scn in Resources */ = {isa = PBXBuildFile; fileRef = D37B34E5296D93B900AB17B7 /* iceCream.scn */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
 		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 		D37B34DF296D918F00AB17B7 /* cupcake.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = cupcake.scn; path = scnAsset/cupcake.scn; sourceTree = SOURCE_ROOT; };
 		D37B34E1296D921D00AB17B7 /* cookie.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = cookie.scn; path = scnAsset/cookie.scn; sourceTree = SOURCE_ROOT; };
 		D37B34E3296D925300AB17B7 /* chocolate.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = chocolate.scn; sourceTree = "<group>"; };
+		D37B34E5296D93B900AB17B7 /* iceCream.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = iceCream.scn; path = scnAsset/iceCream.scn; sourceTree = SOURCE_ROOT; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 				D37B34DF296D918F00AB17B7 /* cupcake.scn */,
 				D37B34E1296D921D00AB17B7 /* cookie.scn */,
 				D37B34E3296D925300AB17B7 /* chocolate.scn */,
+				D37B34E5296D93B900AB17B7 /* iceCream.scn */,
 			);
 			path = scnAsset;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				D37B34DB296D8F7700AB17B7 /* chocolate.usdz in Resources */,
 				D37B34DD296D90B800AB17B7 /* donut.usdz in Resources */,
 				D37B34E4296D925300AB17B7 /* chocolate.scn in Resources */,
+				D37B34E6296D93B900AB17B7 /* iceCream.scn in Resources */,
 				D37B34E2296D921D00AB17B7 /* cookie.scn in Resources */,
 				D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */,
 			);
