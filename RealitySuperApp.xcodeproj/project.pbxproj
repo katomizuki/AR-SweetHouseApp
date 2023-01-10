@@ -11,6 +11,7 @@
 		D3760F9C29051B6B00356F63 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D3760F9B29051B6B00356F63 /* Home */; };
 		D37B34D2296D89CB00AB17B7 /* cupcake.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34D1296D89CB00AB17B7 /* cupcake.usdz */; };
 		D37B34D5296D8EAD00AB17B7 /* cookie.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34D4296D8EAD00AB17B7 /* cookie.usdz */; };
+		D37B34D9296D8F3100AB17B7 /* iceCream.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34D8296D8F3100AB17B7 /* iceCream.usdz */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
 		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 		D3760F862904FDC700356F63 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 		D37B34D1296D89CB00AB17B7 /* cupcake.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cupcake.usdz; sourceTree = "<group>"; };
 		D37B34D4296D8EAD00AB17B7 /* cookie.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = cookie.usdz; sourceTree = "<group>"; };
+		D37B34D8296D8F3100AB17B7 /* iceCream.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = iceCream.usdz; sourceTree = "<group>"; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				D37B34D1296D89CB00AB17B7 /* cupcake.usdz */,
 				D37B34D4296D8EAD00AB17B7 /* cookie.usdz */,
+				D37B34D8296D8F3100AB17B7 /* iceCream.usdz */,
 			);
 			path = usdzAsset;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				D37B34D2296D89CB00AB17B7 /* cupcake.usdz in Resources */,
 				D37B34D5296D8EAD00AB17B7 /* cookie.usdz in Resources */,
 				D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */,
+				D37B34D9296D8F3100AB17B7 /* iceCream.usdz in Resources */,
 				D3340BAF29459ED200D5B171 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
