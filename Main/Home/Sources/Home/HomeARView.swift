@@ -36,7 +36,9 @@ final class HomeARView: ARView {
         setupOverlayView()
         setupSubscribeARScene()
         setupTouchUpEvent()
-        setupRoomCaptureDelegate()
+        if UserSetting.sceneMode == .roomPlan {
+           setupRoomCaptureDelegate()
+        }
     }
     
     private func setupSessionDelegate() {
@@ -49,6 +51,7 @@ final class HomeARView: ARView {
     }
     
     @objc private func onTouchARView(_ sender: UITapGestureRecognizer) {
+        if UserSetting.sceneMode == .roomPlan { return }
         let tapPoint = sender.location(in: self)
         guard let rayResults = ray(through: tapPoint) else { return }
         let hitResults = scene.raycast(from: rayResults.origin, to: rayResults.direction)
@@ -65,7 +68,7 @@ final class HomeARView: ARView {
     }
     
     private func putSweet(at position: simd_float3) {
-        guard let selectedModel = viewStore.state.selectedModel else { return }
+        guard let selectedModel = UserSetting.selectedModel else { return }
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)

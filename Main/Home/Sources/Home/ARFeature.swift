@@ -29,7 +29,7 @@ public struct ARFeature: ReducerProtocol {
 
     public struct State: Equatable {
         var isSelectedModel = false
-        var selectedModel: ModelEntity?
+        var selectedModel: Entity? = UserSetting.selectedModel
         var arSession: ARSession?
         var roomSession: RoomCaptureSession?
         var alert: AlertState<Action>?
@@ -52,7 +52,7 @@ public struct ARFeature: ReducerProtocol {
                 UserSetting.currentAnchorState = .objToRoom
             }
         case .initialize:
-            state.selectedModel = UserSetting.selectedModel
+            fetchUsdz()
             break
         case .showFailedAlert:
             state.alert = .init(title: .init("不明なエラーが発生しました"))
@@ -65,6 +65,11 @@ public struct ARFeature: ReducerProtocol {
             UserSetting.currentAnchorState = .normal
         }
         return .none
+    }
+    
+    private func fetchUsdz() {
+        let entity = try! ModelEntity.load(named: "cupcake.usdz")
+        UserSetting.selectedModel = entity
     }
     
 }

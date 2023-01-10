@@ -15,6 +15,7 @@ import SwiftUI
 import HapticsFeature
 import RoomPlan
 import EntityModule
+import RealityKit
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?

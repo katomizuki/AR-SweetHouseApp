@@ -11,7 +11,7 @@ import ARKit
 public final class UserSetting {
     public static var sceneMode: ARSceneMode = .objectPutting
     public static var isAllowHaptics: Bool = true
-    public static var selectedModel: ModelEntity?
+    public static var selectedModel: Entity?
     public static var currentAnchorState: AddAnchor = .normal
     public enum AddAnchor {
         // ObjectPutting->RoomPlanに途中できりかえ
