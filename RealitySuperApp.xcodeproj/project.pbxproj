@@ -14,6 +14,7 @@
 		D37B34D9296D8F3100AB17B7 /* iceCream.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34D8296D8F3100AB17B7 /* iceCream.usdz */; };
 		D37B34DB296D8F7700AB17B7 /* chocolate.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34DA296D8F7700AB17B7 /* chocolate.usdz */; };
 		D37B34DD296D90B800AB17B7 /* donut.usdz in Resources */ = {isa = PBXBuildFile; fileRef = D37B34DC296D90B800AB17B7 /* donut.usdz */; };
+		D37B34E0296D918F00AB17B7 /* cupcake.scn in Resources */ = {isa = PBXBuildFile; fileRef = D37B34DF296D918F00AB17B7 /* cupcake.scn */; };
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
 		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		D37B34D8296D8F3100AB17B7 /* iceCream.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = iceCream.usdz; sourceTree = "<group>"; };
 		D37B34DA296D8F7700AB17B7 /* chocolate.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = chocolate.usdz; sourceTree = "<group>"; };
 		D37B34DC296D90B800AB17B7 /* donut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = donut.usdz; sourceTree = "<group>"; };
+		D37B34DF296D918F00AB17B7 /* cupcake.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = cupcake.scn; path = scnAsset/cupcake.scn; sourceTree = SOURCE_ROOT; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -88,9 +90,18 @@
 			path = usdzAsset;
 			sourceTree = "<group>";
 		};
+		D37B34DE296D916500AB17B7 /* scnAsset */ = {
+			isa = PBXGroup;
+			children = (
+				D37B34DF296D918F00AB17B7 /* cupcake.scn */,
+			);
+			path = scnAsset;
+			sourceTree = "<group>";
+		};
 		D37BED8F29017E4500FF3A73 = {
 			isa = PBXGroup;
 			children = (
+				D37B34DE296D916500AB17B7 /* scnAsset */,
 				D37B34D3296D8DBF00AB17B7 /* usdzAsset */,
 				D304BB21294F190C00EB7C45 /* RealityTest.xctestplan */,
 				D3DF887E29081AB500227BED /* RealitySuperApp-Info.plist */,
@@ -176,6 +187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D37B34D2296D89CB00AB17B7 /* cupcake.usdz in Resources */,
+				D37B34E0296D918F00AB17B7 /* cupcake.scn in Resources */,
 				D37B34D5296D8EAD00AB17B7 /* cookie.usdz in Resources */,
 				D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */,
 				D37B34D9296D8F3100AB17B7 /* iceCream.usdz in Resources */,
