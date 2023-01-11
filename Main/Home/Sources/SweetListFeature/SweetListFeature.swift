@@ -15,8 +15,9 @@ public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
         var sweets = Sweets()
-        var detailState = SweetDetailFeature.State()
+        var detailState: SweetDetailFeature.State?
         var alert: AlertState<Action>?
+        var isNavigationActive: Bool = false
         public init() { }
         public static func == (lhs: SweetListFeature.State, rhs: SweetListFeature.State) -> Bool {
             return true
@@ -26,16 +27,12 @@ public struct SweetListFeature: ReducerProtocol {
     public enum Action: Equatable {
         case onAppear
         case detailAction(SweetDetailFeature.Action)
-        case sweetResponse(TaskResult<Sweets>)
         case showFailedAlert
+        case setNavigation(isActive: Bool, sweet: Sweet)
         case dismissAlert
     }
     
     @Dependency(\.firebaseClient) var firebaseClient
-    
-    private enum SweetID {
-        
-    }
     
     public init() { }
 
@@ -46,21 +43,15 @@ public struct SweetListFeature: ReducerProtocol {
                 return .none
             case .detailAction:
                 return .none
-            case .sweetResponse(.failure):
-                state.alert = .init(title: .init("通信に失敗しました"))
-                return .none
-            case .sweetResponse(.success(let sweets)):
-                state.sweets = sweets
-                return .none
             case .showFailedAlert:
                 state.alert = .init(title: .init("不明なエラーが発生しました"))
             case .dismissAlert:
                 state.alert = nil
+            case .setNavigation(_, let sweet):
+                state.detailState = SweetDetailFeature.State(sweet)
             }
             return .none
-        }
-        
-        Scope(state: \.detailState, action: /Action.detailAction) {
+        }.ifLet( \.detailState, action: /Action.detailAction) {
             SweetDetailFeature()
         }
     }

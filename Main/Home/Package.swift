@@ -47,7 +47,7 @@ let package = Package(
             name: "Firebase",url: "https://github.com/firebase/firebase-ios-sdk.git",
                  .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
-                 .exactItem(.init("0.42.0")!)),
+                 .exactItem(.init("0.47.0")!)),
         .package(url: "https://github.com/maxxfrazer/FocusEntity.git", .exactItem(.init("2.3.0")!))
     ],
     targets: [
