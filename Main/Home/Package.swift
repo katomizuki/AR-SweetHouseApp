@@ -48,6 +48,7 @@ let package = Package(
                  .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
                  .exactItem(.init("0.47.0")!)),
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", from: "0.4.1"),
         .package(url: "https://github.com/maxxfrazer/FocusEntity.git", .exactItem(.init("2.3.0")!))
     ],
     targets: [
@@ -105,6 +106,8 @@ let package = Package(
         .target(name: "SweetListFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture"),
+                               .product(name: "SwiftUINavigation",
+                                        package: "swiftui-navigation"),
                                "EntityModule",
                                "SweetDetailFeature",
                                "ViewComponents",
