@@ -8,12 +8,14 @@
 import XCTest
 import ComposableArchitecture
 @testable import SweetDetailFeature
+@testable import EntityModule
 
 final class SweetDetailTests: XCTestCase {
     
     let scheduler = DispatchQueue.test
+    let sweet = Sweet(name: "アイウエオ", thumbnail: "いいい", description: "uuu")
     func test_起動時() {
-        let store = TestStore(initialState: SweetDetailFeature.State(),
+        let store = TestStore(initialState: SweetDetailFeature.State(sweet),
                             reducer: SweetDetailFeature())
         store.send(.onAppear)
         XCTAssertTrue(store.state.isVerticleLook)
@@ -22,7 +24,7 @@ final class SweetDetailTests: XCTestCase {
     }
     
     func test_Offset変更時() {
-        let store = TestStore(initialState: SweetDetailFeature.State(),
+        let store = TestStore(initialState: SweetDetailFeature.State(sweet),
                               reducer: SweetDetailFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.changeOffset(90.0)) {
@@ -31,7 +33,7 @@ final class SweetDetailTests: XCTestCase {
     }
     
     func test_ナビゲーションの左ボタンタップ時() {
-        let store = TestStore(initialState: SweetDetailFeature.State(),
+        let store = TestStore(initialState: SweetDetailFeature.State(sweet),
                             reducer: SweetDetailFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.onTapNavigationTrailingButton) {
@@ -41,7 +43,7 @@ final class SweetDetailTests: XCTestCase {
     }
     
     func test_エラー時() {
-        let store = TestStore(initialState: SweetDetailFeature.State(),
+        let store = TestStore(initialState: SweetDetailFeature.State(sweet),
                             reducer: SweetDetailFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.showFailedAlert) {
