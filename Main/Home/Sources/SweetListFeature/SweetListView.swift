@@ -8,7 +8,6 @@ import SwiftUI
 import ComposableArchitecture
 import SweetDetailFeature
 import ViewComponents
-import SwiftUINavigation
 
 public struct SweetListView: View {
     
@@ -22,13 +21,16 @@ public struct SweetListView: View {
                     List(content: {
                         ForEach(viewStore.sweets.list,
                                 content: { sweet in
-//                            NavigationLink(destination: {
-//                                SweetDetailView(store: self.store.scope(state: \.detailState,
-//                                                                        action: SweetListFeature.Action.detailAction))
-//                            }, label: {
-//                                ListCellWithImage(image: Image(systemName: sweet.thumbnail),
-//                                                  title: sweet.name)
-//                            })
+                            NavigationLink(destination: IfLetStore(
+                                            self.store.scope(state: \.detailState,
+                                                             action: SweetListFeature.Action.detailAction),
+                                            then: { SweetDetailView(store: $0) })
+                            , isActive: viewStore.binding(get: \.isNavigationActive,
+                                                           send: .setNavigation(isActive: true,
+                                                                                sweet: sweet))) {
+                                ListCellWithImage(image: Image(systemName: sweet.name),
+                                                  title: sweet.name)
+                            }
                         })
                     })
                 })

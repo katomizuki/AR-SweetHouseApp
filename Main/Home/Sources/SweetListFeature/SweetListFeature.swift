@@ -30,9 +30,11 @@ public struct SweetListFeature: ReducerProtocol {
         case showFailedAlert
         case setNavigation(isActive: Bool, sweet: Sweet)
         case dismissAlert
+        case setSweet(_ sweet: Sweet)
     }
     
     @Dependency(\.firebaseClient) var firebaseClient
+    @Dependency(\.mainQueue) var mainQueue
     
     public init() { }
 
@@ -48,7 +50,13 @@ public struct SweetListFeature: ReducerProtocol {
             case .dismissAlert:
                 state.alert = nil
             case .setNavigation(_, let sweet):
+                state.isNavigationActive = true
+                return Effect(value: .setSweet(sweet))
+                    .delay(for: 1, scheduler: mainQueue)
+                    .eraseToEffect()
+            case .setSweet(let sweet):
                 state.detailState = SweetDetailFeature.State(sweet)
+                return .none
             }
             return .none
         }.ifLet( \.detailState, action: /Action.detailAction) {
