@@ -24,9 +24,12 @@ public struct SweetListView: View {
                             NavigationLink(destination: IfLetStore(
                                 self.store.scope(state: \.selection?.value,
                                                              action: SweetListFeature.Action.detailAction),
-                                            then: { SweetDetailView(store: $0) })
-                                           , tag: sweet.id, selection: viewStore.binding(get: \.selection?.id,
-                                                                                         send: SweetListFeature.Action.setNavigation(selection:))) {
+                                then: { SweetDetailView(store: $0) },
+                                else: { ProgressView() } ),
+                                           tag: sweet.id,
+                                           selection: viewStore.binding(
+                                            get: \.selection?.id,
+                                            send: SweetListFeature.Action.setNavigation(selection:))) {
                                 ListCellWithImage(image: Image(systemName: sweet.name),
                                                   title: sweet.name)
                             }
@@ -47,6 +50,9 @@ public struct SweetListView: View {
                 })
                 .onAppear(perform: {
                     viewStore.send(.onAppear)
+                })
+                .onDisappear(perform: {
+                    viewStore.send(.onDisappear)
                 })
             })
         }

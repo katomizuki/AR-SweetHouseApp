@@ -32,6 +32,7 @@ public struct SweetListFeature: ReducerProtocol {
     
     public enum Action: Equatable {
         case onAppear
+        case onDisappear
         case detailAction(SweetDetailFeature.Action)
         case showFailedAlert
         case dismissAlert
@@ -49,6 +50,8 @@ public struct SweetListFeature: ReducerProtocol {
             switch action {
             case .onAppear:
                 return .none
+            case .onDisappear:
+                return .cancel(id: CancelID.self)
             case .detailAction:
                 return .none
             case .showFailedAlert:
