@@ -19,15 +19,14 @@ public struct SweetListView: View {
             NavigationView(content: {
                 HStack(content: {
                     List(content: {
-                        ForEach(viewStore.sweets.list,
+                        ForEach(viewStore.sweets,
                                 content: { sweet in
                             NavigationLink(destination: IfLetStore(
-                                            self.store.scope(state: \.detailState,
+                                self.store.scope(state: \.selection?.value,
                                                              action: SweetListFeature.Action.detailAction),
                                             then: { SweetDetailView(store: $0) })
-                            , isActive: viewStore.binding(get: \.isNavigationActive,
-                                                           send: .setNavigation(isActive: true,
-                                                                                sweet: sweet))) {
+                                           , tag: sweet.id, selection: viewStore.binding(get: \.selection?.id,
+                                                                                         send: SweetListFeature.Action.setNavigation(selection:))) {
                                 ListCellWithImage(image: Image(systemName: sweet.name),
                                                   title: sweet.name)
                             }

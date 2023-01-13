@@ -14,8 +14,14 @@ import FirebaseClient
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets = Sweets()
-        var detailState: SweetDetailFeature.State?
+        var sweets: IdentifiedArrayOf<Sweet> = [
+            Sweet(name: "cupcake", thumbnail: "cupcake", description: "カップケーキ"),
+            Sweet(name: "cookie", thumbnail: "cookie", description: "クッキー"),
+            Sweet(name: "chocolate", thumbnail: "cookie", description: "チョコレート"),
+            Sweet(name: "iceCream", thumbnail: "iceCream", description: "アイスクリーム"),
+            Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ"),
+        ]
+        var selection: Identified<Sweet.ID, SweetDetailFeature.State>?
         var alert: AlertState<Action>?
         var isNavigationActive: Bool = false
         public init() { }
@@ -28,13 +34,13 @@ public struct SweetListFeature: ReducerProtocol {
         case onAppear
         case detailAction(SweetDetailFeature.Action)
         case showFailedAlert
-        case setNavigation(isActive: Bool, sweet: Sweet)
         case dismissAlert
-        case setSweet(_ sweet: Sweet)
+        case setNavigation(selection: UUID?)
     }
     
     @Dependency(\.firebaseClient) var firebaseClient
     @Dependency(\.mainQueue) var mainQueue
+    private enum CancelID {}
     
     public init() { }
 
@@ -49,18 +55,24 @@ public struct SweetListFeature: ReducerProtocol {
                 state.alert = .init(title: .init("不明なエラーが発生しました"))
             case .dismissAlert:
                 state.alert = nil
-            case .setNavigation(_, let sweet):
-                state.isNavigationActive = true
-                return Effect(value: .setSweet(sweet))
-                    .delay(for: 1, scheduler: mainQueue)
-                    .eraseToEffect()
-            case .setSweet(let sweet):
-                state.detailState = SweetDetailFeature.State(sweet)
+            case let .setNavigation(selection: .some(id)):
+                state.selection = Identified(SweetDetailFeature.State(state.sweets[id: id] ?? Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ")),
+                                             id: id)
                 return .none
+            case .setNavigation(selection: .none):
+                if let selection = state.selection {
+                    state.sweets[id: selection.id] = selection.sweet
+                }
+                state.selection = nil
+                return .cancel(id: CancelID.self)
             }
             return .none
-        }.ifLet( \.detailState, action: /Action.detailAction) {
-            SweetDetailFeature()
+        }.ifLet(\.selection,
+                 action: /Action.detailAction) {
+            Scope(state: \Identified<Sweet.ID, SweetDetailFeature.State>.value,
+                  action: /.self) {
+                SweetDetailFeature()
+            }
         }
     }
 }

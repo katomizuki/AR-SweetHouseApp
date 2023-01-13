@@ -11,8 +11,9 @@ import SceneKit
 
 public struct SweetDetailFeature: ReducerProtocol {
     
-    public struct State: Equatable {
-        var sweet: Sweet
+    public struct State: Equatable, Identifiable {
+        public var id: UUID = UUID()
+        public var sweet: Sweet
         var isVerticleLook: Bool = true
         var rotationEffect: Double = 90
         var offset: CGFloat = .zero

@@ -14,7 +14,7 @@ public struct SweetDetailView: View {
     private let store: StoreOf<SweetDetailFeature>
     
     public var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ScrollView(.vertical,
                        showsIndicators: false,
                        content: {

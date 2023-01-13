@@ -11,7 +11,7 @@ import ThumbnailGeneratorFeature
 
 public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
-    public var id: String = UUID().uuidString
+    public var id: UUID = UUID()
     public let name: String
     public let thumbnail: String
     public var description: String
