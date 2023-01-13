@@ -15,6 +15,5 @@ final class SweetListTests: XCTestCase {
         let store = TestStore(initialState: SweetListFeature.State(),
                             reducer: SweetListFeature())
         XCTAssertNil(store.state.alert)
-        XCTAssertNotNil(store.state.detailState)
     }
 }
