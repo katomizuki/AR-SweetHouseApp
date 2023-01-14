@@ -32,6 +32,7 @@ public struct SweetDetailFeature: ReducerProtocol {
         case changeOffset(_ newOffset: CGFloat)
         case showFailedAlert
         case dismissAlert
+        case onTapDecideButton
     }
     
     public init() { }
@@ -68,6 +69,8 @@ public struct SweetDetailFeature: ReducerProtocol {
             state.alert = .init(title: .init("不明なエラーが発生しました"))
         case .dismissAlert:
             state.alert = nil
+        case .onTapDecideButton:
+            UserSetting.selectedModel = state.sweet.entity
         }
         return .none
     }

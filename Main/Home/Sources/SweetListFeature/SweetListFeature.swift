@@ -37,7 +37,6 @@ public struct SweetListFeature: ReducerProtocol {
         case dismissAlert
     }
     
-    @Dependency(\.firebaseClient) var firebaseClient
     @Dependency(\.mainQueue) var mainQueue
     private enum CancelID {}
     

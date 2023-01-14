@@ -11,6 +11,7 @@ import ComposableArchitecture
 struct PropertiesSweetView: View {
     
     private let store: StoreOf<SweetDetailFeature>
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         WithViewStore(self.store) { viewStore in
@@ -39,7 +40,7 @@ struct PropertiesSweetView: View {
                        alignment: .leading)
                 HStack(alignment: .top) {
                     Button {
-                        
+                        viewStore.send(.onTapDecideButton)
                     } label: {
                         VStack(spacing: 12) {
                             Image(systemName: "plus.square.dashed")
