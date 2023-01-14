@@ -126,6 +126,7 @@ let package = Package(
                            "SweetListFeature",
                            "SettingFeature",
                            "PuttingFeature",
-                           "SweetDetailFeature"]),
+                           "SweetDetailFeature",
+                           "EntityModule"]),
     ]
 )
