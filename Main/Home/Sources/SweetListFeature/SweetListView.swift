@@ -17,21 +17,13 @@ public struct SweetListView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationView(content: {
-                Form(content: {
-                    ForEach(viewStore.sweets,
-                            content: { sweet in
-                        NavigationLink(destination: IfLetStore(
-                            self.store.scope(state: \.selection?.value,
-                                             action: SweetListFeature.Action.detailAction),
-                            then: { SweetDetailView(store: $0) },
-                            else: { ProgressView() } ),
-                                       tag: sweet.id,
-                                       selection: viewStore.binding(
-                                        get: \.selection?.id,
-                                        send: SweetListFeature.Action.setNavigation(selection:))) {
-                                            ListCellWithImage(image: Image(systemName: sweet.name),
-                                                              title: sweet.name)
-                                        }
+                List(viewStore.sweets,
+                     rowContent: { sweet in
+                    NavigationLink(destination: {
+                        SweetDetailView(sweet: sweet)
+                    }, label: {
+                        ListCellWithImage(image: Image(systemName: sweet.name),
+                                          title: sweet.name)
                     })
                 })
                 .alert(self.store.scope(state: { $0.alert }),

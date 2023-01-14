@@ -23,7 +23,6 @@ public struct SweetListFeature: ReducerProtocol {
         ]
         var selection: Identified<Sweet.ID, SweetDetailFeature.State>?
         var alert: AlertState<Action>?
-        var isNavigationActive: Bool = false
         public init() { }
         public static func == (lhs: SweetListFeature.State, rhs: SweetListFeature.State) -> Bool {
             return true
@@ -36,7 +35,6 @@ public struct SweetListFeature: ReducerProtocol {
         case detailAction(SweetDetailFeature.Action)
         case showFailedAlert
         case dismissAlert
-        case setNavigation(selection: UUID?)
     }
     
     @Dependency(\.firebaseClient) var firebaseClient
@@ -58,16 +56,7 @@ public struct SweetListFeature: ReducerProtocol {
                 state.alert = .init(title: .init("不明なエラーが発生しました"))
             case .dismissAlert:
                 state.alert = nil
-            case let .setNavigation(selection: .some(id)):
-                state.selection = Identified(SweetDetailFeature.State(state.sweets[id: id] ?? Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ")),
-                                             id: id)
                 return .none
-            case .setNavigation(selection: .none):
-                if let selection = state.selection {
-                    state.sweets[id: selection.id] = selection.sweet
-                }
-                state.selection = nil
-                return .cancel(id: CancelID.self)
             }
             return .none
         }.ifLet(\.selection,

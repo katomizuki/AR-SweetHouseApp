@@ -13,7 +13,7 @@ import ViewComponents
 public struct HomeView : View {
     public let store: StoreOf<HomeFeature>
     public var body: some View {
-        WithViewStore(self.store) { viewStore in
+        WithViewStore(self.store, observe: { $0 }) { viewStore in
             ZStack(alignment: .bottom,
                    content: {
                 ZStack(alignment: .top,

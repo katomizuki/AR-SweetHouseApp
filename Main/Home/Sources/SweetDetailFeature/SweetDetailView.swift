@@ -8,13 +8,14 @@
 import SwiftUI
 import ComposableArchitecture
 import SceneKit
+import EntityModule
 
 public struct SweetDetailView: View {
     @GestureState var offset: CGFloat = 0
     private let store: StoreOf<SweetDetailFeature>
     
     public var body: some View {
-        WithViewStore(self.store, observe: { $0 }) { viewStore in
+        WithViewStore(self.store) { viewStore in
             ScrollView(.vertical,
                        showsIndicators: false,
                        content: {
@@ -57,7 +58,8 @@ public struct SweetDetailView: View {
         }
     }
     
-    public init(store: StoreOf<SweetDetailFeature>) {
-        self.store = store
+    public init(sweet: Sweet) {
+        self.store = StoreOf<SweetDetailFeature>(initialState: SweetDetailFeature.State(sweet),
+                                                 reducer: SweetDetailFeature())
     }
 }
