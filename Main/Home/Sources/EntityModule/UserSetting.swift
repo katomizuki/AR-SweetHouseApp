@@ -9,7 +9,7 @@ import RealityKit
 import ARKit
 
 public final class UserSetting {
-    public static var sceneMode: ARSceneMode = .objectPutting
+    public static var sceneMode: ARSceneMode = .roomPlan
     public static var isAllowHaptics: Bool = true
     public static var selectedModel: Entity?
     public static var currentAnchorState: AddAnchor = .normal
