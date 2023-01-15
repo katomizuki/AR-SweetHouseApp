@@ -28,7 +28,6 @@ public struct ARFeature: ReducerProtocol {
     
 
     public struct State: Equatable {
-        var isSelectedModel = false
         var selectedModel: Entity? = UserSetting.selectedModel
         var arSession: ARSession?
         var roomSession: RoomCaptureSession?
@@ -43,7 +42,7 @@ public struct ARFeature: ReducerProtocol {
    public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onTouchARView:
-            state.isSelectedModel = false
+            UserSetting.selectedModel = nil
         case .subscriveEvent(let arSession, let roomSession):
             state.arSession = arSession
             state.roomSession = roomSession
@@ -52,7 +51,6 @@ public struct ARFeature: ReducerProtocol {
                 UserSetting.currentAnchorState = .objToRoom
             }
         case .initialize:
-            fetchUsdz()
             break
         case .showFailedAlert:
             state.alert = .init(title: .init("不明なエラーが発生しました"))
@@ -66,10 +64,4 @@ public struct ARFeature: ReducerProtocol {
         }
         return .none
     }
-    
-    private func fetchUsdz() {
-        let entity = try! ModelEntity.load(named: "cupcake.usdz")
-        UserSetting.selectedModel = entity
-    }
-    
 }

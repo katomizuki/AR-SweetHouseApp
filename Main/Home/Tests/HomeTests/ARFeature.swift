@@ -14,7 +14,7 @@ final class ARFeatureTest: XCTestCase {
     func test_起動時() {
         let store = TestStore(initialState: ARFeature.State(),
                             reducer: ARFeature())
-        XCTAssertFalse(store.state.isSelectedModel)
+        XCTAssertNil(store.state.selectedModel)
         XCTAssertNil(store.state.alert)
         XCTAssertNil(store.state.selectedModel)
         XCTAssertNil(store.state.arSession)

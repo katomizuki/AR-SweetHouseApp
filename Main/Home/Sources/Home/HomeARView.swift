@@ -109,7 +109,8 @@ final class HomeARView: ARView {
             guard let self = self else { return }
             self.viewStore.send(.subscriveEvent(session: self.session,
                                                  roomSession: self.caputureSession))
-            self.focusEntity.isEnabled = !(UserSetting.sceneMode == .roomPlan)
+            /// 部屋モードではないかつ。selectedModelがnil
+            self.focusEntity.isEnabled = UserSetting.selectedModel != nil && UserSetting.sceneMode == .objectPutting
         }.store(in: &self.cancellables)
     }
     
