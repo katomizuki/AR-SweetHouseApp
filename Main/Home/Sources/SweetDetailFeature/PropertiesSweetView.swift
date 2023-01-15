@@ -11,7 +11,6 @@ import ComposableArchitecture
 struct PropertiesSweetView: View {
     
     private let store: StoreOf<SweetDetailFeature>
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         WithViewStore(self.store) { viewStore in

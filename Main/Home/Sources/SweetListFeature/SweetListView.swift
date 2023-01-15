@@ -20,7 +20,7 @@ public struct SweetListView: View {
                 List(viewStore.sweets,
                      rowContent: { sweet in
                     NavigationLink(destination: {
-                        SweetDetailView(sweet: sweet)
+                        SweetDetailView(sweet)
                     }, label: {
                         ListCellWithImage(image: Image(systemName: sweet.name),
                                           title: sweet.name)

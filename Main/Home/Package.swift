@@ -41,6 +41,8 @@ let package = Package(
                  targets: ["PuttingFeature"]),
         .library(name: "SweetDetailFeature",
                  targets: ["SweetDetailFeature"]),
+        .library(name: "TabFeature",
+                 targets: ["TabFeature"]),
     ],
     dependencies: [
         .package(
@@ -63,7 +65,8 @@ let package = Package(
                            "PuttingFeature",
                            "ViewComponents",
                            "WorldMapFeature",
-                           "HapticsFeature"]),
+                           "HapticsFeature",
+                           "TabFeature"]),
         .target(
             name: "ViewComponents",
             dependencies: ["EntityModule"]),
@@ -108,7 +111,8 @@ let package = Package(
                                "EntityModule",
                                "SweetDetailFeature",
                                "ViewComponents",
-                               "FirebaseClient"]),
+                               "FirebaseClient",
+                               "TabFeature"]),
         .target(name: "SettingFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture"),
@@ -119,7 +123,10 @@ let package = Package(
         .target(name: "SweetDetailFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                                  package: "swift-composable-architecture"),
-                               "EntityModule"]),
+                               "EntityModule",
+                               "TabFeature"]),
+        .target(name: "TabFeature",
+                dependencies: []),
         .testTarget(
             name: "HomeTests",
             dependencies: ["Home",

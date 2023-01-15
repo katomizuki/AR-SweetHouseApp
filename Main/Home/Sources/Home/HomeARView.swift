@@ -72,6 +72,7 @@ final class HomeARView: ARView {
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
+        viewStore.send(.onTouchARView)
     }
     
     private func setupConfiguration() {

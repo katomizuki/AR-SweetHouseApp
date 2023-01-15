@@ -10,20 +10,24 @@ import EntityModule
 import SwiftUI
 import SweetDetailFeature
 import FirebaseClient
+import TabFeature
 
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets: IdentifiedArrayOf<Sweet> = [
+        var sweets: [Sweet] = [
             Sweet(name: "cupcake", thumbnail: "cupcake", description: "カップケーキ"),
             Sweet(name: "cookie", thumbnail: "cookie", description: "クッキー"),
             Sweet(name: "chocolate", thumbnail: "cookie", description: "チョコレート"),
             Sweet(name: "iceCream", thumbnail: "iceCream", description: "アイスクリーム"),
             Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ"),
         ]
-        var selection: Identified<Sweet.ID, SweetDetailFeature.State>?
+        var detailState: SweetDetailFeature.State?
+        var tabState: TabState
         var alert: AlertState<Action>?
-        public init() { }
+        public init() {
+            self.tabState = TabState()
+        }
         public static func == (lhs: SweetListFeature.State, rhs: SweetListFeature.State) -> Bool {
             return true
         }
@@ -58,12 +62,9 @@ public struct SweetListFeature: ReducerProtocol {
                 return .none
             }
             return .none
-        }.ifLet(\.selection,
+        }.ifLet(\.detailState,
                  action: /Action.detailAction) {
-            Scope(state: \Identified<Sweet.ID, SweetDetailFeature.State>.value,
-                  action: /.self) {
-                SweetDetailFeature()
-            }
+            SweetDetailFeature()
         }
     }
 }

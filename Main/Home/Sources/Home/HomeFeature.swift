@@ -16,6 +16,7 @@ import HapticsFeature
 import RoomPlan
 import EntityModule
 import RealityKit
+import TabFeature
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
@@ -26,6 +27,7 @@ public struct HomeFeature: ReducerProtocol {
         var isSettingView: Bool = false
         var isPuttingView: Bool = false
         var canUseApp: Bool = false
+        var tabState: TabState = TabState()
         var currentARSceneMode: ARSceneMode = .objectPutting
         var sweetListState = SweetListFeature.State()
         var puttingState = PuttingFeature.State()
