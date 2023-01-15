@@ -23,7 +23,7 @@ public struct HomeControlsButtons: View {
                               action: {
                     viewStore.send(.toggleSettingView)
                 })
-                .sheet(isPresented: viewStore.binding(get: \.isSettingView,
+                .sheet(isPresented: viewStore.binding(get: \.tabState.isSettingView,
                                                       send: .toggleSettingView),
                        onDismiss: {
                     viewStore.send(.toggleSettingView)
@@ -40,7 +40,7 @@ public struct HomeControlsButtons: View {
                               action: {
                     viewStore.send(.toggleSweetListView)
                 })
-                .fullScreenCover(isPresented: viewStore.binding(get: \.isSweetListView,
+                .fullScreenCover(isPresented: viewStore.binding(get: \.tabState.isSweetListView,
                                                       send: .toggleSweetListView),
                                  onDismiss: {
                     viewStore.send(.toggleSweetListView)
@@ -57,7 +57,7 @@ public struct HomeControlsButtons: View {
                               action: {
                     viewStore.send(.togglePuttiingView)
                 })
-                .fullScreenCover(isPresented: viewStore.binding(get: \.isPuttingView,
+                .fullScreenCover(isPresented: viewStore.binding(get: \.tabState.isPuttingView,
                                                       send: .togglePuttiingView),
                                  onDismiss: {
                     viewStore.send(.togglePuttiingView)

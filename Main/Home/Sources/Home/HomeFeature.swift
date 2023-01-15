@@ -23,9 +23,6 @@ public struct HomeFeature: ReducerProtocol {
     private static var roomSession: RoomCaptureSession?
     
     public struct State: Equatable {
-        var isSweetListView: Bool = false
-        var isSettingView: Bool = false
-        var isPuttingView: Bool = false
         var canUseApp: Bool = false
         var tabState: TabState = TabState()
         var currentARSceneMode: ARSceneMode = .objectPutting
@@ -83,11 +80,11 @@ public struct HomeFeature: ReducerProtocol {
                     return .toggleCanUseApp
                 }
             case .toggleSettingView:
-                state.isSettingView.toggle()
+                state.tabState.isSettingView.toggle()
             case .toggleSweetListView:
-                state.isSweetListView.toggle()
+                state.tabState.isSweetListView.toggle()
             case .togglePuttiingView:
-                state.isPuttingView.toggle()
+                state.tabState.isPuttingView.toggle()
             case .onTapSaveWorldMapButton:
                 return .task {
                     do {

@@ -8,9 +8,9 @@ class HomeTests: XCTestCase {
     func test_起動時() {
         let store = TestStore(initialState: HomeFeature.State(),
                             reducer: HomeFeature())
-        XCTAssertFalse(store.state.isSweetListView)
-        XCTAssertFalse(store.state.isPuttingView)
-        XCTAssertFalse(store.state.isSettingView)
+        XCTAssertFalse(store.state.tabState.isSweetListView)
+        XCTAssertFalse(store.state.tabState.isPuttingView)
+        XCTAssertFalse(store.state.tabState.isSettingView)
         XCTAssertFalse(store.state.canUseApp)
         XCTAssertNil(store.state.alert)
         XCTAssertNotNil(store.state.puttingState)
@@ -23,15 +23,15 @@ class HomeTests: XCTestCase {
                             reducer: HomeFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.togglePuttiingView) {
-            $0.isPuttingView = true
+            $0.tabState.isPuttingView = true
         }
         
         store.send(.toggleSweetListView) {
-            $0.isSweetListView = true
+            $0.tabState.isSweetListView = true
         }
         
         store.send(.toggleSettingView) {
-            $0.isSettingView = true
+            $0.tabState.isSettingView = true
         }
     }
     
