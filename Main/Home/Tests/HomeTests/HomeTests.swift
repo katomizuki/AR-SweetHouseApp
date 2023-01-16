@@ -8,6 +8,7 @@ class HomeTests: XCTestCase {
     func test_起動時() {
         let store = TestStore(initialState: HomeFeature.State(),
                             reducer: HomeFeature())
+        store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         XCTAssertFalse(store.state.tabState.isSweetListView)
         XCTAssertFalse(store.state.tabState.isPuttingView)
         XCTAssertFalse(store.state.tabState.isSettingView)
