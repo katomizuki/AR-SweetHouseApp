@@ -33,13 +33,8 @@ public struct SweetListFeature: ReducerProtocol {
                                            thumbnail: "donut",
                                            description: "ドーナッツ")),
         ]
-        public var isPresent: Bool = false
-        var tabState: TabState
-        var isSweetListView: Bool = false
         var alert: AlertState<Action>?
-        public init() {
-            self.tabState = TabState()
-        }
+        public init() { }
         public static func == (lhs: SweetListFeature.State, rhs: SweetListFeature.State) -> Bool {
             return true
         }
@@ -52,6 +47,7 @@ public struct SweetListFeature: ReducerProtocol {
                           action: SweetDetailFeature.Action)
         case showFailedAlert
         case dismissAlert
+        case dismissAll
     }
     
     @Dependency(\.mainQueue) var mainQueue
@@ -66,12 +62,19 @@ public struct SweetListFeature: ReducerProtocol {
                 return .none
             case .onDisappear:
                 return .cancel(id: CancelID.self)
-            case .detailAction:
+            case .detailAction(_, let action):
+                if action == .onTapDecideButton {
+                    return .task {
+                        return .dismissAll
+                    }
+                }
                 return .none
             case .showFailedAlert:
                 state.alert = .init(title: .init("不明なエラーが発生しました"))
             case .dismissAlert:
                 state.alert = nil
+                return .none
+            case .dismissAll:
                 return .none
             }
             return .none

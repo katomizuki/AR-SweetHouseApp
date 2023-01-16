@@ -19,7 +19,6 @@ public struct SweetDetailFeature: ReducerProtocol {
         var offset: CGFloat = .zero
         var scene: SCNScene?
         var alert: AlertState<Action>?
-        public var isPresent: Bool = true
         public init(_ sweet: Sweet) {
             self.sweet = sweet
             self.scene = SCNScene(named: "\(sweet.name).scn")
@@ -72,7 +71,6 @@ public struct SweetDetailFeature: ReducerProtocol {
             state.alert = nil
         case .onTapDecideButton:
             UserSetting.selectedModel = state.sweet.entity
-            state.isPresent.toggle()
         }
         return .none
     }

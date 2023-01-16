@@ -132,6 +132,11 @@ public struct HomeFeature: ReducerProtocol {
                     state.currentARSceneMode = .objectPutting
                     UserSetting.sceneMode = .objectPutting
                 }
+            case .sweetList(let action):
+                if action == .dismissAll {
+                    state.tabState.isSweetListView.toggle()
+                }
+                return .none
             default: return .none
             }
             return .none
