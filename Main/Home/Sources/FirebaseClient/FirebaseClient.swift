@@ -39,22 +39,22 @@ public final class FirebaseClient {
     private let storage = Storage.storage()
     private var cancellable: AnyCancellable?
     
-    public func fetchSweets() async throws -> Sweets {
-        do {
-            let list = try await db.getDocuments()
-                .documents
-                .map({
-                    do {
-                        return try Firestore.Decoder().decode(Sweet.self, from: $0.data())
-                    } catch {
-                        throw FirebaseError.decodeError
-                    }
-                })
-            return Sweets()
-        } catch {
-            throw FirebaseError.normalError
-        }
-    }
+//    public func fetchSweets() async throws -> Sweets {
+//        do {
+//            let list = try await db.getDocuments()
+//                .documents
+//                .map({
+//                    do {
+//                        return try Firestore.Decoder().decode(Sweet.self, from: $0.data())
+//                    } catch {
+//                        throw FirebaseError.decodeError
+//                    }
+//                })
+//            return Sweets()
+//        } catch {
+//            throw FirebaseError.normalError
+//        }
+//    }
 
     private func fetchUsdzModel(url: URL,
                                completion: @escaping(Result<ModelEntity, Error>)-> Void) {
