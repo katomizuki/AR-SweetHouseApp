@@ -58,8 +58,7 @@ public struct SweetDetailView: View {
         }
     }
     
-    public init(_ sweet: Sweet) {
-        self.store = StoreOf<SweetDetailFeature>(initialState: SweetDetailFeature.State(sweet),
-                                                 reducer: SweetDetailFeature())
+    public init(_ store: StoreOf<SweetDetailFeature>) {
+        self.store = store
     }
 }

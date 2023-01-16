@@ -15,15 +15,27 @@ import TabFeature
 public struct SweetListFeature: ReducerProtocol {
     
     public struct State: Equatable {
-        var sweets: [Sweet] = [
-            Sweet(name: "cupcake", thumbnail: "cupcake", description: "カップケーキ"),
-            Sweet(name: "cookie", thumbnail: "cookie", description: "クッキー"),
-            Sweet(name: "chocolate", thumbnail: "cookie", description: "チョコレート"),
-            Sweet(name: "iceCream", thumbnail: "iceCream", description: "アイスクリーム"),
-            Sweet(name: "donut", thumbnail: "donut", description: "ドーナッツ"),
+        public var detailStates: IdentifiedArrayOf<SweetDetailFeature.State> =
+        [
+            SweetDetailFeature.State(Sweet(name: "cupcake",
+                                           thumbnail: "cupcake",
+                                           description: "カップケーキ")),
+            SweetDetailFeature.State(Sweet(name: "cookie",
+                                           thumbnail: "cookie",
+                                           description: "クッキー")),
+            SweetDetailFeature.State(Sweet(name: "chocolate",
+                                           thumbnail: "cookie",
+                                           description: "チョコレート")),
+            SweetDetailFeature.State(Sweet(name: "iceCream",
+                                           thumbnail: "iceCream",
+                                           description: "アイスクリーム")),
+            SweetDetailFeature.State(Sweet(name: "donut",
+                                           thumbnail: "donut",
+                                           description: "ドーナッツ")),
         ]
-        var detailState: SweetDetailFeature.State?
+        public var isPresent: Bool = false
         var tabState: TabState
+        var isSweetListView: Bool = false
         var alert: AlertState<Action>?
         public init() {
             self.tabState = TabState()
@@ -36,7 +48,8 @@ public struct SweetListFeature: ReducerProtocol {
     public enum Action: Equatable {
         case onAppear
         case onDisappear
-        case detailAction(SweetDetailFeature.Action)
+        case detailAction(id: SweetDetailFeature.State.ID,
+                          action: SweetDetailFeature.Action)
         case showFailedAlert
         case dismissAlert
     }
@@ -62,8 +75,8 @@ public struct SweetListFeature: ReducerProtocol {
                 return .none
             }
             return .none
-        }.ifLet(\.detailState,
-                 action: /Action.detailAction) {
+        }.forEach(\.detailStates,
+                  action: /Action.detailAction(id:action:)) {
             SweetDetailFeature()
         }
     }

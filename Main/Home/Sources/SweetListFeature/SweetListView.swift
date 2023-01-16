@@ -17,14 +17,23 @@ public struct SweetListView: View {
     public var body: some View {
         WithViewStore(self.store, observe: { $0 }) { viewStore in
             NavigationView(content: {
-                List(viewStore.sweets,
-                     rowContent: { sweet in
-                    NavigationLink(destination: {
-                        SweetDetailView(sweet)
-                    }, label: {
-                        ListCellWithImage(image: Image(systemName: sweet.name),
-                                          title: sweet.name)
-                    })
+                List {
+                    ForEachStore(
+                        self.store.scope(
+                            state: \.detailStates,
+                            action: SweetListFeature.Action.detailAction(id:action:))) {
+                                detailStore in
+                                NavigationLink(destination: {
+                                    SweetDetailView(detailStore)
+                                }, label: {
+                                    WithViewStore(detailStore) { detailViewstore in
+                                        ListCellWithImage(image:
+                                                            Image(systemName: detailViewstore.state.sweet.name),
+                                                          title: detailViewstore.state.sweet.name)
+                                    }
+                            })
+                      }
+                  }
                 })
                 .alert(self.store.scope(state: { $0.alert }),
                        dismiss: .dismissAlert)
@@ -44,7 +53,6 @@ public struct SweetListView: View {
                 .onDisappear(perform: {
                     viewStore.send(.onDisappear)
                 })
-            })
         }
     }
     
