@@ -12,13 +12,12 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
     public var id: UUID = UUID()
     public let name: String
-    public let thumbnail: String
     public var description: String
     public var entity: Entity?
     
-    public init(name: String, thumbnail: String, description: String) {
+    public init(name: String,
+                description: String) {
         self.name = name
-        self.thumbnail = thumbnail
         self.description = description
     #if targetEnvironment(simulator)
     #else
@@ -36,7 +35,6 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
     private enum CodingKeys: String, CodingKey {
         case name
-        case thumbnail
         case description
     }
 }

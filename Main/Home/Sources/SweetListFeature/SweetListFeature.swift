@@ -18,19 +18,14 @@ public struct SweetListFeature: ReducerProtocol {
         public var detailStates: IdentifiedArrayOf<SweetDetailFeature.State> =
         [
             SweetDetailFeature.State(Sweet(name: "cupcake",
-                                           thumbnail: "cupcake",
                                            description: "カップケーキ")),
             SweetDetailFeature.State(Sweet(name: "cookie",
-                                           thumbnail: "cookie",
                                            description: "クッキー")),
             SweetDetailFeature.State(Sweet(name: "chocolate",
-                                           thumbnail: "cookie",
                                            description: "チョコレート")),
             SweetDetailFeature.State(Sweet(name: "iceCream",
-                                           thumbnail: "iceCream",
                                            description: "アイスクリーム")),
             SweetDetailFeature.State(Sweet(name: "donut",
-                                           thumbnail: "donut",
                                            description: "ドーナッツ")),
         ]
         var alert: AlertState<Action>?

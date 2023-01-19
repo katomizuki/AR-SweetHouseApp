@@ -27,14 +27,12 @@ public struct SweetListView: View {
                                     SweetDetailView(detailStore)
                                 }, label: {
                                     WithViewStore(detailStore) { detailViewstore in
-                                        ListCellWithImage(image:
-                                                            Image(systemName: detailViewstore.state.sweet.name),
-                                                          title: detailViewstore.state.sweet.name)
+                                            Text(detailViewstore.state.sweet.name)
+                                            .font(.title2)
                                     }
                             })
                       }
                   }
-                })
                 .alert(self.store.scope(state: { $0.alert }),
                        dismiss: .dismissAlert)
                 .toolbar(content: {
@@ -43,9 +41,10 @@ public struct SweetListView: View {
                         Button(action: {
                             dismiss()
                         },label: {
-                             Image(systemName: "clear.fill")
-                        })
-                    })
+                                Image(systemName: "clear.fill")
+                           })
+                       })
+                   })
                 })
                 .onAppear(perform: {
                     viewStore.send(.onAppear)
