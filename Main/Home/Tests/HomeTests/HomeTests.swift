@@ -10,11 +10,9 @@ class HomeTests: XCTestCase {
                             reducer: HomeFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         XCTAssertFalse(store.state.tabState.isSweetListView)
-        XCTAssertFalse(store.state.tabState.isPuttingView)
         XCTAssertFalse(store.state.tabState.isSettingView)
         XCTAssertFalse(store.state.canUseApp)
         XCTAssertNil(store.state.alert)
-        XCTAssertNotNil(store.state.puttingState)
         XCTAssertNotNil(store.state.settingState)
         XCTAssertNotNil(store.state.arViewState)
         XCTAssertEqual(store.state.currentARSceneMode, .objectPutting)
@@ -23,10 +21,7 @@ class HomeTests: XCTestCase {
         let store = TestStore(initialState: HomeFeature.State(),
                             reducer: HomeFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
-        store.send(.togglePuttiingView) {
-            $0.tabState.isPuttingView = true
-        }
-        
+      
         store.send(.toggleSweetListView) {
             $0.tabState.isSweetListView = true
         }

@@ -7,9 +7,7 @@
 import UIKit
 import SwiftUI
 import Home
-import Firebase
 import ComposableArchitecture
-import WorldMapFeature
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,7 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let store = Store(initialState: HomeFeature.State(),
                           reducer: HomeFeature())
         let contentView = Home.HomeView(store: store)
-        FirebaseApp.configure()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UIHostingController(rootView: contentView)
         self.window = window

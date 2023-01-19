@@ -10,7 +10,6 @@ import ViewComponents
 import ComposableArchitecture
 import SweetListFeature
 import SettingFeature
-import PuttingFeature
 
 public struct HomeControlsButtons: View {
     public let store: StoreOf<HomeFeature>
@@ -20,6 +19,7 @@ public struct HomeControlsButtons: View {
                       content: { viewStore in
             HStack(content: {
                 ControlButton(systemName: "square.grid.2x2",
+                              buttonTitle: "settings",
                               action: {
                     viewStore.send(.toggleSettingView)
                 })
@@ -36,7 +36,8 @@ public struct HomeControlsButtons: View {
                 
                 Spacer()
                 
-                ControlButton(systemName: "square.grid.2x2",
+                ControlButton(systemName: "list.bullet",
+                              buttonTitle: "sweet list",
                               action: {
                     viewStore.send(.toggleSweetListView)
                 })
@@ -50,27 +51,11 @@ public struct HomeControlsButtons: View {
                                                  action: HomeFeature.Action.sweetList)
                     SweetListView(store: store)
                 })
-                
-                Spacer()
-                
-                ControlButton(systemName: "square.grid.2x2",
-                              action: {
-                    viewStore.send(.togglePuttiingView)
-                })
-                .fullScreenCover(isPresented: viewStore.binding(get: \.tabState.isPuttingView,
-                                                      send: .togglePuttiingView),
-                                 onDismiss: {
-                    viewStore.send(.togglePuttiingView)
-                },
-                                 content: {
-                    let store = self.store.scope(state: \.puttingState,
-                                                 action: HomeFeature.Action.putting)
-                    PuttingView(store: store)
-                })
             
                 Spacer()
                 
-                ControlButton(systemName: "square.grid.2x2",
+                ControlButton(systemName: "arkit",
+                              buttonTitle: "save the AR World Map",
                               action: {
                     viewStore.send(.onTapSaveWorldMapButton)
                 })

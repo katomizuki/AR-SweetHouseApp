@@ -12,9 +12,9 @@ public enum ARSceneMode: String, CaseIterable, Identifiable {
     public var description: String {
         switch self {
         case .roomPlan:
-            return "部屋のものをお菓子にみたてて遊んでみよう！"
+            return "AR sweet Room"
         case .objectPutting:
-            return "好きにお菓子を配置しよう!!"
+            return "Puts sweet"
         }
     }
     

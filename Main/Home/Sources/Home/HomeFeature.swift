@@ -7,7 +7,6 @@
 
 import ComposableArchitecture
 import SweetListFeature
-import PuttingFeature
 import SettingFeature
 import WorldMapFeature
 import ARKit
@@ -27,7 +26,6 @@ public struct HomeFeature: ReducerProtocol {
         var tabState: TabState = TabState()
         var currentARSceneMode: ARSceneMode = .objectPutting
         var sweetListState = SweetListFeature.State()
-        var puttingState = PuttingFeature.State()
         var settingState = SettingFeature.State()
         var arViewState: ARFeature.State {
             get {
@@ -45,9 +43,7 @@ public struct HomeFeature: ReducerProtocol {
         case onAppear
         case toggleSweetListView
         case toggleSettingView
-        case togglePuttiingView
         case sweetList(SweetListFeature.Action)
-        case putting(PuttingFeature.Action)
         case setting(SettingFeature.Action)
         case arView(ARFeature.Action)
         case writeARWorldMap(_ worldMap: ARWorldMap)
@@ -83,8 +79,6 @@ public struct HomeFeature: ReducerProtocol {
                 state.tabState.isSettingView.toggle()
             case .toggleSweetListView:
                 state.tabState.isSweetListView.toggle()
-            case .togglePuttiingView:
-                state.tabState.isPuttingView.toggle()
             case .onTapSaveWorldMapButton:
                 return .task {
                     do {
@@ -144,10 +138,6 @@ public struct HomeFeature: ReducerProtocol {
         
         Scope(state: \.sweetListState, action: /Action.sweetList) {
             SweetListFeature()
-        }
-        
-        Scope(state: \.puttingState, action: /Action.putting) {
-            PuttingFeature()
         }
         
         Scope(state: \.settingState, action: /Action.setting) {
