@@ -68,22 +68,6 @@ final class MeshHelper {
                    }
                    return textureCoordinates
         }
-    
-//    private func makeMesh(normals: [SIMD3<Float>],
-//                          positions: [SIMD3<Float>],
-//                          indices:[UInt32]) -> ModelEntity? {
-//        var descriptor = MeshDescriptor(name: "mesh")
-//        descriptor.positions = MeshBuffer(positions)
-//        descriptor.normals = MeshBuffer(normals)
-//        descriptor.primitives = .triangles(indices)
-//        let material = SimpleMaterial(color: .red, isMetallic: false)
-//        do {
-//            let mesh = try MeshResource.generate(from: [descriptor])
-//            return ModelEntity(mesh: mesh, materials: [material])
-//        } catch {
-//            return nil
-//        }
-//    }
 }
 extension ARMeshGeometry {
     func classificationOf(index: Int) -> ARMeshClassification {
@@ -93,27 +77,3 @@ extension ARMeshGeometry {
         return ARMeshClassification(rawValue: classificationValue) ?? .none
     }
 }
-
-//        if anchors.isEmpty { return }
-//
-//        guard let meshAnchor = anchors.map({ $0 as? ARMeshAnchor }).last else { return }
-//        guard let meshAnchor = meshAnchor else { return }
-//        let geometry = meshAnchor.geometry
-//        let verticesSource = geometry.vertices
-//        let faces = geometry.faces
-//        let normalsSource = geometry.normals
-//        var positions = [SIMD3<Float>]()
-//        var normals = [SIMD3<Float>]()
-//        var indices = [UInt32]()
-//        for index in 0..<faces.count {
-//            let vertex = meshHelper.vertex(at: UInt32(index), vertices: verticesSource)
-//            let normal = meshHelper.normal(at: UInt32(index), normals: normalsSource)
-//            positions.append(vertex)
-//            normals.append(normal)
-//            indices.append(UInt32(index))
-//        }
-//        // 0, 1, 2, 2, 3, 0
-//        guard let mesh = self.makeMesh(normals: normals, positions: positions, indices: indices) else { return }
-//        let anchorEntity = AnchorEntity(world: meshAnchor.transform)
-//        anchorEntity.addChild(mesh)
-//        scene.anchors.append(anchorEntity)

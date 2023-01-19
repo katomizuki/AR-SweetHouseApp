@@ -45,9 +45,9 @@ let package = Package(
                  targets: ["TabFeature"]),
     ],
     dependencies: [
-        .package(
-            name: "Firebase",url: "https://github.com/firebase/firebase-ios-sdk.git",
-                 .exactItem(.init("10.0.0")!)),
+//        .package(
+//            name: "Firebase",url: "https://github.com/firebase/firebase-ios-sdk.git",
+//                 .exactItem(.init("10.0.0")!)),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture.git",
                  .exactItem(.init("0.42.0")!)),
         .package(url: "https://github.com/maxxfrazer/FocusEntity.git", .exactItem(.init("2.3.0")!))
@@ -80,15 +80,7 @@ let package = Package(
             dependencies: [.product(name: "ComposableArchitecture",
                                     package: "swift-composable-architecture")]),
         .target(name: "FirebaseClient",
-                dependencies: [.product(name: "FirebaseFirestore",
-                                        package: "Firebase"),
-                               .product(name: "FirebaseStorage",
-                                        package: "Firebase"),
-                               .product(name: "FirebaseFirestoreSwift",
-                                        package: "Firebase"),
-                               "EntityModule",
-                    .product(name: "ComposableArchitecture",
-                             package: "swift-composable-architecture")]),
+                dependencies: []),
         .target(name: "WorldMapFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture")]),
