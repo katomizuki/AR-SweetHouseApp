@@ -21,6 +21,8 @@ public struct ARFeature: ReducerProtocol {
         case dismissAlert
         case completeAddAnchor
         case disAppear
+        case sendARSession(arSession: ARSession?,
+                           roomSession: RoomCaptureSession?)
         public static func == (lhs: ARFeature.Action, rhs: ARFeature.Action) -> Bool {
             return true
         }
@@ -50,6 +52,9 @@ public struct ARFeature: ReducerProtocol {
                 state.addAnchorState != .finishAddAnchor {
                 UserSetting.currentAnchorState = .objToRoom
             }
+            return .task {
+                return .sendARSession(arSession: arSession, roomSession: roomSession)
+            }
         case .initialize:
             break
         case .showFailedAlert:
@@ -61,6 +66,8 @@ public struct ARFeature: ReducerProtocol {
             UserSetting.currentAnchorState = .finishAddAnchor
         case .disAppear:
             UserSetting.currentAnchorState = .normal
+        case .sendARSession(_,_):
+            return .none
         }
         return .none
     }

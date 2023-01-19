@@ -16,10 +16,13 @@ import RoomPlan
 import EntityModule
 import RealityKit
 import TabFeature
+import MultiPeerFeature
+import MultipeerConnectivity
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
     private static var roomSession: RoomCaptureSession?
+    
     
     public struct State: Equatable {
         var canUseApp: Bool = false
@@ -27,14 +30,7 @@ public struct HomeFeature: ReducerProtocol {
         var currentARSceneMode: ARSceneMode = .objectPutting
         var sweetListState = SweetListFeature.State()
         var settingState = SettingFeature.State()
-        var arViewState: ARFeature.State {
-            get {
-                ARFeature.State()
-            } set {
-                HomeFeature.roomSession = newValue.roomSession
-                HomeFeature.arSession = newValue.arSession
-            }
-        }
+        var arViewState = ARFeature.State()
         var alert: AlertState<Action>?
         public init() { }
     }
@@ -55,8 +51,9 @@ public struct HomeFeature: ReducerProtocol {
         case toggleCanUseApp
         case completedConnectOtherApp
         case onTapSegment
+        case onTapMultipeer
     }
-    
+
     public init() {
     }
     
@@ -131,11 +128,30 @@ public struct HomeFeature: ReducerProtocol {
                     state.tabState.isSweetListView.toggle()
                 }
                 return .none
-            default: return .none
+            case .onTapMultipeer:
+                // ボタンなどはつけずにやったほうがええかも
+                if let collaborationData = try? NSKeyedArchiver.archivedData(withRootObject: ARSession.CollaborationData.self,
+                                                                             requiringSecureCoding: true) {
+//                    mulipeerSession.sendToAllPeers(Data(), reliably: true)
+                }
+                
+               // 通信
+                return .none
+            case .setting(let settingFeatureAction):
+                return .none
+            case .arView(let arFeatureAction):
+                switch arFeatureAction {
+                case .sendARSession(let session, let roomSession):
+                    Self.arSession = session
+                    Self.roomSession = roomSession
+                default: break
+                }
+                return .none
             }
             return .none
         }
-        
+
+
         Scope(state: \.sweetListState, action: /Action.sweetList) {
             SweetListFeature()
         }
@@ -147,5 +163,25 @@ public struct HomeFeature: ReducerProtocol {
         Scope(state: \.arViewState, action: /Action.arView) {
             ARFeature()
         }
+    }
+    
+    func recevieData(_ data: Data, from peer: MCPeerID) {
+        if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self,
+                                                                           from: data) {
+            Self.arSession?.update(with: collaborationData)
+        }
+    }
+    
+    func peerJoinedHandler(_ peerId: MCPeerID) {
+        print("参加したで")
+    }
+    
+    func peerLeftHandler(_ peerId: MCPeerID) {
+        print("抜けたで")
+    }
+    
+    func peerDiscoverdHandler(_ peerId: MCPeerID) -> Bool {
+        print("発見したで")
+        return true
     }
 }

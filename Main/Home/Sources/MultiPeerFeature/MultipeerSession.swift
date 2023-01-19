@@ -20,10 +20,10 @@ public final class MultipeerSession: NSObject {
     private let peerLeftHandler: (MCPeerID) -> Void
     private let peerDiscoverdHandler: (MCPeerID) -> Bool
     
-    init(receiveDataHandler: @escaping (Data, MCPeerID) -> Void,
-         peerJoinedHandler: @escaping (MCPeerID) -> Void,
-         peerLeftHandler: @escaping (MCPeerID) -> Void,
-         peerDiscoverdHandler: @escaping (MCPeerID) -> Bool) {
+    public init(receiveDataHandler: @escaping (Data, MCPeerID) -> Void,
+                peerJoinedHandler: @escaping (MCPeerID) -> Void,
+                peerLeftHandler: @escaping (MCPeerID) -> Void,
+                peerDiscoverdHandler: @escaping (MCPeerID) -> Bool) {
         self.receiveDataHandler = receiveDataHandler
         self.peerJoinedHandler = peerJoinedHandler
         self.peerLeftHandler = peerLeftHandler
