@@ -22,6 +22,7 @@ import MultipeerConnectivity
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
     private static var roomSession: RoomCaptureSession?
+    private var multipeerSession: MultipeerSession!
     
     
     public struct State: Equatable {
@@ -32,6 +33,7 @@ public struct HomeFeature: ReducerProtocol {
         var settingState = SettingFeature.State()
         var arViewState = ARFeature.State()
         var alert: AlertState<Action>?
+        var collaborationData: ARSession.CollaborationData?
         public init() { }
     }
     
@@ -55,6 +57,10 @@ public struct HomeFeature: ReducerProtocol {
     }
 
     public init() {
+        self.multipeerSession = MultipeerSession(receiveDataHandler: self.recevieData(_:from:),
+                                                 peerJoinedHandler: self.peerJoinedHandler(_:),
+                                                 peerLeftHandler: self.peerLeftHandler(_:),
+                                                 peerDiscoverdHandler: self.peerDiscoverdHandler(_:))
     }
     
    @Dependency(\.mainQueue) var mainQueue
@@ -130,11 +136,12 @@ public struct HomeFeature: ReducerProtocol {
                 return .none
             case .onTapMultipeer:
                 // ボタンなどはつけずにやったほうがええかも
-                if let collaborationData = try? NSKeyedArchiver.archivedData(withRootObject: ARSession.CollaborationData.self,
+                if let data = state.collaborationData,
+                   let collaborationData = try? NSKeyedArchiver.archivedData(withRootObject: data,
                                                                              requiringSecureCoding: true) {
-//                    mulipeerSession.sendToAllPeers(Data(), reliably: true)
+                    multipeerSession.sendToAllPeers(collaborationData,
+                                                    reliably: true)
                 }
-                
                // 通信
                 return .none
             case .setting(let settingFeatureAction):
@@ -144,6 +151,8 @@ public struct HomeFeature: ReducerProtocol {
                 case .sendARSession(let session, let roomSession):
                     Self.arSession = session
                     Self.roomSession = roomSession
+                case .syncCollaborationData(let collaborationData):
+                    state.collaborationData = collaborationData
                 default: break
                 }
                 return .none
@@ -166,6 +175,7 @@ public struct HomeFeature: ReducerProtocol {
     }
     
     func recevieData(_ data: Data, from peer: MCPeerID) {
+        // 受け取ったデータをCollaborationDataに変換する。
         if let collaborationData = try? NSKeyedUnarchiver.unarchivedObject(ofClass: ARSession.CollaborationData.self,
                                                                            from: data) {
             Self.arSession?.update(with: collaborationData)
@@ -173,15 +183,15 @@ public struct HomeFeature: ReducerProtocol {
     }
     
     func peerJoinedHandler(_ peerId: MCPeerID) {
-        print("参加したで")
+        UserSetting.connectText = "端末と繋がりました"
     }
     
     func peerLeftHandler(_ peerId: MCPeerID) {
-        print("抜けたで")
+        UserSetting.connectText = "端末との接続が切れました。"
     }
     
     func peerDiscoverdHandler(_ peerId: MCPeerID) -> Bool {
-        print("発見したで")
+        UserSetting.connectText = "端末を発見しました"
         return true
     }
 }

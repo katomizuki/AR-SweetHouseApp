@@ -47,6 +47,7 @@ public final class MultipeerSession: NSObject {
         serviceBrowser = MCNearbyServiceBrowser(peer: myPeerID,
                                                 serviceType: MultipeerSession.serviceType)
         serviceBrowser.delegate = self
+        // 周りの検索を開始する。
         serviceBrowser.startBrowsingForPeers()
     }
     
@@ -109,13 +110,15 @@ extension MultipeerSession: MCSessionDelegate {
                  peer peerID: MCPeerID,
                  didChange state: MCSessionState) {
         if state == .connected {
+            // 接続中
             peerJoinedHandler(peerID)
         } else if state == .notConnected {
+            // 接続が切れる。
             peerLeftHandler(peerID)
         }
     }
     
-    // データを受信
+    // データを受信　-> ARSession.CollaborationDataに変換してViewに反映する。
     public func session(_ session: MCSession,
                  didReceive data: Data,
                  fromPeer peerID: MCPeerID) {

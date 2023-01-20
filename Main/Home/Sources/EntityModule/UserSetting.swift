@@ -22,4 +22,11 @@ public final class UserSetting {
         case normal
     }
     
+    public static var connectText: String = ""
+    public enum ConnectionStatus {
+        case connecting
+        case noConnecting
+        case invite
+    }
+    
 }

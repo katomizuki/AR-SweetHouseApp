@@ -153,7 +153,6 @@ final class HomeARView: ARView {
         room.walls.forEach {
             let roomObject = RoomObjectAnchor($0)
             let roomNode = RoomNode(roomObject: roomObject, uuid: $0.identifier.uuidString)
-//            roomNode.updateSurface()
             scene.anchors.append(roomNode.anchorEntity)
         }
         room.doors.forEach {
@@ -208,6 +207,7 @@ extension HomeARView: ARSessionDelegate {
     }
     
     func session(_ session: ARSession, didOutputCollaborationData data: ARSession.CollaborationData) {
+        viewStore.send(.sendCollaborationData(data))
     }
 }
 

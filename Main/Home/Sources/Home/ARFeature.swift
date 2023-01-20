@@ -23,6 +23,8 @@ public struct ARFeature: ReducerProtocol {
         case disAppear
         case sendARSession(arSession: ARSession?,
                            roomSession: RoomCaptureSession?)
+        case sendCollaborationData(_ collaborationData: ARSession.CollaborationData)
+        case syncCollaborationData(_ collaborationData: ARSession.CollaborationData)
         public static func == (lhs: ARFeature.Action, rhs: ARFeature.Action) -> Bool {
             return true
         }
@@ -67,6 +69,12 @@ public struct ARFeature: ReducerProtocol {
         case .disAppear:
             UserSetting.currentAnchorState = .normal
         case .sendARSession(_,_):
+            return .none
+        case .sendCollaborationData(let collaborationData):
+            return .task {
+                return .syncCollaborationData(collaborationData)
+            }
+        case .syncCollaborationData(_):
             return .none
         }
         return .none
