@@ -22,7 +22,6 @@
 		D37BED9C29017E4500FF3A73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37BED9B29017E4500FF3A73 /* AppDelegate.swift */; };
 		D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D37D919B2920621F003B03FD /* MultiPeerFeature */; };
 		D38D3E6F294C9CC900BCD6B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */; };
-		D3DF88592907F82000227BED /* ViewComponents in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF88582907F82000227BED /* ViewComponents */; };
 		D3F4C39E2931F00500218193 /* EntityModule in Frameworks */ = {isa = PBXBuildFile; productRef = D3F4C39D2931F00500218193 /* EntityModule */; };
 /* End PBXBuildFile section */
 
@@ -34,11 +33,11 @@
 		D37B34D8296D8F3100AB17B7 /* iceCream.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = iceCream.usdz; sourceTree = "<group>"; };
 		D37B34DA296D8F7700AB17B7 /* chocolate.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = chocolate.usdz; sourceTree = "<group>"; };
 		D37B34DC296D90B800AB17B7 /* donut.usdz */ = {isa = PBXFileReference; lastKnownFileType = file.usdz; path = donut.usdz; sourceTree = "<group>"; };
-		D37B34DF296D918F00AB17B7 /* cupcake.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = cupcake.scn; path = scnAsset/cupcake.scn; sourceTree = SOURCE_ROOT; };
-		D37B34E1296D921D00AB17B7 /* cookie.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = cookie.scn; path = scnAsset/cookie.scn; sourceTree = SOURCE_ROOT; };
+		D37B34DF296D918F00AB17B7 /* cupcake.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = cupcake.scn; path = scnAsset/cupcake.scn; sourceTree = SOURCE_ROOT; };
+		D37B34E1296D921D00AB17B7 /* cookie.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = cookie.scn; path = scnAsset/cookie.scn; sourceTree = SOURCE_ROOT; };
 		D37B34E3296D925300AB17B7 /* chocolate.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = chocolate.scn; sourceTree = "<group>"; };
-		D37B34E5296D93B900AB17B7 /* iceCream.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = iceCream.scn; path = scnAsset/iceCream.scn; sourceTree = SOURCE_ROOT; };
-		D37B34E7296D942400AB17B7 /* donut.scn */ = {isa = PBXFileReference; lastKnownFileType = file; name = donut.scn; path = usdzAsset/donut.scn; sourceTree = SOURCE_ROOT; };
+		D37B34E5296D93B900AB17B7 /* iceCream.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = iceCream.scn; path = scnAsset/iceCream.scn; sourceTree = SOURCE_ROOT; };
+		D37B34E7296D942400AB17B7 /* donut.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; name = donut.scn; path = usdzAsset/donut.scn; sourceTree = SOURCE_ROOT; };
 		D37BED9B29017E4500FF3A73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D38C7B75290EAB4100515B58 /* RealitySuperApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealitySuperApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D38D3E6E294C9CC900BCD6B2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -54,7 +53,6 @@
 				D3760F9C29051B6B00356F63 /* Home in Frameworks */,
 				D3F4C39E2931F00500218193 /* EntityModule in Frameworks */,
 				D37D919C2920621F003B03FD /* MultiPeerFeature in Frameworks */,
-				D3DF88592907F82000227BED /* ViewComponents in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +148,6 @@
 			name = RealitySuperApp;
 			packageProductDependencies = (
 				D3760F9B29051B6B00356F63 /* Home */,
-				D3DF88582907F82000227BED /* ViewComponents */,
 				D37D919B2920621F003B03FD /* MultiPeerFeature */,
 				D3F4C39D2931F00500218193 /* EntityModule */,
 			);
@@ -458,10 +455,6 @@
 		D37D919B2920621F003B03FD /* MultiPeerFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MultiPeerFeature;
-		};
-		D3DF88582907F82000227BED /* ViewComponents */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ViewComponents;
 		};
 		D3F4C39D2931F00500218193 /* EntityModule */ = {
 			isa = XCSwiftPackageProductDependency;
