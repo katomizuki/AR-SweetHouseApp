@@ -8,7 +8,6 @@
 import SwiftUI
 import RealityKit
 import ComposableArchitecture
-import ViewComponents
 
 public struct HomeView : View {
     public let store: StoreOf<HomeFeature>

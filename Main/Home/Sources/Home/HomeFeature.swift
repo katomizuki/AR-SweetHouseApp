@@ -15,7 +15,6 @@ import HapticsFeature
 import RoomPlan
 import EntityModule
 import RealityKit
-import TabFeature
 import MultiPeerFeature
 import MultipeerConnectivity
 

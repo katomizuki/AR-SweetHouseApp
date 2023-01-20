@@ -10,7 +10,6 @@ import EntityModule
 import SwiftUI
 import SweetDetailFeature
 import FirebaseClient
-import TabFeature
 
 public struct SweetListFeature: ReducerProtocol {
     

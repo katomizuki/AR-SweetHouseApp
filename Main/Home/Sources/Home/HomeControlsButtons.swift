@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import ViewComponents
 import ComposableArchitecture
 import SweetListFeature
 import SettingFeature
