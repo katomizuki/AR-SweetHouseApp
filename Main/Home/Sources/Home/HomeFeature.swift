@@ -56,7 +56,7 @@ public struct HomeFeature: ReducerProtocol {
     }
 
     public init() {
-        self.multipeerSession = MultipeerSession(receiveDataHandler: self.recevieData(_:from:),
+        self.multipeerSession = MultiPeerFeature.MultipeerSession(receiveDataHandler: self.recevieData(_:from:),
                                                  peerJoinedHandler: self.peerJoinedHandler(_:),
                                                  peerLeftHandler: self.peerLeftHandler(_:),
                                                  peerDiscoverdHandler: self.peerDiscoverdHandler(_:))
@@ -134,6 +134,8 @@ public struct HomeFeature: ReducerProtocol {
                 }
                 return .none
             case .onTapMultipeer:
+            #if targetEnvironment(simulator)
+            #else
                 // ボタンなどはつけずにやったほうがええかも
                 if let data = state.collaborationData,
                    let collaborationData = try? NSKeyedArchiver.archivedData(withRootObject: data,
@@ -141,6 +143,7 @@ public struct HomeFeature: ReducerProtocol {
                     multipeerSession.sendToAllPeers(collaborationData,
                                                     reliably: true)
                 }
+            #endif
                // 通信
                 return .none
             case .setting(let settingFeatureAction):

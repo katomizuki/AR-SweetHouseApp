@@ -52,6 +52,7 @@ let package = Package(
                            "SweetListFeature",
                            "SettingFeature",
                            "WorldMapFeature",
+                           "MultiPeerFeature",
                            "HapticsFeature"]),
         .target(
             name: "EntityModule",
