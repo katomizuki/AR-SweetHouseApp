@@ -52,7 +52,9 @@ public struct ARFeature: ReducerProtocol {
             state.arSession = arSession
             state.roomSession = roomSession
             if let worldMap = state.savedARWorld {
-                print("きたよ")
+                let config = ARWorldTrackingConfiguration()
+                config.initialWorldMap = worldMap
+                arSession?.run(config)
             }
             if UserSetting.sceneMode == .roomPlan,
                 state.addAnchorState != .finishAddAnchor {

@@ -17,6 +17,7 @@ import EntityModule
 import RealityKit
 import MultiPeerFeature
 import MultipeerConnectivity
+import UtilFeature
 
 public struct HomeFeature: ReducerProtocol {
     private static var arSession: ARSession?
@@ -68,12 +69,14 @@ public struct HomeFeature: ReducerProtocol {
    @Dependency(\.mainQueue) var mainQueue
    @Dependency(\.worldMap) var worldMapFeature
    @Dependency(\.hapticsFeature) var hapticsFeature
+   @Dependency(\.userDefaultsManager) var userDefalutsManager
     
     public var body: some ReducerProtocol<State, Action> {
         Reduce { state, action in
             switch action {
             case .onAppear:
                 state = .init()
+                state.isSaveARWorld = userDefalutsManager.loadARWorldFlag()
                 return .task {
                         if !RoomCaptureSession.isSupported && ARConfiguration.supportsFrameSemantics([.sceneDepth,.smoothedSceneDepth]) {
                             return .showDontUseAppAlert
@@ -112,9 +115,11 @@ public struct HomeFeature: ReducerProtocol {
             #endif
                 state.alert = .init(title: .init("AR world successfully saved!"))
                 state.isSaveARWorld.toggle()
+                userDefalutsManager.saveARWorldFlag(flag: true)
             case .showFailAlert:
                 state.alert = .init(title: .init("Failed to save AR world"))
                 state.isSaveARWorld = false
+                userDefalutsManager.saveARWorldFlag(flag: false)
             case .alertDismiss:
                 state.alert = nil
             case .showDontUseAppAlert:
@@ -136,7 +141,7 @@ public struct HomeFeature: ReducerProtocol {
                 }
             case .sendARWorldMap(let worldMap):
                 state.arViewState.savedARWorld = worldMap
-                break
+                return .none
             case .onTapSegment:
                 if state.currentARSceneMode == .objectPutting {
                     state.currentARSceneMode = .roomPlan

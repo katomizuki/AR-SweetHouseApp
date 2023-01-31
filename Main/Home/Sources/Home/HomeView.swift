@@ -18,7 +18,7 @@ public struct HomeView : View {
                 ZStack(alignment: .top,
                        content: {
                         HomeARViewContainer(store: store)
-                    HStack(alignment: .center,
+                    HStack(alignment: .bottom,
                            content: {
                         if viewStore.state.isSaveARWorld {
                             ReviveButton(store: store)

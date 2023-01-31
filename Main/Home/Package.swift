@@ -53,6 +53,7 @@ let package = Package(
                            "SettingFeature",
                            "WorldMapFeature",
                            "MultiPeerFeature",
+                           "UtilFeature",
                            "HapticsFeature"]),
         .target(
             name: "EntityModule",
@@ -73,7 +74,8 @@ let package = Package(
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture")]),
         .target(name: "UtilFeature",
-                dependencies: []),
+                dependencies: [.product(name: "ComposableArchitecture",
+                                        package: "swift-composable-architecture")]),
         .target(name: "SweetListFeature",
                 dependencies: [.product(name: "ComposableArchitecture",
                                         package: "swift-composable-architecture"),
