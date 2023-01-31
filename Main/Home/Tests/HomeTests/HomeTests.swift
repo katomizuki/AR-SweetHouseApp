@@ -1,5 +1,6 @@
 import XCTest
 import ComposableArchitecture
+import UtilFeature
 @testable import Home
 
 class HomeTests: XCTestCase {
@@ -45,8 +46,10 @@ class HomeTests: XCTestCase {
         let store = TestStore(initialState: HomeFeature.State(),
                               reducer: HomeFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
+        store.dependencies.userDefaultsManager = UserDefaultsManager.shared
         store.send(.showCompleteAlert) {
             $0.alert = .init(title: .init("AR world successfully saved!"))
+            $0.isSaveARWorld = true
         }
         
 
@@ -56,6 +59,7 @@ class HomeTests: XCTestCase {
         
         store.send(.showFailAlert) {
             $0.alert = .init(title: .init("Failed to save AR world"))
+            $0.isSaveARWorld = false
         }
         
         store.send(.showDontUseAppAlert) {
