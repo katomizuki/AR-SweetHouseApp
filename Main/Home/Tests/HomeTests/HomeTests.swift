@@ -46,7 +46,7 @@ class HomeTests: XCTestCase {
                               reducer: HomeFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.showCompleteAlert) {
-            $0.alert = .init(title: .init("AR世界の保存に成功しました"))
+            $0.alert = .init(title: .init("AR world successfully saved!"))
         }
         
 
@@ -55,11 +55,11 @@ class HomeTests: XCTestCase {
         }
         
         store.send(.showFailAlert) {
-            $0.alert = .init(title: .init("AR世界の保存に失敗しました"))
+            $0.alert = .init(title: .init("Failed to save AR world"))
         }
         
         store.send(.showDontUseAppAlert) {
-            $0.alert = .init(title: .init("iOS16以上かつLidarを搭載しているIPhone出ないとこのアプリは使用できません"))
+            $0.alert = .init(title: .init("This application can only be used on IPhone with iOS16 or higher and Lidar."))
         }
     }
     
