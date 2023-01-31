@@ -17,15 +17,20 @@ public struct SweetListFeature: ReducerProtocol {
         public var detailStates: IdentifiedArrayOf<SweetDetailFeature.State> =
         [
             SweetDetailFeature.State(Sweet(name: "Cupcake",
-                                           description: "A cupcake is a small cake designed to serve one person, which is baked in a cup-shaped mold. It is often topped with frosting or other decorations and comes in a variety of flavors.")),
+                                           description: "A cupcake is a small cake designed to serve one person, which is baked in a cup-shaped mold. It is often topped with frosting or other decorations and comes in a variety of flavors.",
+                                           usdzName: "cupcake")),
             SweetDetailFeature.State(Sweet(name: "Cookie",
-                                           description: "A cookie is a sweet baked good that is typically small, flat, and round. It is made from a mixture of flour, sugar, butter or oil, and other ingredients such as eggs, chocolate chips, or nuts. Cookies are often enjoyed as a snack or dessert.")),
+                                           description: "A cookie is a sweet baked good that is typically small, flat, and round. It is made from a mixture of flour, sugar, butter or oil, and other ingredients such as eggs, chocolate chips, or nuts. Cookies are often enjoyed as a snack or dessert.",
+                                           usdzName: "cookie")),
             SweetDetailFeature.State(Sweet(name: "Chocolate",
-                                           description: "Chocolate is a sweet, usually brown, food made from cacao beans, cocoa butter, sugar, and other ingredients such as milk or vanilla. It is used as an ingredient in a wide range of sweet foods and drinks, including chocolate bars, cakes, and hot chocolate. It is known for its rich, creamy texture and sweet, slightly bitter taste.")),
+                                           description: "Chocolate is a sweet, usually brown, food made from cacao beans, cocoa butter, sugar, and other ingredients such as milk or vanilla. It is used as an ingredient in a wide range of sweet foods and drinks, including chocolate bars, cakes, and hot chocolate. It is known for its rich, creamy texture and sweet, slightly bitter taste.",
+                                           usdzName: "chocolate")),
             SweetDetailFeature.State(Sweet(name: "Icecream",
-                                           description: "Ice cream is a frozen dessert made from a mixture of cream, sugar, and flavorings, such as fruit or chocolate. It is usually served as a scoop or in a cone, and is a popular treat in many countries around the world, especially during hot weather. It can be made at home or purchased pre-made from a store.")),
+                                           description: "Ice cream is a frozen dessert made from a mixture of cream, sugar, and flavorings, such as fruit or chocolate. It is usually served as a scoop or in a cone, and is a popular treat in many countries around the world, especially during hot weather. It can be made at home or purchased pre-made from a store.",
+                                           usdzName: "iceCream")),
             SweetDetailFeature.State(Sweet(name: "Donut",
-                                           description: "A donut (also spelled doughnut) is a sweet, fried pastry, often shaped like a ring or a ball. It is typically made from a sweet dough, which is deep-fried and then coated with sugar or glaze. Donuts are a popular treat and come in a variety of flavors, such as chocolate, jelly-filled, or powdered sugar.")),
+                                           description: "A donut (also spelled doughnut) is a sweet, fried pastry, often shaped like a ring or a ball. It is typically made from a sweet dough, which is deep-fried and then coated with sugar or glaze. Donuts are a popular treat and come in a variety of flavors, such as chocolate, jelly-filled, or powdered sugar.",
+                                           usdzName: "donut")),
         ]
         var alert: AlertState<Action>?
         public init() { }

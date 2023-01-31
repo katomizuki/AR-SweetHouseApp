@@ -22,43 +22,50 @@ struct PropertiesSweetView: View {
                         .fontWeight(.heavy)
                         .foregroundColor(.orange)
                 }
-                .padding(.top, 30)
+                .padding(.top, 10)
                 .frame(maxWidth: .infinity,
                        alignment: .leading)
-                HStack(alignment: .top) {
-                    Button {
-                        viewStore.send(.onTapDecideButton)
-                    } label: {
-                        VStack(spacing: 12) {
-                            Image(systemName: "plus.square.dashed")
-                                .resizable()
-                                .renderingMode(.template)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 45,
-                                       height: 45)
-                            
-                            Text("Place in ARWorld")
-                                .fontWeight(.semibold)
-                                .padding(.top, 20)
-                        }
-                        .foregroundColor(.black)
-                        .padding(18)
-                        .background {
-                            RoundedRectangle(cornerRadius: 20,
-                                             style: .continuous)
-                                .fill(.white)
-                        }
-                    }
+                VStack(alignment: .center) {
                     VStack(alignment: .leading,
                            spacing: 10) {
                         Text(viewStore.state.sweet.description)
                             .font(.callout)
-                            .fontWeight(.semibold)
-                            .foregroundColor(.gray)
+                            .fontWeight(.heavy)
+                            .foregroundColor(Color.gray)
 
                     }
                     .frame(maxWidth: .infinity,
                            alignment: .leading)
+                
+                    Spacer()
+                    
+                    Button {
+                        viewStore.send(.onTapDecideButton)
+                    } label: {
+                        VStack(alignment: .center,
+                               content: {
+                            VStack(spacing: 12) {
+                                Image(systemName: "plus.square.dashed")
+                                    .resizable()
+                                    .renderingMode(.template)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 45,
+                                           height: 45)
+                            }
+                            .foregroundColor(.black)
+                            .padding(18)
+                            .background {
+                                RoundedRectangle(cornerRadius: 20,
+                                                 style: .continuous)
+                                    .fill(.white)
+                            }
+                            
+                            Text("Place in ARWorld")
+                                .fontWeight(.semibold)
+                                .padding(.top, 20)
+                                .foregroundColor(.orange)
+                        })
+                    }
                 }
                 .padding(.top, 30)
             }

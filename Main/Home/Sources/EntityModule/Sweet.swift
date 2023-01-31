@@ -13,15 +13,18 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     public var id: UUID = UUID()
     public let name: String
     public var description: String
+    public var usdzName: String
     public var entity: Entity?
     
     public init(name: String,
-                description: String) {
+                description: String,
+                usdzName: String) {
         self.name = name
         self.description = description
+        self.usdzName = usdzName
     #if targetEnvironment(simulator)
     #else
-        self.entity = try? ModelEntity.load(named: name)
+        self.entity = try? ModelEntity.load(named: usdzName)
     #endif
     }
     
@@ -36,5 +39,6 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     private enum CodingKeys: String, CodingKey {
         case name
         case description
+        case usdzName
     }
 }

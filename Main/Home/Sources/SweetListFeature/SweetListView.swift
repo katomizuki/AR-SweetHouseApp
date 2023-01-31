@@ -41,6 +41,7 @@ public struct SweetListView: View {
                             dismiss()
                         },label: {
                                 Image(systemName: "clear.fill")
+                                .foregroundColor(.orange)
                            })
                        })
                    })

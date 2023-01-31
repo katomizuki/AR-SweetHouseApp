@@ -21,7 +21,7 @@ public struct SweetDetailFeature: ReducerProtocol {
         var alert: AlertState<Action>?
         public init(_ sweet: Sweet) {
             self.sweet = sweet
-            self.scene = SCNScene(named: "\(sweet.name).scn")
+            self.scene = SCNScene(named: "\(sweet.usdzName).scn")
         }
     }
     
