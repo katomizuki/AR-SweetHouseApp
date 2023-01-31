@@ -15,16 +15,6 @@ public struct CustomSegmentView: View {
     public var body: some View {
         WithViewStore(self.store) { viewStore in
             HStack(content: {
-                Button(action: {
-                    viewStore.send(.onTapMultipeer)
-                }, label: {
-                    VStack(content: {
-                        Image(systemName: "iphone.homebutton.radiowaves.left.and.right.circle.fill")
-                            .frame(width: 50,
-                                   height: 50)
-                        Text("multipeer")
-                    })
-                })
                 Picker(viewStore.state.currentARSceneMode.description,
                        selection: viewStore.binding(get: \.currentARSceneMode,
                                                     send: .onTapSegment),
@@ -35,7 +25,7 @@ public struct CustomSegmentView: View {
                             .tag(sceneMode)
                     })
                 })
-                .colorMultiply(.blue)
+                .colorMultiply(.orange)
                 .pickerStyle(.segmented)
             })
         }

@@ -20,19 +20,7 @@ struct PropertiesSweetView: View {
                     Text(viewStore.state.sweet.name)
                         .font(.largeTitle)
                         .fontWeight(.heavy)
-                    
-                    Text(viewStore.state.sweet.name)
-                        .fontWeight(.semibold)
-                        .foregroundColor(.gray)
-                        
-                    Label {
-                        Text(viewStore.state.sweet.name)
-                            .fontWeight(.semibold)
-                    } icon: {
-                        Image(systemName: "star.fill")
-                    }
-                    .foregroundColor(Color.orange)
-
+                        .foregroundColor(.orange)
                 }
                 .padding(.top, 30)
                 .frame(maxWidth: .infinity,
@@ -49,7 +37,7 @@ struct PropertiesSweetView: View {
                                 .frame(width: 45,
                                        height: 45)
                             
-                            Text("Decide!!")
+                            Text("Place in ARWorld")
                                 .fontWeight(.semibold)
                                 .padding(.top, 20)
                         }

@@ -20,7 +20,7 @@ public struct SettiingView: View {
                         Toggle(isOn: viewStore.binding(get: \.isAllowHaptics,
                                                        send: .toggleHaptics),
                                label: {
-                            Text("振動するのを許可する")
+                            Text("Allow to vibrate")
                         })
                         .tint(.orange)
                     })
@@ -30,7 +30,7 @@ public struct SettiingView: View {
                 .toolbar(content: {
                     ToolbarItem(placement: .navigationBarLeading,
                                 content: {
-                        Text("設定")
+                        Text("Setting")
                             .foregroundColor(.orange)
                             .font(.title2)
                             .bold()

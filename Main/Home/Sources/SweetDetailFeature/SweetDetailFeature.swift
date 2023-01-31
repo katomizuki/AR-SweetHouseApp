@@ -66,7 +66,7 @@ public struct SweetDetailFeature: ReducerProtocol {
                 SCNTransaction.commit()
             }
         case .showFailedAlert:
-            state.alert = .init(title: .init("不明なエラーが発生しました"))
+            state.alert = .init(title: .init("Unknown error occurred."))
         case .dismissAlert:
             state.alert = nil
         case .onTapDecideButton:

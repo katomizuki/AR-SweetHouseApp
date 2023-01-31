@@ -47,7 +47,7 @@ final class SweetDetailTests: XCTestCase {
                             reducer: SweetDetailFeature())
         store.dependencies.mainQueue = scheduler.eraseToAnyScheduler()
         store.send(.showFailedAlert) {
-            $0.alert = .init(title: .init("不明なエラーが発生しました"))
+            $0.alert = .init(title: .init("Unknown error occurred."))
         }
         store.send(.dismissAlert) {
             $0.alert = nil

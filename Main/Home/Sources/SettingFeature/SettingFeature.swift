@@ -35,7 +35,7 @@ public struct SettingFeature: ReducerProtocol {
         case .dismissAlert:
             state.alert = nil
         case .showFailedAlert:
-            state.alert = .init(title: .init("不明なエラーが発生しました"))
+            state.alert = .init(title: .init("Unknown error occurred."))
         }
         return .none
     }

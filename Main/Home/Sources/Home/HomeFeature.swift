@@ -107,13 +107,13 @@ public struct HomeFeature: ReducerProtocol {
                     hapticsFeature.eventHaptics()
                 }
             #endif
-                state.alert = .init(title: .init("AR世界の保存に成功しました"))
+                state.alert = .init(title: .init("AR world successfully saved!"))
             case .showFailAlert:
-                state.alert = .init(title: .init("AR世界の保存に失敗しました"))
+                state.alert = .init(title: .init("Failed to save AR world"))
             case .alertDismiss:
                 state.alert = nil
             case .showDontUseAppAlert:
-                state.alert = .init(title: .init("iOS16以上かつLidarを搭載しているIPhone出ないとこのアプリは使用できません"))
+                state.alert = .init(title: .init("This application can only be used on IPhone with iOS16 or higher and Lidar."))
             case .toggleCanUseApp:
                 state.canUseApp.toggle()
             case .completedConnectOtherApp:
@@ -136,7 +136,6 @@ public struct HomeFeature: ReducerProtocol {
             case .onTapMultipeer:
             #if targetEnvironment(simulator)
             #else
-                // ボタンなどはつけずにやったほうがええかも
                 if let data = state.collaborationData,
                    let collaborationData = try? NSKeyedArchiver.archivedData(withRootObject: data,
                                                                              requiringSecureCoding: true) {
@@ -144,7 +143,6 @@ public struct HomeFeature: ReducerProtocol {
                                                     reliably: true)
                 }
             #endif
-               // 通信
                 return .none
             case .setting(let settingFeatureAction):
                 return .none
