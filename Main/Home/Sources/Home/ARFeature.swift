@@ -37,6 +37,7 @@ public struct ARFeature: ReducerProtocol {
         var roomSession: RoomCaptureSession?
         var alert: AlertState<Action>?
         var addAnchorState = UserSetting.currentAnchorState
+        var savedARWorld: ARWorldMap?
         
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
             return true
@@ -50,6 +51,9 @@ public struct ARFeature: ReducerProtocol {
         case .subscriveEvent(let arSession, let roomSession):
             state.arSession = arSession
             state.roomSession = roomSession
+            if let worldMap = state.savedARWorld {
+                print("きたよ")
+            }
             if UserSetting.sceneMode == .roomPlan,
                 state.addAnchorState != .finishAddAnchor {
                 UserSetting.currentAnchorState = .objToRoom

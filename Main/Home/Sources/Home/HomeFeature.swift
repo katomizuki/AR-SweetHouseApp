@@ -33,6 +33,7 @@ public struct HomeFeature: ReducerProtocol {
         var arViewState = ARFeature.State()
         var alert: AlertState<Action>?
         var collaborationData: ARSession.CollaborationData?
+        var isSaveARWorld = false
         public init() { }
     }
     
@@ -53,6 +54,8 @@ public struct HomeFeature: ReducerProtocol {
         case completedConnectOtherApp
         case onTapSegment
         case onTapMultipeer
+        case onTapReviveButton
+        case sendARWorldMap(worldMap: ARWorldMap)
     }
 
     public init() {
@@ -108,18 +111,32 @@ public struct HomeFeature: ReducerProtocol {
                 }
             #endif
                 state.alert = .init(title: .init("AR world successfully saved!"))
+                state.isSaveARWorld.toggle()
             case .showFailAlert:
                 state.alert = .init(title: .init("Failed to save AR world"))
+                state.isSaveARWorld = false
             case .alertDismiss:
                 state.alert = nil
             case .showDontUseAppAlert:
                 state.alert = .init(title: .init("This application can only be used on IPhone with iOS16 or higher and Lidar."))
             case .toggleCanUseApp:
                 state.canUseApp.toggle()
+            case .onTapReviveButton:
+                return .task {
+                    do {
+                        let worldMap = try worldMapFeature.loadWorldMap()
+                        return .sendARWorldMap(worldMap: worldMap)
+                    } catch {
+                        return .showFailAlert
+                    }
+                }
             case .completedConnectOtherApp:
                 if hapticsFeature.supportedHaptics(), UserSetting.isAllowHaptics {
                     hapticsFeature.eventHaptics()
                 }
+            case .sendARWorldMap(let worldMap):
+                state.arViewState.savedARWorld = worldMap
+                break
             case .onTapSegment:
                 if state.currentARSceneMode == .objectPutting {
                     state.currentARSceneMode = .roomPlan
