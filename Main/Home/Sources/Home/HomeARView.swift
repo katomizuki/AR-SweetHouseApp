@@ -36,9 +36,7 @@ final class HomeARView: ARView {
         setupOverlayView()
         setupSubscribeARScene()
         setupTouchUpEvent()
-        if UserSetting.sceneMode == .roomPlan {
-           setupRoomCaptureDelegate()
-        }
+        setupRoomCaptureDelegate()
     }
     
     private func setupSessionDelegate() {
