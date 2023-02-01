@@ -25,6 +25,7 @@ public struct ARFeature: ReducerProtocol {
                            roomSession: RoomCaptureSession?)
         case sendCollaborationData(_ collaborationData: ARSession.CollaborationData)
         case syncCollaborationData(_ collaborationData: ARSession.CollaborationData)
+        case reset
         public static func == (lhs: ARFeature.Action, rhs: ARFeature.Action) -> Bool {
             return true
         }
@@ -77,6 +78,8 @@ public struct ARFeature: ReducerProtocol {
                 return .syncCollaborationData(collaborationData)
             }
         case .syncCollaborationData(_):
+            return .none
+        case .reset:
             return .none
         }
         return .none

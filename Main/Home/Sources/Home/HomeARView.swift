@@ -80,7 +80,7 @@ final class HomeARView: ARView {
             configuration.frameSemantics = [.sceneDepth]
             configuration.planeDetection = [.horizontal, .vertical]
         }
-        session.run(configuration)
+        session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
     }
     
     private func setupOverlayView() {
@@ -108,15 +108,15 @@ final class HomeARView: ARView {
             guard let self = self else { return }
             self.viewStore.send(.subscriveEvent(session: self.session,
                                                  roomSession: self.caputureSession))
-            print(self.viewStore.isReviveARWorld)
             if let worldMap = ARSceneSetting.savedARWorldMap,
                ARSceneSetting.isRevive {
                 let configuration = ARWorldTrackingConfiguration()
                 configuration.initialWorldMap = worldMap
                 configuration.planeDetection = [.horizontal, .vertical]
-                self.session.run(configuration)
+                self.session.run(configuration, options: [.removeExistingAnchors, .resetTracking])
                 ARSceneSetting.savedARWorldMap = nil
                 ARSceneSetting.isRevive = false
+                self.viewStore.send(.reset)
             }
             /// 部屋モードではないかつ。selectedModelがnil
             self.focusEntity.isEnabled = ARSceneSetting.selectedModel != nil && ARSceneSetting.sceneMode == .objectPutting
