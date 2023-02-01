@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 import ComposableArchitecture
+import EntityModule
 
 public struct HomeView : View {
     public let store: StoreOf<HomeFeature>
@@ -20,7 +21,8 @@ public struct HomeView : View {
                         HomeARViewContainer(store: store)
                     HStack(alignment: .bottom,
                            content: {
-                        if viewStore.state.isSaveARWorld {
+                        if viewStore.state.isSaveARWorld,
+                            ARSceneSetting.savedARWorldMap != nil {
                             ReviveButton(store: store)
                         }
                             CustomSegmentView(store: store)

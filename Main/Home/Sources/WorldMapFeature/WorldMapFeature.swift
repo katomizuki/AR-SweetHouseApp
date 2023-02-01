@@ -31,6 +31,7 @@ public struct WorldMapFeature {
     public func loadWorldMap() throws -> ARWorldMap {
         let mapData = try Data(contentsOf: self.makeURL())
         guard let worldMap = try NSKeyedUnarchiver.unarchivedObject(ofClass: ARWorldMap.self, from: mapData) else { throw ARError(.invalidWorldMap) }
+        print(worldMap)
         return worldMap
     }
     public init() { }

@@ -70,7 +70,7 @@ public struct SweetDetailFeature: ReducerProtocol {
         case .dismissAlert:
             state.alert = nil
         case .onTapDecideButton:
-            UserSetting.selectedModel = state.sweet.entity
+            ARSceneSetting.selectedModel = state.sweet.entity
         }
         return .none
     }

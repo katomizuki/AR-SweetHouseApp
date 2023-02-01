@@ -49,7 +49,7 @@ final class HomeARView: ARView {
     }
     
     @objc private func onTouchARView(_ sender: UITapGestureRecognizer) {
-        if UserSetting.sceneMode == .roomPlan { return }
+        if ARSceneSetting.sceneMode == .roomPlan { return }
         let tapPoint = sender.location(in: self)
         guard let rayResults = ray(through: tapPoint) else { return }
         let hitResults = scene.raycast(from: rayResults.origin, to: rayResults.direction)
@@ -66,7 +66,7 @@ final class HomeARView: ARView {
     }
     
     private func putSweet(at position: simd_float3) {
-        guard let selectedModel = UserSetting.selectedModel else { return }
+        guard let selectedModel = ARSceneSetting.selectedModel else { return }
         let anchorEntity = AnchorEntity(world: position)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
@@ -108,8 +108,18 @@ final class HomeARView: ARView {
             guard let self = self else { return }
             self.viewStore.send(.subscriveEvent(session: self.session,
                                                  roomSession: self.caputureSession))
+            print(self.viewStore.isReviveARWorld)
+            if let worldMap = ARSceneSetting.savedARWorldMap,
+               ARSceneSetting.isRevive {
+                let configuration = ARWorldTrackingConfiguration()
+                configuration.initialWorldMap = worldMap
+                configuration.planeDetection = [.horizontal, .vertical]
+                self.session.run(configuration)
+                ARSceneSetting.savedARWorldMap = nil
+                ARSceneSetting.isRevive = false
+            }
             /// 部屋モードではないかつ。selectedModelがnil
-            self.focusEntity.isEnabled = UserSetting.selectedModel != nil && UserSetting.sceneMode == .objectPutting
+            self.focusEntity.isEnabled = ARSceneSetting.selectedModel != nil && ARSceneSetting.sceneMode == .objectPutting
         }.store(in: &self.cancellables)
     }
     
@@ -176,7 +186,6 @@ final class HomeARView: ARView {
 
 extension HomeARView: ARSessionDelegate {
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
     }
     
     func session(_ session: ARSession, didAdd anchors: [ARAnchor]) {
@@ -223,7 +232,7 @@ extension HomeARView: RoomCaptureSessionDelegate {
     
     func captureSession(_ session: RoomCaptureSession, didUpdate room: CapturedRoom) {
         print(#function)
-        if UserSetting.currentAnchorState == .objToRoom {
+        if ARSceneSetting.currentAnchorState == .objToRoom {
             self.addObjectNodes(with: room)
             viewStore.send(.completeAddAnchor)
         }

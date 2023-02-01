@@ -12,7 +12,7 @@ public struct SettingFeature: ReducerProtocol {
     
     public struct State: Equatable {
         var alert: AlertState<Action>?
-        var isAllowHaptics: Bool = UserSetting.isAllowHaptics
+        var isAllowHaptics: Bool = ARSceneSetting.isAllowHaptics
         public init() { }
     }
     
@@ -31,7 +31,7 @@ public struct SettingFeature: ReducerProtocol {
             break
         case .toggleHaptics:
             state.isAllowHaptics.toggle()
-            UserSetting.isAllowHaptics = state.isAllowHaptics
+            ARSceneSetting.isAllowHaptics = state.isAllowHaptics
         case .dismissAlert:
             state.alert = nil
         case .showFailedAlert:

@@ -31,13 +31,13 @@ public final class RoomNode: Hashable, Equatable {
 }
 extension RoomNode {
     func updateObject() {
-        if UserSetting.sceneMode == .objectPutting { return }
+        if ARSceneSetting.sceneMode == .objectPutting { return }
         update(with: roomObject.dimensions, category: roomObject.category)
         anchorEntity.transform = Transform(matrix: roomObject.transform)
     }
     
     func updateSurface() {
-        if UserSetting.sceneMode == .objectPutting { return }
+        if ARSceneSetting.sceneMode == .objectPutting { return }
         update(with: roomObject.dimensions, surface: roomObject.surfaceCategory)
         anchorEntity.transform = Transform(matrix: roomObject.transform)
     }

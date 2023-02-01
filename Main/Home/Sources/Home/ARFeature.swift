@@ -32,12 +32,13 @@ public struct ARFeature: ReducerProtocol {
     
 
     public struct State: Equatable {
-        var selectedModel: Entity? = UserSetting.selectedModel
+        var selectedModel: Entity? = ARSceneSetting.selectedModel
         var arSession: ARSession?
         var roomSession: RoomCaptureSession?
         var alert: AlertState<Action>?
-        var addAnchorState = UserSetting.currentAnchorState
+        var addAnchorState = ARSceneSetting.currentAnchorState
         var savedARWorld: ARWorldMap?
+        var isReviveARWorld: Bool = false
         
         public static func == (lhs: ARFeature.State, rhs: ARFeature.State) -> Bool {
             return true
@@ -47,18 +48,13 @@ public struct ARFeature: ReducerProtocol {
    public func reduce(into state: inout State, action: Action) -> Effect<Action, Never> {
         switch action {
         case .onTouchARView:
-            UserSetting.selectedModel = nil
+            ARSceneSetting.selectedModel = nil
         case .subscriveEvent(let arSession, let roomSession):
             state.arSession = arSession
             state.roomSession = roomSession
-            if let worldMap = state.savedARWorld {
-                let config = ARWorldTrackingConfiguration()
-                config.initialWorldMap = worldMap
-                arSession?.run(config)
-            }
-            if UserSetting.sceneMode == .roomPlan,
+            if ARSceneSetting.sceneMode == .roomPlan,
                 state.addAnchorState != .finishAddAnchor {
-                UserSetting.currentAnchorState = .objToRoom
+                ARSceneSetting.currentAnchorState = .objToRoom
             }
             return .task {
                 return .sendARSession(arSession: arSession, roomSession: roomSession)
@@ -71,9 +67,9 @@ public struct ARFeature: ReducerProtocol {
             state.alert = nil
         case .completeAddAnchor:
             state.addAnchorState = .finishAddAnchor
-            UserSetting.currentAnchorState = .finishAddAnchor
+            ARSceneSetting.currentAnchorState = .finishAddAnchor
         case .disAppear:
-            UserSetting.currentAnchorState = .normal
+            ARSceneSetting.currentAnchorState = .normal
         case .sendARSession(_,_):
             return .none
         case .sendCollaborationData(let collaborationData):

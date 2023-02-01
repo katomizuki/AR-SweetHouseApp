@@ -77,6 +77,12 @@ public struct HomeFeature: ReducerProtocol {
             case .onAppear:
                 state = .init()
                 state.isSaveARWorld = userDefalutsManager.loadARWorldFlag()
+                do {
+                    // willAppearの時にARWorldmapがロードしている
+                    ARSceneSetting.savedARWorldMap = try worldMapFeature.loadWorldMap()
+                } catch {
+                    print(error.localizedDescription)
+                }
                 return .task {
                         if !RoomCaptureSession.isSupported && ARConfiguration.supportsFrameSemantics([.sceneDepth,.smoothedSceneDepth]) {
                             return .showDontUseAppAlert
@@ -92,6 +98,7 @@ public struct HomeFeature: ReducerProtocol {
                     do {
                         guard  let session = Self.arSession else { return .showFailAlert }
                         let worldMap = try await worldMapFeature.getCurrentWorldMap(session)
+                        ARSceneSetting.savedARWorldMap = worldMap
                         return .writeARWorldMap(worldMap)
                     } catch {
                         return .showFailAlert
@@ -109,12 +116,13 @@ public struct HomeFeature: ReducerProtocol {
             case .showCompleteAlert:
             #if targetEnvironment(simulator)
             #else
-                if hapticsFeature.supportedHaptics(), UserSetting.isAllowHaptics {
+                if hapticsFeature.supportedHaptics(),
+                    ARSceneSetting.isAllowHaptics {
                     hapticsFeature.eventHaptics()
                 }
             #endif
                 state.alert = .init(title: .init("AR world successfully saved!"))
-                state.isSaveARWorld.toggle()
+                state.isSaveARWorld = true
                 userDefalutsManager.saveARWorldFlag(flag: true)
             case .showFailAlert:
                 state.alert = .init(title: .init("Failed to save AR world"))
@@ -136,19 +144,20 @@ public struct HomeFeature: ReducerProtocol {
                     }
                 }
             case .completedConnectOtherApp:
-                if hapticsFeature.supportedHaptics(), UserSetting.isAllowHaptics {
+                if hapticsFeature.supportedHaptics(),
+                   ARSceneSetting.isAllowHaptics {
                     hapticsFeature.eventHaptics()
                 }
-            case .sendARWorldMap(let worldMap):
-                state.arViewState.savedARWorld = worldMap
+            case .sendARWorldMap(_):
+                ARSceneSetting.isRevive = true
                 return .none
             case .onTapSegment:
                 if state.currentARSceneMode == .objectPutting {
                     state.currentARSceneMode = .roomPlan
-                    UserSetting.sceneMode = .roomPlan
+                    ARSceneSetting.sceneMode = .roomPlan
                 } else {
                     state.currentARSceneMode = .objectPutting
-                    UserSetting.sceneMode = .objectPutting
+                    ARSceneSetting.sceneMode = .objectPutting
                 }
             case .sweetList(let action):
                 if action == .dismissAll {
@@ -205,15 +214,15 @@ public struct HomeFeature: ReducerProtocol {
     }
     
     func peerJoinedHandler(_ peerId: MCPeerID) {
-        UserSetting.connectText = "端末と繋がりました"
+        ARSceneSetting.connectText = "端末と繋がりました"
     }
     
     func peerLeftHandler(_ peerId: MCPeerID) {
-        UserSetting.connectText = "端末との接続が切れました。"
+        ARSceneSetting.connectText = "端末との接続が切れました。"
     }
     
     func peerDiscoverdHandler(_ peerId: MCPeerID) -> Bool {
-        UserSetting.connectText = "端末を発見しました"
+        ARSceneSetting.connectText = "端末を発見しました"
         return true
     }
 }
