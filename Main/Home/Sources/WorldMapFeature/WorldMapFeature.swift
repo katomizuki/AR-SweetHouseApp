@@ -25,7 +25,7 @@ public struct WorldMapFeature {
     public func writeWorldMap(_ worldMap: ARWorldMap) throws {
         let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap,
                                                     requiringSecureCoding: true)
-        try data.write(to: self.makeURL())
+        try data.write(to: self.makeURL(), options: [.atomic])
     }
     
     public func loadWorldMap() throws -> ARWorldMap {

@@ -184,6 +184,8 @@ public struct HomeFeature: ReducerProtocol {
                     Self.roomSession = roomSession
                 case .syncCollaborationData(let collaborationData):
                     state.collaborationData = collaborationData
+                case .reset:
+                    state.isSaveARWorld = false
                 default: break
                 }
                 return .none
