@@ -69,6 +69,7 @@ final class HomeARView: ARView {
         guard let selectedModel = ARSceneSetting.selectedModel else { return }
         let anchorEntity = AnchorEntity(world: position)
         selectedModel.generateCollisionShapes(recursive: true)
+        installGestures(for: selectedModel)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
         viewStore.send(.onTouchARView)

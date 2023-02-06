@@ -14,7 +14,7 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     public let name: String
     public var description: String
     public var usdzName: String
-    public var entity: Entity?
+    public var entity: ModelEntity?
     
     public init(name: String,
                 description: String,
@@ -25,7 +25,7 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
         self.usdzName = usdzName
     #if targetEnvironment(simulator)
     #else
-        self.entity = try? ModelEntity.load(named: usdzName)
+        self.entity = try? ModelEntity.loadModel(named: usdzName)
         self.entity?.scale = simd_make_float3(scale, scale, scale)
     #endif
     }
