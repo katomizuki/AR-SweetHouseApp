@@ -7,6 +7,7 @@
 
 import ARKit
 import ComposableArchitecture
+import UtilFeature
 
 extension DependencyValues {
     public var worldMap: WorldMapFeature {
@@ -25,6 +26,7 @@ public struct WorldMapFeature {
     public func writeWorldMap(_ worldMap: ARWorldMap) throws {
         let data = try NSKeyedArchiver.archivedData(withRootObject: worldMap,
                                                     requiringSecureCoding: true)
+        UserDefaultsManager.shared.saveData(data)
         try data.write(to: self.makeURL(), options: [.atomic])
     }
     

@@ -80,6 +80,8 @@ public struct HomeFeature: ReducerProtocol {
                 do {
                     // willAppearの時にARWorldmapがロードしている
                     ARSceneSetting.savedARWorldMap = try worldMapFeature.loadWorldMap()
+                    ARSceneSetting.savedARWorldMap = try userDefalutsManager.loadData()
+                    print(ARSceneSetting.savedARWorldMap, "😈")
                 } catch {
                     print(error.localizedDescription)
                 }

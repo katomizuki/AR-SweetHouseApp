@@ -68,6 +68,7 @@ final class HomeARView: ARView {
     private func putSweet(at position: simd_float3) {
         guard let selectedModel = ARSceneSetting.selectedModel else { return }
         let anchorEntity = AnchorEntity(world: position)
+        selectedModel.generateCollisionShapes(recursive: true)
         anchorEntity.addChild(selectedModel)
         scene.anchors.append(anchorEntity)
         viewStore.send(.onTouchARView)
