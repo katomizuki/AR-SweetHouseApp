@@ -13,7 +13,7 @@ import ComposableArchitecture
 final class SweetDetailTests: XCTestCase {
     
     let scheduler = DispatchQueue.test
-    let sweet = Sweet(name: "アイウエオ", description: "uuu", usdzName: "aiueo")
+    let sweet = Sweet(name: "アイウエオ", description: "uuu", usdzName: "aiueo", scale: 0.1)
     func test_起動時() {
         let store = TestStore(initialState: SweetDetailFeature.State(sweet),
                             reducer: SweetDetailFeature())
