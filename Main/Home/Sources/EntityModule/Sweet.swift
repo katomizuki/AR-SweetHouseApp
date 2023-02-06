@@ -18,13 +18,15 @@ public struct Sweet: Identifiable, CustomStringConvertible, Hashable, Codable {
     
     public init(name: String,
                 description: String,
-                usdzName: String) {
+                usdzName: String,
+                scale: Float) {
         self.name = name
         self.description = description
         self.usdzName = usdzName
     #if targetEnvironment(simulator)
     #else
         self.entity = try? ModelEntity.load(named: usdzName)
+        self.entity?.scale = simd_make_float3(scale, scale, scale)
     #endif
     }
     
